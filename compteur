@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numéro Incrémentable</title>
+</head>
+<body>
+    <h1>Numéro actuel : <span id="numberDisplay">0</span></h1>
+    <button onclick="incrementNumber()">Incrémenter</button>
+
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-database.js"></script>
+    <script>
+        // Initialize Firebase
+        const firebaseConfig = {
+          apiKey: "AIzaSyDPALVDmL0ll2D1SJgDkw13vdEuuxSxVBg",
+          authDomain: "murray-ciussse.firebaseapp.com",
+          projectId: "murray-ciussse",
+          storageBucket: "murray-ciussse.appspot.com",
+          messagingSenderId: "116118823992",
+          appId: "1:116118823992:web:76f93e77a161c9f9dd32cd",
+          measurementId: "G-8ZDE07LQCR"
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        const db = firebase.database();
+        const numberRef = db.ref('number');
+
+        // Function to increment the number
+        function incrementNumber() {
+            numberRef.transaction(function(currentNumber) {
+                return (currentNumber || 0) + 1;
+            });
+        }
+
+        // Update the displayed number when value changes
+        numberRef.on('value', function(snapshot) {
+            const number = snapshot.val();
+            document.getElementById('numberDisplay').textContent = number;
+        });
+    </script>
+</body>
+</html>
