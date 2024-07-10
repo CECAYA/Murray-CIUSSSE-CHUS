@@ -4,15 +4,20 @@ import { db } from './config.js';
 // Fonction pour afficher le numéro appelé, la salle, le comptoir, et les 5 derniers numéros appelés
 onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
     if (doc.exists()) {
-        document.getElementById('currentNumber').textContent = doc.data().number;
-        document.getElementById('currentCounter').textContent = doc.data().counter;
-        document.getElementById('currentRoom').textContent = doc.data().room;
+        const data = doc.data();
+        console.log("Current call data:", data);
+        document.getElementById('currentNumber').textContent = data.number || '-';
+        document.getElementById('currentCounter').textContent = data.counter || '-';
+        document.getElementById('currentRoom').textContent = data.room || '-';
+    } else {
+        console.log("No current call document found.");
     }
 });
 
 onSnapshot(doc(db, 'waitingRoom', 'history'), async (doc) => {
     if (doc.exists()) {
         const calls = doc.data().calls || [];
+        console.log("History data:", calls);
         const lastFiveCalls = calls.slice(-5);
         const previousCallsElement = document.getElementById('previousCalls');
         previousCallsElement.innerHTML = '';
@@ -29,5 +34,7 @@ onSnapshot(doc(db, 'waitingRoom', 'history'), async (doc) => {
         });
         const averageTime = count > 0 ? (totalTime / count).toFixed(2) : '-';
         document.getElementById('averageTime').textContent = averageTime;
+    } else {
+        console.log("No history document found.");
     }
 });
