@@ -1,0 +1,70 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
+    max-width: 600px;
+    margin: 20px auto;
+    border: 1px solid #000;
+    padding: 20px;
+}
+
+.big-numbers {
+    font-size: 72px;
+    text-align: center;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.big-numbers span {
+    flex: 1;
+    padding: 20px;
+}
+
+.num {
+    background-color: #c5e1a5;
+}
+
+.room {
+    background-color: #ffe0b2;
+}
+
+.post {
+    background-color: #b3e5fc;
+}
+
+.average-time,
+.building-info {
+    grid-column: span 2;
+    text-align: center;
+    padding: 10px;
+}
+
+.previous-calls {
+    text-align: left;
+    padding: 10px;
+}
+
+.red-text {
+    color: red;
+}
+
+.previous-calls-list {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.previous-calls-list div {
+    display: block;
+    color: #ccc;
+}
+
+.previous-calls-list .active {
+    color: #000;
+}
