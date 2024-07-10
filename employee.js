@@ -10,29 +10,29 @@ async function callNextUser() {
         const docSnap = await getDoc(docRef);
         let currentNumber = 1;
         if (docSnap.exists()) {
-            currentNumber = docSnap.data().number + 1;
+            currentNumber = docSnap.data().compteur + 1;
         }
 
         await setDoc(docRef, {
-            number: currentNumber,
-            counter: counterNumber,
-            room: roomNumber,
+            compteur: currentNumber,
+            comptoir: counterNumber,
+            salle: roomNumber,
             timestamp: Date.now()
         });
 
         await updateDoc(doc(db, 'waitingRoom', 'history'), {
             calls: arrayUnion({
-                number: currentNumber,
-                counter: counterNumber,
-                room: roomNumber,
+                compteur: currentNumber,
+                comptoir: counterNumber,
+                salle: roomNumber,
                 timestamp: Date.now()
             })
         });
 
         console.log("New call:", {
-            number: currentNumber,
-            counter: counterNumber,
-            room: roomNumber,
+            compteur: currentNumber,
+            comptoir: counterNumber,
+            salle: roomNumber,
             timestamp: Date.now()
         });
     } else {
