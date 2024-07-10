@@ -3,12 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <title>Salle d'attente</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .main-display {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border: 1px solid #000;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .previous-calls {
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
     <h1>Salle d'attente</h1>
-    <div>
-        <h2>Numéro appelé: <span id="currentNumber">-</span></h2>
-        <h2>Comptoir: <span id="counterNumber">-</span></h2>
+    <div class="main-display">
+        <div>
+            <h2>Numéro appelé: <span id="currentNumber">-</span></h2>
+            <h2>Salle: <span id="currentRoom">-</span></h2>
+            <h2>Poste: <span id="currentCounter">-</span></h2>
+        </div>
+        <div>
+            <h2>Temps inter-numéro moyen: <span id="averageTime">-</span> mins</h2>
+        </div>
+    </div>
+    <div class="previous-calls">
+        <h2>Précédents appels:</h2>
+        <ul id="previousCalls">
+            <li>-</li>
+        </ul>
     </div>
 
     <script type="module" src="config.js"></script>
