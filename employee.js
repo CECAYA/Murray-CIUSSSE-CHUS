@@ -5,12 +5,10 @@ async function callNextUser() {
     const counterNumber = document.getElementById('counterNumber').value;
     const roomNumber = document.getElementById('roomNumber').value;
     if (counterNumber && roomNumber) {
-        const docRef = doc(db, 'waitingRoom', 'current');
-        const docSnap = await getDoc(docRef);
-        let currentNumber = 1;
-        if (docSnap.exists()) {
-            const currentData = docSnap.data();
-            currentNumber = currentData.compteur + 1; // Correct increment
+        setDoc(doc(db, 'waitingRoom', 'current'), {
+                number: increment(1),
+                counter: counterNumber
+            }, { merge: true });
         }
 
         await setDoc(docRef, {
