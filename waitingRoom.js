@@ -1,9 +1,9 @@
-import { doc, onSnapshot, collection, query, orderBy, limit, getDocs } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
+import { doc, onSnapshot } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
 import { db } from './config.js';
 
 // Fonction pour afficher le numéro appelé, la salle, le comptoir, et les 5 derniers numéros appelés
 onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
-    if (doc.exists) {
+    if (doc.exists()) {
         document.getElementById('currentNumber').textContent = doc.data().number;
         document.getElementById('currentCounter').textContent = doc.data().counter;
         document.getElementById('currentRoom').textContent = doc.data().room;
@@ -11,7 +11,7 @@ onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
 });
 
 onSnapshot(doc(db, 'waitingRoom', 'history'), async (doc) => {
-    if (doc.exists) {
+    if (doc.exists()) {
         const calls = doc.data().calls || [];
         const lastFiveCalls = calls.slice(-5);
         const previousCallsElement = document.getElementById('previousCalls');
