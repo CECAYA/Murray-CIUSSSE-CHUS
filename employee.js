@@ -1,4 +1,4 @@
-import { doc, setDoc, increment, updateDoc, arrayUnion, getDoc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
+import { doc, setDoc, updateDoc, arrayUnion, getDoc, increment } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
 import { db } from './config.js';
 
 // Fonction pour appeler le prochain usager
