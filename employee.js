@@ -1,4 +1,4 @@
-import { doc, setDoc, updateDoc, arrayUnion, getDoc, increment } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
+import { doc, setDoc, updateDoc, arrayUnion, getDoc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
 import { db } from './config.js';
 
 // Fonction pour appeler le prochain usager
@@ -28,6 +28,15 @@ async function callNextUser() {
                 timestamp: Date.now()
             })
         });
+
+        console.log("New call:", {
+            number: currentNumber,
+            counter: counterNumber,
+            room: roomNumber,
+            timestamp: Date.now()
+        });
+    } else {
+        console.log("Counter number or room number is missing.");
     }
 }
 
