@@ -1,45 +1,132 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Édifice Murray</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); 
+      gap: 0px;
+    }
+    .grid-item {
+      padding: 10px;
+      color: black; /* Pour améliorer la lisibilité */
+    }
+    .col-1 {
+      background-color: #def1d3; /* vert pâle */
+      font-family: Impact, Helvetica, sans-serif;
+      text-align: center;
+      font-size: 50px;
+      border-top: 10px solid black;
+      border-left: 10px solid black;
+    }
+    .col-2 {
+      background-color: #f7e4d8; /* orange pâle */
+      font-family: Impact, Helvetica, sans-serif;
+      text-align: center;
+      font-size: 50px;
+      border-top: 10px solid black;
+    }
+    .col-3 {
+      background-color: #d1edf9; /* bleu pâle */
+      font-family: Impact, Helvetica, sans-serif;
+      text-align: center;
+      font-size: 50px;
+      border-top: 10px solid black;
+      border-right: 10px solid black;
+    }
+    .col-4 {
+      background-color: #ffffff; /* blanc */
+      font-family: Impact, Helvetica, sans-serif;
+      text-align: center;
+      font-size: 30px;
+      border-top: 10px solid black;
+      border-right: 10px solid black;
+    }
+    .col-1-2 {
+      background-color: #def1d3; /* vert pâle */
+      font-family: Impact, Helvetica, sans-serif;
+      text-align: center;
+      font-size: 350px;
+      border-bottom: 10px solid black;
+      border-left: 10px solid black;
+    }
+    .col-2-2 {
+      background-color: #f7e4d8; /* orange pâle */
+      font-family: Impact, Helvetica, sans-serif;
+      text-align: center;
+      font-size: 350px;
+      border-bottom: 10px solid black;
+    }
+    .col-3-2 {
+      background-color: #d1edf9; /* bleu pâle */
+      font-family: Impact, Helvetica, sans-serif;
+      text-align: center;
+      font-size: 350px;
+      border-bottom: 10px solid black;
+      border-right: 10px solid black;
+    }
+    .col-4-2 {
+      background-color: #ffffff; /* blanc */
+      font-family: Impact, Helvetica, sans-serif;
+      text-align: center;
+      font-size: 70px;
+      border-right: 10px solid black;
+      border-bottom: 10px solid black;
+    }
+    .col-1-3 {
+      background-color: #ffffff;
+      grid-column: span 3; /* Fusionne deux colonnes */
+      font-family: Impact, Helvetica, sans-serif;
+      font-size: 35px;
+    }
+    .col-4-3 {
+      background-color: #ffffff;
+  
+    }
+    .col-1-3 {
+      background-color: #ffffff;
+      grid-column: span 4; /* Fusionne deux colonnes */
+      font-family: Impact, Helvetica, sans-serif;
+      font-size: 35px;
+      text-align: center;
+    }
+    .col-1-4 {
+      background-color: #ffffff;
+      grid-column: span 3; /* Fusionne deux colonnes */
+      font-family: Impact, Helvetica, sans-serif;
+      font-size: 70px;
+    }
+    .col-4-4 {
+      background-color: #ffffff;
+      font-family: Impact, Helvetica, sans-serif;
+      font-size: 70px;
+      vertical-align: center;
+    }
+    
+    
+  </style>
 </head>
-
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="header-item">NUMÉRO APPELÉ</div>
-            <div class="header-item">SALLE</div>
-            <div class="header-item">POSTE</div>
-            <div class="header-item">PRÉCÉDANT APPELS</div>
-        </div>
-        <div class="big-numbers">
-            <span class="num">00</span>
-            <span class="room">A</span>
-            <span class="post">1</span>
-            <div class="previous-calls">
-                <div class="previous-calls-list">
-                    <div class="active">10-B-2</div>
-                    <div class="active">09-A-8</div>
-                    <div class="inactive">09-A-8</div>
-                    <div class="inactive">09-A-8</div>
-                    <div class="inactive">09-A-8</div>
-                </div>
-            </div>
-        </div>
-        <div class="footer">
-            <div class="average-time">
-                <p><strong>TEMPS INTER-NUMÉRO MOYEN :</strong> <span class="red-text">7</span> MINS</p>
-            </div>
-            <div class="building-info">
-                <p><strong>ÉDIFICE MURRAY</strong></p>
-                <p>Québec <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Flag_of_Quebec.svg/1920px-Flag_of_Quebec.svg.png" alt="Québec flag" width="30" align="middle"></p>
-            </div>
-        </div>
-    </div>
-</body>
+  <div class="grid-container">
+    <div class="grid-item col-1">NUMÉRO APPELÉ</div>
+    <div class="grid-item col-2">SALLE</div>
+    <div class="grid-item col-3">POSTE</div>
+    <div class="grid-item col-4">NUMÉROS PRÉCÉDENTS</div>
+    
+    <div class="grid-item col-1-2">00</div>
+    <div class="grid-item col-2-2">A</div>
+    <div class="grid-item col-3-2">2</div>
+    <div class="grid-item col-4-2">01-B-9<br>01-B-9<br>01-B-9<br>01-B-9<br>01-B-9</div>
+    
+    <div class="grid-item col-1-3">TEMPS INTER-NUMÉRO MOYEN EST DE </div>
+    <div class="grid-item col-1-4">ÉDIFICE MURRAY</div>
+    <div class="grid-item col-4-4">      
+    <img src="https://upload.wikimedia.org/wikipedia/fr/7/7e/Qu%C3%A9bec.svg" alt="Gouvernement du Québec" style="width: 100%;"></div>
+    
 
+    
+  </div>
+</body>
 </html>
