@@ -6,9 +6,9 @@ onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
     if (doc.exists()) {
         const data = doc.data();
         console.log("Current call data:", data);
-        document.getElementById('currentNumber').textContent = data.number || '-';
-        document.getElementById('currentCounter').textContent = data.counter || '-';
-        document.getElementById('currentRoom').textContent = data.room || '-';
+        document.getElementById('currentNumber').textContent = data.compteur || '-';
+        document.getElementById('currentCounter').textContent = data.comptoir || '-';
+        document.getElementById('currentRoom').textContent = data.salle || '-';
     } else {
         console.log("No current call document found.");
     }
