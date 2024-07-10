@@ -1,7 +1,6 @@
 import { doc, setDoc, updateDoc, arrayUnion, getDoc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
 import { db } from './config.js';
 
-// Fonction pour appeler le prochain usager
 async function callNextUser() {
     const counterNumber = document.getElementById('counterNumber').value;
     const roomNumber = document.getElementById('roomNumber').value;
@@ -10,7 +9,8 @@ async function callNextUser() {
         const docSnap = await getDoc(docRef);
         let currentNumber = 1;
         if (docSnap.exists()) {
-            currentNumber = docSnap.data().compteur + 1;
+            const currentData = docSnap.data();
+            currentNumber = currentData.compteur + 1; // Correct increment
         }
 
         await setDoc(docRef, {
