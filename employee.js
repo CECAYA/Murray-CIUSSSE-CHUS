@@ -20,7 +20,7 @@ async function callNextUser() {
             currentRoom = docSnap.data().room;
         }
 
-        let newNumber;
+        let newNumber=0;
         if (currentNumber >= 99) {
             newNumber = 0;
         }  else {
