@@ -1,15 +1,10 @@
-import { doc, setDoc, increment, getDoc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
+import { doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
 import { db } from './config.js';
 
 // Fonction pour appeler le prochain usager
 async function callNextUser() {
     const counterNumber = document.getElementById('counterNumber').value;
     const roomNumber = document.getElementById('roomNumber').value;
-    const oldNumber1 = document.getElementById('oldNumber1').value;
-    const oldNumber2 = document.getElementById('oldNumber2').value;
-    const oldNumber3 = document.getElementById('oldNumber3').value;
-    const oldNumber4 = document.getElementById('oldNumber4').value;
-    const oldNumber5 = document.getElementById('oldNumber5').value;
 
     if (counterNumber && roomNumber) {
         const docRef = doc(db, 'waitingRoom', 'current');
@@ -28,10 +23,10 @@ async function callNextUser() {
         }
 
         await setDoc(docRef, {
-            old5: oldNumber4,
-            old4: oldNumber3,
-            old3: oldNumber2,
-            old2: oldNumber1,
+            old5: docSnap.data().old4,
+            old4: docSnap.data().old3,
+            old3: docSnap.data().old2,
+            old2: docSnap.data().old1,
             old1: currentNumber,
             number: newNumber,
             counter: counterNumber,
