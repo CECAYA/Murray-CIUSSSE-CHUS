@@ -13,9 +13,11 @@ async function callNextUser() {
         let currentNumber = 0;
         let currentCounter, currentRoom;
         let oldNumbers = [];
+        let oldTimes = [];
         if (docSnap.exists()) {
             currentNumber = docSnap.data().number;
             oldNumbers = docSnap.data().oldNumbers || [];
+            oldTimes = docSnap.data().oldTimes || [];
             currentCounter = docSnap.data().counter;
             currentRoom = docSnap.data().room;
         }
@@ -35,12 +37,15 @@ async function callNextUser() {
         
         if (currentCounter != "?") {
             oldNumbers.unshift(`${currentNumber.toString().padStart(2, '0')} - ${currentCounter} - ${currentRoom}`);
+            oldTimes.unshift(Date.now());
         }
         
         if (oldNumbers.length > 5) {
             oldNumbers = oldNumbers.slice(0, 5);
         }
-
+        if (oldTimes.length > 5) {
+            oldTimes = oldTimes.slice(0, 5);
+        }
         await setDoc(docRef, {
             number: newNumber,
             counter: counterNumber,
