@@ -6,7 +6,16 @@ function formatNumber1(num3) {
     return num3.toString().padStart(2, '0'); // Utilise padStart pour ajouter un 0 devant si nécessaire
 }
 
+function speakNumber(number) {
+    const speech = new SpeechSynthesisUtterance();
+    speech.lang = 'fr-FR'; // Langue française
+    speech.text = `Numéro ${number}`; // Utilisation directe de la variable number
+    speech.volume = 1;
+    speech.rate = 1;
+    speech.pitch = 1;
 
+    window.speechSynthesis.speak(speech);
+}
 
 onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
     if (doc.exists) {
@@ -38,6 +47,10 @@ onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
         const notification123 = document.getElementById('notification123');
         if (notification123) {
             notification123.play();
+        
+        setTimeout(() => {
+            speakNumber(data.number);
+        }, 1000);
 
         }
     }
