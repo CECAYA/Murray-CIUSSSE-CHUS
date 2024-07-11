@@ -29,6 +29,34 @@ async function callNextUser() {
     }
 }
 
+async function callBeforeUser() {
+    const docRef = doc(db, 'waitingRoom', 'current');
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+        const currentNumber = docSnap.data().number;
+        const counterNumber = document.getElementById('counterNumber').value;
+        const roomNumber = document.getElementById('roomNumber').value; // Récupérer le numéro de salle
+
+        if (counterNumber && roomNumber) { // Vérifiez que les deux champs sont remplis
+            let nextNumber = increment(currentNumber - 1); // Incrémenter le numéro actuel
+
+            // Vérifier si le prochain numéro est 100
+            if (nextNumber <= 0) {
+                nextNumber = 100; // Remettre à 100 si le numéro atteint 0
+            }
+
+            // Mettre à jour les données dans Firebase
+            await setDoc(docRef, {
+                number: nextNumber,
+                counter: counterNumber,
+                room: roomNumber // Ajouter le numéro de salle
+            }, { merge: true });
+        }
+    }
+}
+
+
 // Nouvelle fonction pour réinitialiser le compteur
 async function resetCounter() {
     await updateDoc(doc(db, 'waitingRoom', 'current'), {
@@ -41,3 +69,4 @@ async function resetCounter() {
 // Attacher les fonctions au contexte global pour qu'elles soient accessibles depuis le HTML
 window.callNextUser = callNextUser;
 window.resetCounter = resetCounter;
+window.callBeforeUser = resetCounter;
