@@ -12,11 +12,7 @@ async function callNextUser() {
         const roomNumber = document.getElementById('roomNumber').value;
 
         if (counterNumber && roomNumber) {
-            let nextNumber = increment(Number(currentNumber)); // Utilisez increment avec un nombre
-
-            if (nextNumber >= 100) {
-                nextNumber = 0;
-            }
+            const nextNumber = increment(currentNumber, 1); // Incrémenter de 1
 
             await setDoc(docRef, {
                 number: nextNumber,
@@ -38,11 +34,7 @@ async function callBeforeUser() {
         const roomNumber = document.getElementById('roomNumber').value;
 
         if (counterNumber && roomNumber) {
-            let nextNumber = increment(Number(currentNumber) - 2); // Utilisez increment correctement pour la décrémentation
-
-            if (nextNumber < 0) {
-                nextNumber = 99;
-            }
+            const nextNumber = increment(currentNumber, -1); // Décrémenter de 1
 
             await setDoc(docRef, {
                 number: nextNumber,
