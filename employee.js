@@ -83,3 +83,4 @@ function resetCounter() {
 // Attacher les fonctions au contexte global pour qu'elles soient accessibles depuis le HTML
 window.callNextUser = callNextUser;
 window.resetCounter = resetCounter;
+window.PreviousNumber = PreviousNumber;
