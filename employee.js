@@ -14,15 +14,16 @@ function callNextUser() {
         }, { merge: true });
     }
 }
+
 function callResetCompteur() {
     const counterNumber = document.getElementById('counterNumber').value;
     const roomNumber = document.getElementById('roomNumber').value; // Récupérer le numéro de salle
-        setDoc(doc(db, 'waitingRoom', 'current'), {
-            number: 0,
-            counter: "?",
-            room: "?" // Ajouter le numéro de salle
-        }
-    }
+    setDoc(doc(db, 'waitingRoom', 'current'), {
+        number: 0,
+        counter: "?",
+        room: "?" // Ajouter le numéro de salle
+    }, { merge: true });
 }
 
 window.callNextUser = callNextUser;
+window.callResetCompteur = callResetCompteur;
