@@ -50,7 +50,8 @@ async function callNextUser() {
             number: newNumber,
             counter: counterNumber,
             room: roomNumber,
-            oldNumbers: oldNumbers
+            oldNumbers: oldNumbers,
+            oldTimes: oldTimes,
         }, { merge: true });
     }
 }
