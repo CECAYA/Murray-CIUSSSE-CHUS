@@ -11,10 +11,13 @@ async function callNextUser() {
         const docSnap = await getDoc(docRef);
 
         let currentNumber = 0;
+        let currentCounter, currentRoom;
         let oldNumbers = [];
         if (docSnap.exists()) {
             currentNumber = docSnap.data().number;
             oldNumbers = docSnap.data().oldNumbers || [];
+            currentCounter = docSnap.data().counter;
+            currentRoom = docSnap.data().room;
         }
 
         let newNumber;
@@ -25,7 +28,7 @@ async function callNextUser() {
         }
 
         // Ajouter le numéro actuel au début de la liste des anciens numéros et limiter la liste à 5 éléments
-        oldNumbers.unshift(currentNumber);
+        oldNumbers.unshift(`${currentNumber} - ${currentCounter} - ${currentRoom}`);
         if (oldNumbers.length > 5) {
             oldNumbers = oldNumbers.slice(0, 5);
         }
