@@ -31,7 +31,11 @@ onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
 
         // Afficher le temps moyen
         document.getElementById('tempsMoyen').textContent = tempsMoyen.toFixed(2);
-
+        
+        // Jouer le son de notification
+        const notification123 = document.getElementById('notification123');
+        if (notification123) {
+            notification123.play();
         }
     }
 });
