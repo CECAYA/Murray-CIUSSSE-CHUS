@@ -18,5 +18,9 @@ onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
         for (let i = 0; i < 5; i++) {
             document.getElementById(`old${i + 1}`).textContent = oldNumbers[i] !== undefined ? formatNumber1(oldNumbers[i]) : '-';
         }
+        const oldTimes = data.oldTimes || [];
+        for (let i = 0; i < 5; i++) {
+            document.getElementById(`oldTime${i + 1}`).textContent = oldTimes[i] !== undefined ? oldTimes[i] : 0;
+        }
     }
 });
