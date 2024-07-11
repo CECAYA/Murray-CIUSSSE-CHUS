@@ -49,25 +49,18 @@ async function callNextUser() {
 }
 
 async function PreviousNumber() {
+    const docRef = doc(db, 'waitingRoom', 'current');
+    const docSnap = await getDoc(docRef);
 
-
-        const docRef = doc(db, 'waitingRoom', 'current');
-        const docSnap = await getDoc(docRef);
-
-        let currentNumberA = 0;
-        if (docSnap.exists()) {
-            currentNumberA = docSnap.data().number;
-            currentNumberA=currentNumberA - 1;
-        }
-        if (currentNumberA < 0) {
-            currentNumberA = 99;
-        }
-    
+    if (docSnap.exists()) {
+        let currentNumberA = docSnap.data().number;
+        currentNumberA = (currentNumberA - 1 + 100) % 100; // Assure que le numéro reste entre 0 et 99
         await setDoc(docRef, {
             number: currentNumberA,
             counter: "?",
             room: "?",
         }, { merge: true });
+    }
 }
 
 // Nouvelle fonction pour réinitialiser le compteur
