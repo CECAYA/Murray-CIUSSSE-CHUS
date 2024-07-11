@@ -9,26 +9,25 @@ async function callNextUser() {
     if (docSnap.exists()) {
         const currentNumber = docSnap.data().number;
         const counterNumber = document.getElementById('counterNumber').value;
-        const roomNumber = document.getElementById('roomNumber').value; // Récupérer le numéro de salle
+        const roomNumber = document.getElementById('roomNumber').value;
 
-        if (counterNumber && roomNumber) { // Vérifiez que les deux champs sont remplis
-            let nextNumber = increment(currentNumber + 1); // Incrémenter le numéro actuel
+        if (counterNumber && roomNumber) {
+            let nextNumber = increment(Number(currentNumber)); // Utilisez increment avec un nombre
 
-            // Vérifier si le prochain numéro est 100
             if (nextNumber >= 100) {
-                nextNumber = 0; // Remettre à 0 si le numéro atteint 100
+                nextNumber = 0;
             }
 
-            // Mettre à jour les données dans Firebase
             await setDoc(docRef, {
                 number: nextNumber,
                 counter: counterNumber,
-                room: roomNumber // Ajouter le numéro de salle
+                room: roomNumber
             }, { merge: true });
         }
     }
 }
 
+// Fonction pour appeler l'utilisateur précédent
 async function callBeforeUser() {
     const docRef = doc(db, 'waitingRoom', 'current');
     const docSnap = await getDoc(docRef);
@@ -36,21 +35,19 @@ async function callBeforeUser() {
     if (docSnap.exists()) {
         const currentNumber = docSnap.data().number;
         const counterNumber = document.getElementById('counterNumber').value;
-        const roomNumber = document.getElementById('roomNumber').value; // Récupérer le numéro de salle
+        const roomNumber = document.getElementById('roomNumber').value;
 
-        if (counterNumber && roomNumber) { // Vérifiez que les deux champs sont remplis
-            let nextNumber = increment(currentNumber - 1); // Incrémenter le numéro actuel
+        if (counterNumber && roomNumber) {
+            let nextNumber = increment(Number(currentNumber) - 2); // Utilisez increment correctement pour la décrémentation
 
-            // Vérifier si le prochain numéro est 100
-            if (nextNumber <= 0) {
-                nextNumber = 100; // Remettre à 100 si le numéro atteint 0
+            if (nextNumber < 0) {
+                nextNumber = 99;
             }
 
-            // Mettre à jour les données dans Firebase
             await setDoc(docRef, {
                 number: nextNumber,
                 counter: counterNumber,
-                room: roomNumber // Ajouter le numéro de salle
+                room: roomNumber
             }, { merge: true });
         }
     }
