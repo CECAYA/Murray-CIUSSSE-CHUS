@@ -1,7 +1,7 @@
 import { doc, onSnapshot } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
 import { db } from './config.js';
 
-// Fonction pour formater le numéro avec la salle et le poste
+// Fonction pour formater les anciens numéros avec la salle et le poste
 function formatOldNumbers(oldNumbers) {
     return oldNumbers.map(num => `${num.number} - ${num.room} - ${num.counter}`).join('<br>');
 }
