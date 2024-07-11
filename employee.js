@@ -25,7 +25,7 @@ async function callNextUser() {
         }
 
         // Ajouter le numéro actuel au début de la liste des anciens numéros et limiter la liste à 5 éléments
-        oldNumbers.unshift(currentNumber);
+        oldNumbers.unshift({ number: currentNumber, room: roomNumber, counter: counterNumber });
         if (oldNumbers.length > 5) {
             oldNumbers = oldNumbers.slice(0, 5);
         }
