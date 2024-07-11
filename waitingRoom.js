@@ -9,7 +9,7 @@ function formatNumber1(num3) {
 function speakNumber(number) {
     const speech = new SpeechSynthesisUtterance();
     speech.lang = 'fr-FR'; // Langue française
-    speech.text = `Numéro appelé : ${number}`;
+    speech.text = `Numéro ${number}`;
     speech.volume = 1;
     speech.rate = 1;
     speech.pitch = 1;
@@ -48,8 +48,9 @@ onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
         if (notification123) {
             notification123.play();
 
-        // Lire le numéro appelé à haute voix
-        speakNumber(data.number);
+        setTimeout(() => {
+            speakNumber(data.number);
+        }, 1000);
 
         }
     }
