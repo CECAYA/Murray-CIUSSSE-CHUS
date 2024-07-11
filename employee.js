@@ -24,7 +24,7 @@ async function callNextUser() {
         if (currentNumber >= 99) {
             newNumber = 0;
         } else if (currentCounter == "?") {
-            newNumber = currentNumber;
+            newNumber = 0;
         } else {
             newNumber = currentNumber + 1;
         }
