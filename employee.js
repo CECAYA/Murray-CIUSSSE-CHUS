@@ -28,7 +28,7 @@ async function callNextUser() {
         }
 
         // Ajouter le numéro actuel au début de la liste des anciens numéros et limiter la liste à 5 éléments
-        oldNumbers.unshift(`${formatNumber2(currentNumber)} - ${currentCounter} - ${currentRoom}`);
+        oldNumbers.unshift(`${currentNumber.toString().padStart(2, '0')} - ${currentCounter} - ${currentRoom}`);
         if (oldNumbers.length > 5) {
             oldNumbers = oldNumbers.slice(0, 5);
         }
@@ -50,11 +50,6 @@ function resetCounter() {
         room: "?",
         oldNumbers: []
     });
-}
-
-// Fonction pour afficher le numéro appelé, le comptoir et la salle
-function formatNumber2(num4) {
-    return num4.toString().padStart(2, '0'); // Utilise padStart pour ajouter un 0 devant si nécessaire
 }
 
 // Attacher les fonctions au contexte global pour qu'elles soient accessibles depuis le HTML
