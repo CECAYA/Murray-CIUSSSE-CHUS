@@ -24,7 +24,7 @@ async function callNextUser() {
         if (currentNumber >= 99) {
             newNumber = 0;
         } else if (currentCounter == "?") {
-            newNumber = 0;
+            newNumber = currentNumber;
         } else {
             newNumber = currentNumber + 1;
         }
@@ -64,7 +64,7 @@ async function PreviousNumber() {
 }
 
 // Nouvelle fonction pour réinitialiser le compteur
-function resetCounter() {
+async function resetCounter() {
     setDoc(doc(db, 'waitingRoom', 'current'), {
         number: 0,
         counter: "?",
