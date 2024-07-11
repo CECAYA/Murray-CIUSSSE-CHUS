@@ -15,4 +15,14 @@ function callNextUser() {
     }
 }
 
+// Nouvelle fonction pour réinitialiser le compteur
+async function resetCounter() {
+    await updateDoc(doc(db, 'waitingRoom', 'current'), {
+        number: 0,
+        counter: "?",
+        room: "?"
+    });
+}
+
 window.callNextUser = callNextUser;
+window.resetCounter = resetCounter;
