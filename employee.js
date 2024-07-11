@@ -16,7 +16,7 @@ function callNextUser() {
 }
 
 // Nouvelle fonction pour réinitialiser le compteur
-async function resetCounter() {
+function resetCounter() {
     await updateDoc(doc(db, 'waitingRoom', 'current'), {
         number: 0,
         counter: "?",
