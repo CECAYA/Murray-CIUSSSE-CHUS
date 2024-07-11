@@ -15,13 +15,4 @@ function callNextUser() {
     }
 }
 
-function callResetCompteur() {
-    setDoc(doc(db, 'waitingRoom', 'current'), {
-        number: 0,
-        counter: "?",
-        room: "?" // Ajouter le numéro de salle
-    }, { merge: true });
-}
-
 window.callNextUser = callNextUser;
-window.callResetCompteur = callResetCompteur;
