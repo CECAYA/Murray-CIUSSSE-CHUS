@@ -39,10 +39,6 @@ onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
         if (notification123) {
             notification123.play();
 
-        //setTimeout(() => {
-        //    speakNumber(data.number);
-        //}, 1000);
-
         }
     }
 });
