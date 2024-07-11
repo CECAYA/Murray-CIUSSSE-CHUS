@@ -23,10 +23,12 @@ async function callNextUser() {
         let newNumber;
         if (currentNumber >= 99) {
             newNumber = 0;
-        } else if (currentCounter == "?") {
-            newNumber = 0;
-        } else {
+        }  else {
             newNumber = currentNumber + 1;
+        }
+        
+        if (currentCounter == "?") {
+            newNumber = currentNumber;
         }
         
         // Ajouter le numéro actuel au début de la liste des anciens numéros et limiter la liste à 5 éléments
