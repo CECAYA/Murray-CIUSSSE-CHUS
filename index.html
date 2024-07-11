@@ -17,24 +17,27 @@
       background-color: #def1d3; /* vert pâle */
       font-family: Impact, Helvetica, sans-serif;
       text-align: center;
-      font-size: 75px;
+      font-size: 60px;
       border-top: 10px solid black;
       border-left: 10px solid black;
+      vertical-align: center;
     }
     .col-2 {
       background-color: #f7e4d8; /* orange pâle */
       font-family: Impact, Helvetica, sans-serif;
       text-align: center;
-      font-size: 75px;
+      font-size: 60px;
       border-top: 10px solid black;
+      vertical-align: center;
     }
     .col-3 {
       background-color: #d1edf9; /* bleu pâle */
       font-family: Impact, Helvetica, sans-serif;
       text-align: center;
-      font-size: 75px;
+      font-size: 60px;
       border-top: 10px solid black;
       border-right: 10px solid black;
+      vertical-align: center;
     }
     .col-4 {
       background-color: #ffffff; /* blanc */
@@ -48,7 +51,7 @@
       background-color: #def1d3; /* vert pâle */
       font-family: Impact, Helvetica, sans-serif;
       text-align: center;
-      font-size: 400px;
+      font-size: 350px;
       border-bottom: 10px solid black;
       border-left: 10px solid black;
     }
@@ -56,14 +59,14 @@
       background-color: #f7e4d8; /* orange pâle */
       font-family: Impact, Helvetica, sans-serif;
       text-align: center;
-      font-size: 400px;
+      font-size: 350px;
       border-bottom: 10px solid black;
     }
     .col-3-2 {
       background-color: #d1edf9; /* bleu pâle */
       font-family: Impact, Helvetica, sans-serif;
       text-align: center;
-      font-size: 400px;
+      font-size: 350px;
       border-bottom: 10px solid black;
       border-right: 10px solid black;
     }
@@ -130,5 +133,11 @@
   </div>
 <script type="module" src="config.js" defer></script>
 <script type="module" src="waitingRoom.js" defer></script>
+<script>
+  function formatNumber(number) {
+    return number.toString().padStart(2, '0');
+  }
+
+</script>
 </body>
 </html>
