@@ -16,8 +16,6 @@ function callNextUser() {
 }
 
 function callResetCompteur() {
-    const counterNumber = document.getElementById('counterNumber').value;
-    const roomNumber = document.getElementById('roomNumber').value; // Récupérer le numéro de salle
     setDoc(doc(db, 'waitingRoom', 'current'), {
         number: 0,
         counter: "?",
