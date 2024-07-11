@@ -23,12 +23,18 @@ async function callNextUser() {
         let newNumber;
         if (currentNumber >= 99) {
             newNumber = 0;
+        } else if (currentCounter == "?") {
+            newNumber = 0;
         } else {
             newNumber = currentNumber + 1;
         }
-
+        
         // Ajouter le numéro actuel au début de la liste des anciens numéros et limiter la liste à 5 éléments
-        oldNumbers.unshift(`${currentNumber.toString().padStart(2, '0')} - ${currentCounter} - ${currentRoom}`);
+        
+        if (currentCounter != "?") {
+            oldNumbers.unshift(`${currentNumber.toString().padStart(2, '0')} - ${currentCounter} - ${currentRoom}`);
+        }
+        
         if (oldNumbers.length > 5) {
             oldNumbers = oldNumbers.slice(0, 5);
         }
