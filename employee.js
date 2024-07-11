@@ -53,6 +53,12 @@ async function callNextUser() {
             oldNumbers: oldNumbers,
             oldTimes: oldTimes,
         }, { merge: true });
+        // Jouer le son de notification
+        const notificationSound = document.getElementById('notification123');
+        if (notification123) {
+            notification123.play();
+        }
+        
     }
 }
 
