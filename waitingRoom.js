@@ -19,8 +19,18 @@ onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
             document.getElementById(`old${i + 1}`).textContent = oldNumbers[i] !== undefined ? formatNumber1(oldNumbers[i]) : '-';
         }
         const oldTimes = data.oldTimes || [];
+
+        // Calculer la somme des oldTimes
+        const sum = oldTimes.reduce((total, time) => total + time, 0);
+        
+        // Calculer le temps moyen
+        const tempsMoyen = oldTimes.length > 0 ? sum / oldTimes.length : 0;
+        
+        // Afficher les oldTimes et le temps moyen
         for (let i = 0; i < 5; i++) {
             document.getElementById(`oldTime${i + 1}`).textContent = oldTimes[i] !== undefined ? oldTimes[i] : 0;
         }
+
+        document.getElementById('tempsMoyen').textContent = tempsMoyen;
     }
 });
