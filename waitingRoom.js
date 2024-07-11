@@ -16,21 +16,20 @@ onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
         // Afficher les anciens numéros
         const oldNumbers = data.oldNumbers || [];
         for (let i = 0; i < 5; i++) {
-            document.getElementById(`old${i + 1}`).textContent = oldNumbers[i] !== undefined ? formatNumber1(oldNumbers[i]) : '-';
+            document.getElementById(`old${i + 1}`).textContent = oldNumbers[i] !== undefined ? oldNumbers[i] : '-';
         }
         const oldTimes = data.oldTimes || [];
 
-        // Calculer la somme des oldTimes
-        const sum = oldTimes.reduce((total, time) => total + time, 0);
-        
-        // Calculer le temps moyen
-        const tempsMoyen = oldTimes.length > 0 ? sum / oldTimes.length : 0;
-        
-        // Afficher les oldTimes et le temps moyen
-        for (let i = 0; i < 5; i++) {
-            document.getElementById(`oldTime${i + 1}`).textContent = oldTimes[i] !== undefined ? oldTimes[i] : 0;
+        // Calculer la somme des différences entre les oldTimes
+        let totalDifference = 0;
+        for (let i = 0; i < oldTimes.length - 1; i++) {
+            totalDifference += oldTimes[i] - oldTimes[i + 1];
         }
 
-        document.getElementById('tempsMoyen').textContent = tempsMoyen;
+        // Calculer le temps moyen en minutes
+        const tempsMoyen = oldTimes.length > 1 ? (totalDifference / (oldTimes.length - 1)) / 60000 : 0;
+
+        // Afficher le temps moyen
+        document.getElementById('tempsMoyen').textContent = tempsMoyen.toFixed(2);
     }
 });
