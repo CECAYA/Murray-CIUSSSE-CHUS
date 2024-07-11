@@ -9,7 +9,7 @@ function formatToTwoDigits(number) {
 // Fonction pour afficher le numéro appelé, le comptoir et la salle
 onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
     if (doc.exists) {
-        document.getElementById('currentNumber').textContent = formatToTwoDigits(doc.data().number;)
+        document.getElementById('currentNumber').textContent = formatToTwoDigits(doc.data().number);
         document.getElementById('counterNumber').textContent = doc.data().counter;
         document.getElementById('roomNumber').textContent = doc.data().room; // Afficher le numéro de salle
     }
