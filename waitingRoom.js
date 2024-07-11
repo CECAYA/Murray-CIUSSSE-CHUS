@@ -12,5 +12,10 @@ onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
         document.getElementById('currentNumber').textContent = formatNumber1(number2);
         document.getElementById('counterNumber').textContent = doc.data().counter;
         document.getElementById('roomNumber').textContent = doc.data().room; // Afficher le numéro de salle
+        document.getElementById('oldNumber1').textContent = doc.data().old1;
+        document.getElementById('oldNumber2').textContent = doc.data().old2;
+        document.getElementById('oldNumber3').textContent = doc.data().old3;
+        document.getElementById('oldNumber4').textContent = doc.data().old4;
+        document.getElementById('oldNumber5').textContent = doc.data().old5;
     }
 });
