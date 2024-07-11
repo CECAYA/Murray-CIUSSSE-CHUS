@@ -9,7 +9,7 @@ function formatNumber1(num3) {
 function speakNumber(number) {
     const speech = new SpeechSynthesisUtterance();
     speech.lang = 'fr-FR'; // Langue française
-    speech.text = `Numéro ${number}`; // Utilisation directe de la variable number
+    speech.text = `Numéro : ${number}`; // Utilisation directe de la variable number
     speech.volume = 1;
     speech.rate = 1;
     speech.pitch = 1;
