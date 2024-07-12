@@ -3,8 +3,8 @@ import { db } from './config.js';
 
 // Fonction pour appeler le prochain usager
 async function callNextUser() {
-    const counterNumber = document.getElementById('counterNumber').value;
-    const roomNumber = document.getElementById('roomNumber').value;
+    const counterNumber = document.getElementById('counterNumber1').value;
+    const roomNumber = document.getElementById('roomNumber1').value;
 
     if (counterNumber && roomNumber) {
         const docRef = doc(db, 'waitingRoom', 'current');
