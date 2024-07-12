@@ -36,7 +36,7 @@ async function callNextUser() {
         // Ajouter le numéro actuel au début de la liste des anciens numéros et limiter la liste à 5 éléments
         
         if (currentCounter != "?") {
-            oldNumbers.unshift(`${currentNumber.toString().padStart(2, '0')} - ${currentCounter} - ${currentRoom}`);
+            oldNumbers.unshift(`${currentNumber.toString().padStart(2, '0')} - ${currentRoom} - ${currentCounter}`);
             oldTimes.unshift(Date.now());
         }
         
