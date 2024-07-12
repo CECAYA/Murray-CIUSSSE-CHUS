@@ -10,39 +10,40 @@
       gap: 0px;
     }
     .grid-item {
+      display: flex;
       padding: 10px;
-      color: black; /* Pour améliorer la lisibilité */
+      align-items: center; /* Centre le contenu verticalement */
+      color: black;
+    }
+    .center-content {
+      justify-content: center; /* Centre le contenu horizontalement */
+    }
+    .right-content {
+      justify-content: right;
     }
     .col-1 {
       background-color: #def1d3; /* vert pâle */
       font-family: Impact, Helvetica, sans-serif;
-      text-align: center;
       font-size: 60px;
       border-top: 10px solid black;
       border-left: 10px solid black;
-      vertical-align: center;
     }
     .col-2 {
       background-color: #f7e4d8; /* orange pâle */
       font-family: Impact, Helvetica, sans-serif;
-      text-align: center;
       font-size: 60px;
       border-top: 10px solid black;
-      vertical-align: center;
     }
     .col-3 {
       background-color: #d1edf9; /* bleu pâle */
       font-family: Impact, Helvetica, sans-serif;
-      text-align: center;
       font-size: 60px;
       border-top: 10px solid black;
       border-right: 10px solid black;
-      vertical-align: center;
     }
     .col-4 {
       background-color: #ffffff; /* blanc */
       font-family: Impact, Helvetica, sans-serif;
-      text-align: center;
       font-size: 50px;
       border-top: 10px solid black;
       border-right: 10px solid black;
@@ -50,7 +51,6 @@
     .col-1-2 {
       background-color: #def1d3; /* vert pâle */
       font-family: Impact, Helvetica, sans-serif;
-      text-align: center;
       font-size: 350px;
       border-bottom: 10px solid black;
       border-left: 10px solid black;
@@ -58,14 +58,12 @@
     .col-2-2 {
       background-color: #f7e4d8; /* orange pâle */
       font-family: Impact, Helvetica, sans-serif;
-      text-align: center;
       font-size: 350px;
       border-bottom: 10px solid black;
     }
     .col-3-2 {
       background-color: #d1edf9; /* bleu pâle */
       font-family: Impact, Helvetica, sans-serif;
-      text-align: center;
       font-size: 350px;
       border-bottom: 10px solid black;
       border-right: 10px solid black;
@@ -73,39 +71,27 @@
     .col-4-2 {
       background-color: #ffffff; /* blanc */
       font-family: Impact, Helvetica, sans-serif;
-      text-align: center;
       font-size: 75px;
       border-right: 10px solid black;
       border-bottom: 10px solid black;
     }
     .col-1-3 {
       background-color: #ffffff;
-      grid-column: span 3; /* Fusionne deux colonnes */
+      grid-column: span 2; /* Fusionne deux colonnes */
       font-family: Impact, Helvetica, sans-serif;
-      font-size: 85px;
+      font-size: 60px;
     }
-    .col-4-3 {
+    .col-3-3 {
       background-color: #ffffff;
-  
-    }
-    .col-1-3 {
-      background-color: #ffffff;
-      grid-column: span 4; /* Fusionne deux colonnes */
+      grid-column: span 2; /* Fusionne deux colonnes */
       font-family: Impact, Helvetica, sans-serif;
-      font-size: 35px;
-      text-align: center;
+      font-size: 100px;
     }
     .col-1-4 {
       background-color: #ffffff;
-      grid-column: span 3; /* Fusionne deux colonnes */
-      font-family: Impact, Helvetica, sans-serif;
-      font-size: 70px;
-    }
-    .col-4-4 {
-      background-color: #ffffff;
-      font-family: Impact, Helvetica, sans-serif;
-      font-size: 70px;
-      vertical-align: center;
+      font-family: Copperplate, Papyrus, Fantasy;
+      grid-column: span 4; /* Fusionne deux colonnes */
+      font-size: 40px;
     }
     .texte-rouge {
     color: red;
@@ -115,20 +101,20 @@
 </head>
 <body>
   <div class="grid-container">
-    <div class="grid-item col-1">NUMÉRO APPELÉ</div>
-    <div class="grid-item col-2">SALLE</div>
-    <div class="grid-item col-3">POSTE</div>
-    <div class="grid-item col-4">NUMÉROS PRÉCÉDENTS</div>
+    <div class="grid-item col-1 center-content">NUMÉRO APPELÉ</div>
+    <div class="grid-item col-2 center-content">SALLE</div>
+    <div class="grid-item col-3 center-content">TABLE</div>
+    <div class="grid-item col-4 center-content">NUMÉROS PRÉCÉDENTS</div>
     
-    <div class="grid-item col-1-2"><span id="currentNumber">-</span></div>
-    <div class="grid-item col-2-2"><span id="roomNumber">-</span></div>
-    <div class="grid-item col-3-2"><span id="counterNumber">-</span></div>
-    <div class="grid-item col-4-2"><span id="old1">-</span><br><span id="old2">-</span><br><span id="old3">-</span><br><span id="old4">-</span><br><span id="old5">-</span></div>
+    <div class="grid-item col-1-2 center-content"><span id="currentNumber">-</span></div>
+    <div class="grid-item col-2-2 center-content"><span id="roomNumber">-</span></div>
+    <div class="grid-item col-3-2 center-content"><span id="counterNumber">-</span></div>
+    <div class="grid-item col-4-2 center-content"><span id="old1">-</span><br><span id="old2">-</span><br><span id="old3">-</span><br><span id="old4">-</span><br><span id="old5">-</span></div>
     
-    <div class="grid-item col-1-3">TEMPS INTER-NUMÉRO MOYEN EST DE <span id="tempsMoyen" class="texte-rouge">-</span> MINUTES</div>
-    <div class="grid-item col-1-4">ÉDIFICE MURRAY</div>
-    <div class="grid-item col-4-4">      
-    <img src="https://upload.wikimedia.org/wikipedia/fr/7/7e/Qu%C3%A9bec.svg" alt="Gouvernement du Québec" style="width: 100%;"></div>
+    <div class="grid-item col-1-3">LE TEMPS DE TRAITEMENT<br>MOYEN EST DE <span id="tempsMoyen" class="texte-rouge">-</span> MINS</div>
+    <div class="grid-item col-3-3 right-content">ÉDIFICE MURRAY</div>
+    <div class="grid-item col-1-4 right-content">CIUSSSE-CHUS  |&nbsp
+    <img src="https://upload.wikimedia.org/wikipedia/fr/7/7e/Qu%C3%A9bec.svg" alt="Gouvernement du Québec" style="width: 15%;"></div>
   </div>
   <audio id="notification123" src="notification123.mp3"></audio>
 <script type="module" src="config.js" defer></script>
