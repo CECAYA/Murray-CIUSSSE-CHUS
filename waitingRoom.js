@@ -45,13 +45,19 @@ onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
 
         if (data.room != "?"){
         // Jouer le son de notification
+        bouttonOff();
         const notification123 = document.getElementById('notification123');
         if (notification123) {
             notification123.play();
         
         setTimeout(() => {
             speakNumber(data.number);
-        }, 1500);
+        }, 2500);
+            
+        setTimeout(() => {
+            bouttonOn();
+        }, 3000);
+            
         }
         }
     }
