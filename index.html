@@ -151,7 +151,7 @@
   <audio id="notification123" src="notification123.mp3"></audio>
   
   <div id="videoContainer" style="display: none;">
-    <video id="videoElement" width="100%" height="100%" controls>
+    <video id="videoElement" width="100%" height="100%" controls preload="auto">
       <source src="your-video-file.mp4" type="video/mp4">
       Votre navigateur ne supporte pas la vidéo HTML5.
     </video>
@@ -176,6 +176,7 @@
       
       // Lecture automatique de la vidéo
       const videoElement = document.getElementById('videoElement');
+      videoElement.style.display = 'block';
       videoElement.play();
       
       // Masquer la vidéo après sa fin ou après un certain temps (par exemple 2 minutes)
