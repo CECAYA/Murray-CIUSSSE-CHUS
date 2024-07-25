@@ -87,7 +87,23 @@ async function resetCounter() {
     });
 }
 
+// Nouvelle fonction pour changer la disponibilité
+async function ouiDisponible() {
+    setDoc(doc(db, 'waitingRoom', 'current'), {
+        disponible: True
+    });
+}
+
+// Nouvelle fonction pour changer la disponibilité
+async function nonDisponible() {
+    setDoc(doc(db, 'waitingRoom', 'current'), {
+        disponible: False
+    });
+}
+
 // Attacher les fonctions au contexte global pour qu'elles soient accessibles depuis le HTML
 window.callNextUser = callNextUser;
 window.resetCounter = resetCounter;
 window.PreviousNumber = PreviousNumber;
+window.ouiDisponible = PreviousNumber;
+window.nonDisponible = PreviousNumber;
