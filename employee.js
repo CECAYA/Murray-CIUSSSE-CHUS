@@ -1,4 +1,4 @@
-import { doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
+import { doc, setDoc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
 import { db } from './config.js';
 
 // Fonction pour appeler le prochain usager
@@ -49,55 +49,45 @@ async function callNextUser() {
                 oldTimes = oldTimes.slice(0, 5);
             }
             await setDoc(docRef, {
-                disponible: False,
+                disponible: false,
                 number: newNumber,
                 counter: counterNumber,
                 room: roomNumber,
                 oldNumbers: oldNumbers,
                 oldTimes: oldTimes,
             }, { merge: true });
-    
-            
         }
     }
 }
 
-async function PreviousNumber() {
+// Nouvelle fonction pour vérifier l'état de disponibilité et mettre à jour le bouton
+function updateButtonState(disponible) {
+    const nextButton = document.querySelector('button[onclick="callNextUser()"]');
+    if (disponible) {
+        nextButton.disabled = false;
+        nextButton.style.backgroundColor = "";
+    } else {
+        nextButton.disabled = true;
+        nextButton.style.backgroundColor = "red";
+    }
+}
+
+// Fonction pour initialiser l'état du bouton en fonction de la disponibilité
+async function initializeButtonState() {
     const docRef = doc(db, 'waitingRoom', 'current');
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-        let currentNumberA = docSnap.data().number;
-        currentNumberA = (currentNumberA - 1 + 100) % 100; // Assure que le numéro reste entre 0 et 99
-        await setDoc(docRef, {
-            number: currentNumberA,
-            counter: "?",
-            room: "?",
-        }, { merge: true });
+        const disponible = docSnap.data().disponible;
+        updateButtonState(disponible);
     }
-}
 
-// Nouvelle fonction pour réinitialiser le compteur
-async function resetCounter() {
-    setDoc(doc(db, 'waitingRoom', 'current'), {
-        number: 0,
-        counter: "?",
-        room: "?",
-        oldNumbers: []
-    });
-}
-
-// Nouvelle fonction pour changer la disponibilité
-async function ouiDisponible() {
-    setDoc(doc(db, 'waitingRoom', 'current'), {
-        disponible: True
-    });
-}
-
-// Nouvelle fonction pour changer la disponibilité
-async function nonDisponible() {
-    setDoc(doc(db, 'waitingRoom', 'current'), {
-        disponible: False
+    // Écouter les changements en temps réel
+    onSnapshot(docRef, (doc) => {
+        if (doc.exists()) {
+            const disponible = doc.data().disponible;
+            updateButtonState(disponible);
+        }
     });
 }
 
@@ -107,3 +97,4 @@ window.resetCounter = resetCounter;
 window.PreviousNumber = PreviousNumber;
 window.ouiDisponible = ouiDisponible;
 window.nonDisponible = nonDisponible;
+window.initializeButtonState = initializeButtonState;
