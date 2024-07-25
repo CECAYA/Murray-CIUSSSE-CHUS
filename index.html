@@ -113,7 +113,22 @@
     .texte-rouge {
       color: red;
     }
-    
+     #videoContainer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: black; /* Pour un meilleur contraste */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999; /* Assurez-vous que la vidéo est au-dessus de tout */
+    }
+
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -134,12 +149,58 @@
     <img src="https://upload.wikimedia.org/wikipedia/fr/7/7e/Qu%C3%A9bec.svg" alt="Gouvernement du Québec" style="width: 15%;"></div>
   </div>
   <audio id="notification123" src="notification123.mp3"></audio>
+  
+  <div id="videoContainer" style="display: none;">
+    <video id="videoElement" width="100%" height="100%" controls>
+      <source src="your-video-file.mp4" type="video/mp4">
+      Votre navigateur ne supporte pas la vidéo HTML5.
+    </video>
+  </div>
+  
 <script type="module" src="config.js" defer></script>
 <script type="module" src="waitingRoom.js" defer></script>
 <script>
   function formatNumber(number) {
     return number.toString().padStart(2, '0');
   }
+
+   // Fonction pour afficher la vidéo
+    function showVideo() {
+      const videoContainer = document.getElementById('videoContainer');
+      const mainContent = document.querySelectorAll('body > :not(#videoContainer)');
+      
+      // Masquer le reste du contenu
+      mainContent.forEach(element => element.classList.add('hidden'));
+      
+      videoContainer.style.display = 'flex';
+      
+      // Lecture automatique de la vidéo
+      const videoElement = document.getElementById('videoElement');
+      videoElement.play();
+      
+      // Masquer la vidéo après sa fin ou après un certain temps (par exemple 2 minutes)
+      videoElement.onended = hideVideo;
+      setTimeout(hideVideo, 120000); // 120000 ms = 2 minutes
+    }
+
+    function hideVideo() {
+      const videoContainer = document.getElementById('videoContainer');
+      const mainContent = document.querySelectorAll('body > :not(#videoContainer)');
+      
+      // Afficher le reste du contenu
+      mainContent.forEach(element => element.classList.remove('hidden'));
+      
+      videoContainer.style.display = 'none';
+      
+      // Réinitialiser la vidéo
+      const videoElement = document.getElementById('videoElement');
+      videoElement.pause();
+      videoElement.currentTime = 0;
+    }
+
+    // Répéter l'affichage de la vidéo toutes les 10 minutes (600000 ms)
+    setInterval(showVideo, 600000);
+  
 </script>
 </body>
 </html>
