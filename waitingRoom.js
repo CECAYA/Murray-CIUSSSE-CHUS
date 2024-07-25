@@ -57,7 +57,6 @@ onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
         document.getElementById('tempsMoyen').textContent = tempsMoyen.toFixed(2);
 
         if (data.room != "?"){
-            bouttonOff(4000);
         // Jouer le son de notification
         const notification123 = document.getElementById('notification123');
         if (notification123) {
