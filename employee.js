@@ -73,13 +73,13 @@ function updateButtonState(disponible) {
 }
 
 // Fonction pour initialiser l'état du bouton en fonction de la disponibilité
-async function initializeButtonState() {
+async function updateDisponibilite(state1) {
     const docRef = doc(db, 'waitingRoom', 'current');
     const docSnap = await getDoc(docRef);
 
-    if (docSnap.exists()) {
-        const disponible = docSnap.data().disponible;
-        updateButtonState(disponible);
+    await setDoc(docRef, {
+                disponible: state1,
+            }, { merge: true });
     }
 
     // Écouter les changements en temps réel
@@ -95,6 +95,4 @@ async function initializeButtonState() {
 window.callNextUser = callNextUser;
 window.resetCounter = resetCounter;
 window.PreviousNumber = PreviousNumber;
-window.ouiDisponible = ouiDisponible;
-window.nonDisponible = nonDisponible;
-window.initializeButtonState = initializeButtonState;
+window.updateDisponibilite = updateDisponibilite;
