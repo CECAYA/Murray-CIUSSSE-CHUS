@@ -51,7 +51,12 @@ onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
         
         setTimeout(() => {
             speakNumber(data.number);
-        }, 1500);
+        }, 2000);
+            
+        setTimeout(() => {
+            ouiDisponible();
+        }, 2000);
+            
         }
         }
     }
