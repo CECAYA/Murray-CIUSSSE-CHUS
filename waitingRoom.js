@@ -44,6 +44,7 @@ onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
         document.getElementById('tempsMoyen').textContent = tempsMoyen.toFixed(2);
 
         if (data.room != "?"){
+            bouttonOff();
         // Jouer le son de notification
         const notification123 = document.getElementById('notification123');
         if (notification123) {
@@ -52,6 +53,7 @@ onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
         setTimeout(() => {
             speakNumber(data.number);
         }, 1500);
+            bouttonOn();
         }
         }
     }
