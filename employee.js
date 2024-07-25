@@ -11,7 +11,7 @@ async function callNextUser() {
         const docSnap = await getDoc(docRef);
 
         let currentNumber = 0;
-        let currentCounter, currentRoom;
+        let currentCounter, currentRoom, currentdisponible;
         let oldNumbers = [];
         let oldTimes = [];
         if (docSnap.exists()) {
@@ -20,41 +20,45 @@ async function callNextUser() {
             oldTimes = docSnap.data().oldTimes || [];
             currentCounter = docSnap.data().counter;
             currentRoom = docSnap.data().room;
+            currentdisponible = docSnap.data().disponible;
         }
 
-        let newNumber=0;
-        if (currentNumber >= 99) {
-            newNumber = 0;
-        }  else {
-            newNumber = currentNumber + 1;
+        if (currentdisponible) {
+            let newNumber=0;
+            if (currentNumber >= 99) {
+                newNumber = 0;
+            }  else {
+                newNumber = currentNumber + 1;
+            }
+            
+            if (currentCounter == "?") {
+                newNumber = currentNumber;
+            }
+            
+            // Ajouter le numéro actuel au début de la liste des anciens numéros et limiter la liste à 5 éléments
+            
+            if (currentCounter != "?") {
+                oldNumbers.unshift(`${currentNumber.toString().padStart(2, '0')} - ${currentRoom} - ${currentCounter}`);
+                oldTimes.unshift(Date.now());
+            }
+            
+            if (oldNumbers.length > 5) {
+                oldNumbers = oldNumbers.slice(0, 5);
+            }
+            if (oldTimes.length > 5) {
+                oldTimes = oldTimes.slice(0, 5);
+            }
+            await setDoc(docRef, {
+                disponible: False,
+                number: newNumber,
+                counter: counterNumber,
+                room: roomNumber,
+                oldNumbers: oldNumbers,
+                oldTimes: oldTimes,
+            }, { merge: true });
+    
+            
         }
-        
-        if (currentCounter == "?") {
-            newNumber = currentNumber;
-        }
-        
-        // Ajouter le numéro actuel au début de la liste des anciens numéros et limiter la liste à 5 éléments
-        
-        if (currentCounter != "?") {
-            oldNumbers.unshift(`${currentNumber.toString().padStart(2, '0')} - ${currentRoom} - ${currentCounter}`);
-            oldTimes.unshift(Date.now());
-        }
-        
-        if (oldNumbers.length > 5) {
-            oldNumbers = oldNumbers.slice(0, 5);
-        }
-        if (oldTimes.length > 5) {
-            oldTimes = oldTimes.slice(0, 5);
-        }
-        await setDoc(docRef, {
-            number: newNumber,
-            counter: counterNumber,
-            room: roomNumber,
-            oldNumbers: oldNumbers,
-            oldTimes: oldTimes,
-        }, { merge: true });
-
-        
     }
 }
 
