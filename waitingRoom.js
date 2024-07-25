@@ -54,10 +54,6 @@ onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
             speakNumber(data.number);
         }, 2500);
             
-        setTimeout(() => {
-            bouttonOn();
-        }, 3000);
-            
         }
             bouttonOn();
         }
