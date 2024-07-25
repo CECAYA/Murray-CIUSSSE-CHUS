@@ -54,7 +54,7 @@ onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
         }, 2000);
             
         setTimeout(() => {
-            ouiDisponible();
+            updateDisponibilite(True);
         }, 2000);
             
         }
