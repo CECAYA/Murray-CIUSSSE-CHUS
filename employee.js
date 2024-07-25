@@ -105,5 +105,5 @@ async function nonDisponible() {
 window.callNextUser = callNextUser;
 window.resetCounter = resetCounter;
 window.PreviousNumber = PreviousNumber;
-window.ouiDisponible = PreviousNumber;
-window.nonDisponible = PreviousNumber;
+window.ouiDisponible = ouiDisponible;
+window.nonDisponible = nonDisponible;
