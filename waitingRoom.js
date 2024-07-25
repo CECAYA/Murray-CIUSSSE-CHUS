@@ -52,7 +52,7 @@ onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
         
         setTimeout(() => {
             speakNumber(data.number);
-        }, 2500);
+        }, 1500);
             
         }
             bouttonOn();
