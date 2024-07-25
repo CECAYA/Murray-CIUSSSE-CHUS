@@ -87,6 +87,3 @@ async function resetCounter() {
 window.callNextUser = callNextUser;
 window.resetCounter = resetCounter;
 window.PreviousNumber = PreviousNumber;
-window.bouttonOff = bouttonOff;
-window.bouttonOn = bouttonOn;
-
