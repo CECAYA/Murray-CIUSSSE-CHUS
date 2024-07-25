@@ -70,3 +70,6 @@ onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
         }
     }
 });
+
+window.bouttonOff = bouttonOff;
+window.bouttonOn = bouttonOn;
