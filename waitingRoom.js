@@ -6,17 +6,6 @@ function formatNumber1(num3) {
     return num3.toString().padStart(2, '0'); // Utilise padStart pour ajouter un 0 devant si nécessaire
 }
 
-function bouttonOff(temps) {
-    const nextButton = document.querySelector('.button1');
-    nextButton.disabled = true;
-    nextButton.classList.add('button-disabled');
-
-    // Attendre 3 secondes (3000 millisecondes)
-    setTimeout(() => {
-        nextButton.disabled = false;
-        nextButton.classList.remove('button-disabled');
-    }, temps);
-}
 
 
 function speakNumber(number) {
