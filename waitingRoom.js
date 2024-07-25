@@ -59,6 +59,7 @@ onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
         }, 3000);
             
         }
+            bouttonOn();
         }
     }
 });
