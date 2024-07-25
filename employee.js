@@ -83,17 +83,6 @@ async function resetCounter() {
     });
 }
 
-async function bouttonOff() {
-    const nextButton = document.querySelector('.button1');
-        nextButton.disabled = true;
-        nextButton.classList.add('button-disabled');
-}
-async function bouttonOn() {
-    const nextButton = document.querySelector('.button1');
-        nextButton.disabled = false;
-        nextButton.classList.remove('button-disabled');
-}
-
 // Attacher les fonctions au contexte global pour qu'elles soient accessibles depuis le HTML
 window.callNextUser = callNextUser;
 window.resetCounter = resetCounter;
