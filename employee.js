@@ -93,12 +93,9 @@ async function resetCounter() {
 
 async function pauseboutton(trueorfalse) {
     const docRef = doc(db, 'waitingRoom', 'current');
-
-    if (docSnap.exists()) {
         await setDoc(docRef, {
             disponible: trueorfalse,
         }, { merge: true });
-    }
 }
 
 
