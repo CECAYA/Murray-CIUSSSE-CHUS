@@ -165,23 +165,27 @@
     return number.toString().padStart(2, '0');
   }
 // Fonction pour afficher la vidéo
- function showVideo() {
-    const videoContainer = document.getElementById('videoContainer');
-    const mainContent = document.querySelectorAll('body > :not(#videoContainer)');
-    
-    // Masquer le reste du contenu
-    mainContent.forEach(element => element.classList.add('hidden'));
-    
-    videoContainer.style.display = 'flex';
-    
-    // Lecture automatique de la vidéo
-    const videoElement = document.getElementById('videoElement');
-    videoElement.style.display = 'block';
-    videoElement.play();
-
-    videoElement.onended = hideVideo;
-}
-
+   function showVideo() {
+    return new Promise((resolve) => {
+      const videoContainer = document.getElementById('videoContainer');
+      const mainContent = document.querySelectorAll('body > :not(#videoContainer)');
+      
+      // Masquer le reste du contenu
+      mainContent.forEach(element => element.classList.add('hidden'));
+      
+      videoContainer.style.display = 'flex';
+      
+      // Lecture automatique de la vidéo
+      const videoElement = document.getElementById('videoElement');
+      videoElement.style.display = 'block';
+      videoElement.play();
+  
+      videoElement.onended = () => {
+        hideVideo();
+        resolve(); // Résoudre la promesse lorsque la vidéo se termine
+      };
+    });
+  }
 function hideVideo() {
     const videoContainer = document.getElementById('videoContainer');
     const mainContent = document.querySelectorAll('body > :not(#videoContainer)');
