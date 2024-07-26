@@ -92,13 +92,14 @@ async function resetCounter() {
 
 
 async function pauseboutton(temps) {
-    setDoc(doc(db, 'waitingRoom', 'current'), {
+    const docRef = doc(db, 'waitingRoom', 'current');
+    await setDoc(docRef, {
         disponible: false,
     });
     setTimeout(async () => {
-    await setDoc(docRef, {
-        disponible: true,
-    }, { merge: true });
+        await setDoc(docRef, {
+            disponible: true,
+        }, { merge: true });
     }, temps);
 }
 
