@@ -38,14 +38,15 @@ async function callNextUser() {
         if (currentCounter != "?") {
             oldNumbers.unshift(`${currentNumber.toString().padStart(2, '0')} - ${currentRoom} - ${currentCounter}`);
             oldTimes.unshift(Date.now());
-        }
-        
-        if (oldNumbers.length > 5) {
-            oldNumbers = oldNumbers.slice(0, 5);
             bouttonOff();
             setTimeout(() => {
                 bouttonOn();
             }, 3000);   
+        }
+        
+        if (oldNumbers.length > 5) {
+            oldNumbers = oldNumbers.slice(0, 5);
+
         }
         if (oldTimes.length > 5) {
             oldTimes = oldTimes.slice(0, 5);
