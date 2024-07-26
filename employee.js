@@ -53,8 +53,19 @@ async function callNextUser() {
             room: roomNumber,
             oldNumbers: oldNumbers,
             oldTimes: oldTimes,
+            disponible: false,
         }, { merge: true });
-
+    
+        setTimeout(() => {
+        await setDoc(docRef, {
+            number: newNumber,
+            counter: counterNumber,
+            room: roomNumber,
+            oldNumbers: oldNumbers,
+            oldTimes: oldTimes,
+            disponible: true,
+        }, { merge: true });
+        }, 3000);
         
     }
 }
