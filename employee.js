@@ -37,11 +37,7 @@ async function callNextUser() {
         
         if (currentCounter != "?") {
             oldNumbers.unshift(`${currentNumber.toString().padStart(2, '0')} - ${currentRoom} - ${currentCounter}`);
-            oldTimes.unshift(Date.now());
-            bouttonOff();
-            setTimeout(() => {
-                bouttonOn();
-            }, 3000);   
+            oldTimes.unshift(Date.now());  
         }
         
         if (oldNumbers.length > 5) {
