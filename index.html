@@ -200,8 +200,14 @@
       videoElement.currentTime = 0;
     }
 
+      function handleVideoCycle() {
+      pauseboutton(false);
+      showVideo();
+      pauseboutton(true);
+    }
+
     // Répéter l'affichage de la vidéo toutes les 10 minutes (100000 ms)
-    setInterval(showVideo, 60000);
+    setInterval(handleVideoCycle, 60000);
   
 </script>
 </body>
