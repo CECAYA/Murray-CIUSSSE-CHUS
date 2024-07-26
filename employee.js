@@ -108,3 +108,4 @@ async function pauseboutton(temps) {
 window.callNextUser = callNextUser;
 window.resetCounter = resetCounter;
 window.PreviousNumber = PreviousNumber;
+window.pauseboutton = pauseboutton;
