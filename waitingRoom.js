@@ -38,6 +38,7 @@ onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
     if (doc.exists) {
         const data = doc.data();
         if (data.disponible === false) {
+            if (document.getElementById('currentNumber').value != formatNumber1(data.number)){
         document.getElementById('currentNumber').textContent = formatNumber1(data.number);
         document.getElementById('counterNumber').textContent = data.counter;
         document.getElementById('roomNumber').textContent = data.room;
@@ -65,7 +66,7 @@ onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
                     }, 1500);
                 }
             }
-        } else {
+        }} else {
             bouttonOn();
         }
     }
