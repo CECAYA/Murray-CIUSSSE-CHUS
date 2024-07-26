@@ -179,13 +179,7 @@ async function showVideo() {
     videoElement.style.display = 'block';
     videoElement.play();
 
-    // Retourner une promesse qui sera résolue lorsque la vidéo se termine
-    return new Promise((resolve) => {
-        videoElement.onended = () => {
-            hideVideo();
-            resolve();
-        };
-    });
+    videoElement.onended = hideVideo;
 }
 
 function hideVideo() {
