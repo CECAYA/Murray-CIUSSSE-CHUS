@@ -203,7 +203,7 @@ function hideVideo() {
     videoElement.currentTime = 0;
 }
 
-async function handleVideoCycle() {
+function handleVideoCycle() {
     pauseboutton(false);
     await showVideo(); // Attendre que la vidéo se termine
     pauseboutton(true);
