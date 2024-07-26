@@ -198,13 +198,13 @@ function hideVideo() {
 }
 
 async function handleVideoCycle() {
-
+    pauseboutton(false)
     await showVideo(); // Attendre que la vidéo se termine
-
+    pauseboutton(true)
 }
 
 // Répéter l'affichage de la vidéo toutes les 10 minutes (20000 ms)
-setInterval(showVideo, 20000);
+setInterval(handleVideoCycle, 20000);
 
 </script>
 </body>
