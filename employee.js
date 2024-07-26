@@ -88,12 +88,12 @@ async function resetCounter() {
     });
 }
 
-async function bouttonOff() {
+function bouttonOff() {
     const nextButton = document.querySelector('.button1');
         nextButton.disabled = true;
         nextButton.classList.add('button-disabled');
 }
-async function bouttonOn() {
+function bouttonOn() {
     const nextButton = document.querySelector('.button1');
         nextButton.disabled = false;
         nextButton.classList.remove('button-disabled');
