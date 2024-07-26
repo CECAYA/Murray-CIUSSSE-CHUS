@@ -42,7 +42,7 @@ onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
 
         if (data.disponible === false) {
             const formattedNumber = formatNumber1(data.number);
-            
+            bouttonOff();
             if (currentNumberValue !== formattedNumber) {
                 currentNumberElement.textContent = formattedNumber;
                 document.getElementById('counterNumber').textContent = data.counter;
@@ -61,7 +61,7 @@ onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
                 const tempsMoyen = oldTimes.length > 1 ? (totalDifference / (oldTimes.length - 1)) / 60000 : 0;
                 document.getElementById('tempsMoyen').textContent = tempsMoyen.toFixed(2);
 
-                bouttonOff();
+                
                 if (data.room != "?") {
                     const notification123 = document.getElementById('notification123');
                     if (notification123) {
