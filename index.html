@@ -164,50 +164,54 @@
   function formatNumber(number) {
     return number.toString().padStart(2, '0');
   }
+// Fonction pour afficher la vidéo
+async function showVideo() {
+    const videoContainer = document.getElementById('videoContainer');
+    const mainContent = document.querySelectorAll('body > :not(#videoContainer)');
+    
+    // Masquer le reste du contenu
+    mainContent.forEach(element => element.classList.add('hidden'));
+    
+    videoContainer.style.display = 'flex';
+    
+    // Lecture automatique de la vidéo
+    const videoElement = document.getElementById('videoElement');
+    videoElement.style.display = 'block';
+    videoElement.play();
 
-   // Fonction pour afficher la vidéo
-    function showVideo() {
-      const videoContainer = document.getElementById('videoContainer');
-      const mainContent = document.querySelectorAll('body > :not(#videoContainer)');
-      
-      // Masquer le reste du contenu
-      mainContent.forEach(element => element.classList.add('hidden'));
-      
-      videoContainer.style.display = 'flex';
-      
-      // Lecture automatique de la vidéo
-      const videoElement = document.getElementById('videoElement');
-      videoElement.style.display = 'block';
-      videoElement.play();
+    // Retourner une promesse qui sera résolue lorsque la vidéo se termine
+    return new Promise((resolve) => {
+        videoElement.onended = () => {
+            hideVideo();
+            resolve();
+        };
+    });
+}
 
-      // Masquer la vidéo après sa fin ou après un certain temps (par exemple 2 minutes)
-      videoElement.onended = hideVideo;
+function hideVideo() {
+    const videoContainer = document.getElementById('videoContainer');
+    const mainContent = document.querySelectorAll('body > :not(#videoContainer)');
+    
+    // Afficher le reste du contenu
+    mainContent.forEach(element => element.classList.remove('hidden'));
+    
+    videoContainer.style.display = 'none';
+    
+    // Réinitialiser la vidéo
+    const videoElement = document.getElementById('videoElement');
+    videoElement.pause();
+    videoElement.currentTime = 0;
+}
 
+async function handleVideoCycle() {
+    pauseboutton(false);
+    await showVideo(); // Attendre que la vidéo se termine
+    pauseboutton(true);
+}
 
-    }
+// Répéter l'affichage de la vidéo toutes les 10 minutes (600000 ms)
+setInterval(handleVideoCycle, 600000);
 
-    function hideVideo() {
-      const videoContainer = document.getElementById('videoContainer');
-      const mainContent = document.querySelectorAll('body > :not(#videoContainer)');
-      
-      // Afficher le reste du contenu
-      mainContent.forEach(element => element.classList.remove('hidden'));
-      
-      videoContainer.style.display = 'none';
-      
-      // Réinitialiser la vidéo
-      const videoElement = document.getElementById('videoElement');
-      videoElement.pause();
-      videoElement.currentTime = 0;
-    }
-
-      function handleVideoCycle() {
-      showVideo();
-    }
-
-    // Répéter l'affichage de la vidéo toutes les 10 minutes (100000 ms)
-    setInterval(handleVideoCycle, 60000);
-  
 </script>
 </body>
 </html>
