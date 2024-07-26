@@ -19,6 +19,7 @@ function speakNumber(number) {
 onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
     if (doc.exists) {
         const data = doc.data();
+        if (data.disponible === false) {
         document.getElementById('currentNumber').textContent = formatNumber1(data.number);
         document.getElementById('counterNumber').textContent = data.counter;
         document.getElementById('roomNumber').textContent = data.room;
@@ -35,7 +36,7 @@ onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
         const tempsMoyen = oldTimes.length > 1 ? (totalDifference / (oldTimes.length - 1)) / 60000 : 0;
         document.getElementById('tempsMoyen').textContent = tempsMoyen.toFixed(2);
 
-        if (data.disponible === false) {
+        
             bouttonOff();
             if (data.room != "?") {
                 const notification123 = document.getElementById('notification123');
