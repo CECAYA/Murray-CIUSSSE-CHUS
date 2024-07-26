@@ -42,6 +42,10 @@ async function callNextUser() {
         
         if (oldNumbers.length > 5) {
             oldNumbers = oldNumbers.slice(0, 5);
+            bouttonOff();
+            setTimeout(() => {
+                bouttonOff();
+            }, 3000);   
         }
         if (oldTimes.length > 5) {
             oldTimes = oldTimes.slice(0, 5);
@@ -83,7 +87,20 @@ async function resetCounter() {
     });
 }
 
+async function bouttonOff() {
+    const nextButton = document.querySelector('.button1');
+        nextButton.disabled = true;
+        nextButton.classList.add('button-disabled');
+}
+async function bouttonOn() {
+    const nextButton = document.querySelector('.button1');
+        nextButton.disabled = false;
+        nextButton.classList.remove('button-disabled');
+}
+
 // Attacher les fonctions au contexte global pour qu'elles soient accessibles depuis le HTML
 window.callNextUser = callNextUser;
 window.resetCounter = resetCounter;
 window.PreviousNumber = PreviousNumber;
+window.bouttonOn = bouttonOn;
+window.bouttonOff = bouttonOff;
