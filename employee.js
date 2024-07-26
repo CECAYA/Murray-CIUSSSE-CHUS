@@ -91,6 +91,18 @@ async function resetCounter() {
 }
 
 
+async function pauseboutton(temps) {
+    setDoc(doc(db, 'waitingRoom', 'current'), {
+        disponible: false,
+    });
+    setTimeout(async () => {
+    await setDoc(docRef, {
+        disponible: true,
+    }, { merge: true });
+    }, temps);
+}
+
+
 
 // Attacher les fonctions au contexte global pour qu'elles soient accessibles depuis le HTML
 window.callNextUser = callNextUser;
