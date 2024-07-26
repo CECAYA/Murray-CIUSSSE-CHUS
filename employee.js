@@ -14,12 +14,14 @@ async function callNextUser() {
         let currentCounter, currentRoom;
         let oldNumbers = [];
         let oldTimes = [];
+        let currentDisponible = false;
         if (docSnap.exists()) {
             currentNumber = docSnap.data().number;
             oldNumbers = docSnap.data().oldNumbers || [];
             oldTimes = docSnap.data().oldTimes || [];
             currentCounter = docSnap.data().counter;
             currentRoom = docSnap.data().room;
+            currentDisponible = docSnap.data().disponible;
         }
 
         let newNumber=0;
