@@ -44,7 +44,7 @@ async function callNextUser() {
             oldNumbers = oldNumbers.slice(0, 5);
             bouttonOff();
             setTimeout(() => {
-                bouttonOff();
+                bouttonOn();
             }, 3000);   
         }
         if (oldTimes.length > 5) {
