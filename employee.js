@@ -14,7 +14,7 @@ async function callNextUser() {
         let currentCounter, currentRoom;
         let oldNumbers = [];
         let oldTimes = [];
-        let currentDisponible = false;
+        let currentDisponible = 0;
         if (docSnap.exists()) {
             currentNumber = docSnap.data().number;
             oldNumbers = docSnap.data().oldNumbers || [];
@@ -46,21 +46,21 @@ async function callNextUser() {
         if (oldTimes.length > 5) {
             oldTimes = oldTimes.slice(0, 5);
         }
+
+        currentDisponible = currentDisponible + 1;
+        
         await setDoc(docRef, {
             number: newNumber,
             counter: counterNumber,
             room: roomNumber,
             oldNumbers: oldNumbers,
             oldTimes: oldTimes,
-            disponible: false,
         }, { merge: true });
-        
+
+        pauseboutton(1);
     
         setTimeout(async () => {
-            await setDoc(docRef, {
-                disponible: true,
-            }, { merge: true });
-
+            pauseboutton(-1);    
         }, 3000);
     }
 }
@@ -91,12 +91,19 @@ async function resetCounter() {
 }
 
 
-async function pauseboutton(trueorfalse) {
+async function pauseboutton(i1) {
     const docRef = doc(db, 'waitingRoom', 'current');
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+        let currentDisponible = docSnap.data().disponible;
+        currentDisponible = currentDisponible + i1;
         await setDoc(docRef, {
-            disponible: trueorfalse,
+            disponible: currentDisponible,
         }, { merge: true });
+    }
 }
+
 
 
 
