@@ -32,14 +32,8 @@ async function callNextUser() {
             room: roomNumber,
             oldNumbers: newOldNumbers,
             oldTimes: newOldTimes,
-            disponible: currentData.disponible
         }, { merge: true });
 
-        toggleButtonState(1);
-
-        setTimeout(() => {
-            toggleButtonState(-1);
-        }, 3000);
     }
 }
 
@@ -70,17 +64,6 @@ async function resetCounter() {
     });
 }
 
-async function toggleButtonState(increment) {
-    const docRef = doc(db, 'waitingRoom', 'current');
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-        let currentDisponible = docSnap.data().disponible;
-        currentDisponible += increment;
-
-        await updateDoc(docRef, { disponible: currentDisponible });
-    }
-}
 
 // Attacher les fonctions au contexte global pour qu'elles soient accessibles depuis le HTML
 window.callNextUser = callNextUser;
