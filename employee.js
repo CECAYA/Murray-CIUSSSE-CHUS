@@ -1,4 +1,4 @@
-import { doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
+import { doc, setDoc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
 import { db } from './config.js';
 
 // Fonction pour appeler le prochain usager
@@ -10,57 +10,35 @@ async function callNextUser() {
         const docRef = doc(db, 'waitingRoom', 'current');
         const docSnap = await getDoc(docRef);
 
-        let currentNumber = 0;
-        let currentCounter, currentRoom;
-        let oldNumbers = [];
-        let oldTimes = [];
-        let currentDisponible = 0;
-        if (docSnap.exists()) {
-            currentNumber = docSnap.data().number;
-            oldNumbers = docSnap.data().oldNumbers || [];
-            oldTimes = docSnap.data().oldTimes || [];
-            currentCounter = docSnap.data().counter;
-            currentRoom = docSnap.data().room;
-            currentDisponible = docSnap.data().disponible;
+        let currentData = docSnap.exists() ? docSnap.data() : { number: 0, oldNumbers: [], oldTimes: [], disponible: 0 };
+
+        let newNumber = currentData.number >= 99 ? 0 : currentData.number + 1;
+        if (currentData.counter == "?") newNumber = currentData.number;
+
+        let newOldNumbers = currentData.oldNumbers;
+        let newOldTimes = currentData.oldTimes;
+
+        if (currentData.counter != "?") {
+            newOldNumbers.unshift(`${currentData.number.toString().padStart(2, '0')} - ${currentData.room} - ${currentData.counter}`);
+            newOldTimes.unshift(Date.now());
         }
 
-        let newNumber=0;
-        if (currentNumber >= 99) {
-            newNumber = 0;
-        } else {
-            newNumber = currentNumber + 1;
-        }
-        
-        if (currentCounter == "?") {
-            newNumber = currentNumber;
-        }
-        
-        if (currentCounter != "?") {
-            oldNumbers.unshift(`${currentNumber.toString().padStart(2, '0')} - ${currentRoom} - ${currentCounter}`);
-            oldTimes.unshift(Date.now());  
-        }
-        
-        if (oldNumbers.length > 5) {
-            oldNumbers = oldNumbers.slice(0, 5);
-        }
-        if (oldTimes.length > 5) {
-            oldTimes = oldTimes.slice(0, 5);
-        }
+        if (newOldNumbers.length > 5) newOldNumbers = newOldNumbers.slice(0, 5);
+        if (newOldTimes.length > 5) newOldTimes = newOldTimes.slice(0, 5);
 
-        currentDisponible = currentDisponible + 1;
-        
         await setDoc(docRef, {
             number: newNumber,
             counter: counterNumber,
             room: roomNumber,
-            oldNumbers: oldNumbers,
-            oldTimes: oldTimes,
+            oldNumbers: newOldNumbers,
+            oldTimes: newOldTimes,
+            disponible: currentData.disponible
         }, { merge: true });
 
-        pauseboutton(1);
-    
-        setTimeout(async () => {
-            pauseboutton(-1);    
+        toggleButtonState(1);
+
+        setTimeout(() => {
+            toggleButtonState(-1);
         }, 3000);
     }
 }
@@ -72,6 +50,7 @@ async function PreviousNumber() {
     if (docSnap.exists()) {
         let currentNumberA = docSnap.data().number;
         currentNumberA = (currentNumberA - 1 + 100) % 100; // Assure que le numéro reste entre 0 et 99
+
         await setDoc(docRef, {
             number: currentNumberA,
             counter: "?",
@@ -80,35 +59,31 @@ async function PreviousNumber() {
     }
 }
 
-// Nouvelle fonction pour réinitialiser le compteur
 async function resetCounter() {
-    setDoc(doc(db, 'waitingRoom', 'current'), {
+    await setDoc(doc(db, 'waitingRoom', 'current'), {
         number: 0,
         counter: "?",
         room: "?",
-        oldNumbers: []
+        oldNumbers: [],
+        oldTimes: [],
+        disponible: 0
     });
 }
 
-
-async function pauseboutton(i1) {
+async function toggleButtonState(increment) {
     const docRef = doc(db, 'waitingRoom', 'current');
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
         let currentDisponible = docSnap.data().disponible;
-        currentDisponible = currentDisponible + i1;
-        await setDoc(docRef, {
-            disponible: currentDisponible,
-        }, { merge: true });
+        currentDisponible += increment;
+
+        await updateDoc(docRef, { disponible: currentDisponible });
     }
 }
-
-
-
 
 // Attacher les fonctions au contexte global pour qu'elles soient accessibles depuis le HTML
 window.callNextUser = callNextUser;
 window.resetCounter = resetCounter;
 window.PreviousNumber = PreviousNumber;
-window.pauseboutton = pauseboutton;
+window.toggleButtonState = toggleButtonState;
