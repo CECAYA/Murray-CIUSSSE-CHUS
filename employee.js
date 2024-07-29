@@ -60,7 +60,6 @@ async function resetCounter() {
         room: "?",
         oldNumbers: [],
         oldTimes: [],
-        disponible: 0
     });
 }
 
@@ -69,4 +68,3 @@ async function resetCounter() {
 window.callNextUser = callNextUser;
 window.resetCounter = resetCounter;
 window.PreviousNumber = PreviousNumber;
-window.toggleButtonState = toggleButtonState;
