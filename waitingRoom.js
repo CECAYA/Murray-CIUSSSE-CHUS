@@ -40,10 +40,7 @@ onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
         const currentNumberElement = document.getElementById('currentNumber');
         const currentNumberValue = currentNumberElement.textContent.trim(); // Assure-toi de comparer les valeurs textuelles
 
-        if (data.disponible > 0) {
             const formattedNumber = formatNumber1(data.number);
-            bouttonOff();
-            if (currentNumberValue !== formattedNumber) {
                 currentNumberElement.textContent = formattedNumber;
                 document.getElementById('counterNumber').textContent = data.counter;
                 document.getElementById('roomNumber').textContent = data.room;
@@ -72,10 +69,6 @@ onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
                     }
                 }
             }
-        } else {
-            bouttonOn();
-        }
-    }
 });
 
 
