@@ -34,6 +34,9 @@ async function callNextUser() {
             oldTimes: newOldTimes,
         }, { merge: true });
 
+        const formattedNumber = formatNumber1(newNumber);
+        document.getElementById('counterNumberEmployee').textContent = formattedNumber;
+
     }
 }
 
