@@ -34,7 +34,7 @@ async function callNextUser() {
             oldTimes: newOldTimes,
         }, { merge: true });
 
-        const formattedNumber = formatNumber1(newNumber);
+        const formattedNumber = formatNumberEmployee(newNumber);
         document.getElementById('counterNumberEmployee').textContent = formattedNumber;
 
     }
@@ -64,6 +64,10 @@ async function resetCounter() {
         oldNumbers: [],
         oldTimes: [],
     });
+}
+
+function formatNumberEmployee(num3) {
+    return num3.toString().padStart(2, '0');
 }
 
 
