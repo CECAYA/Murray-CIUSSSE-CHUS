@@ -13,6 +13,9 @@
       padding: 10px;
       color: black; /* Pour améliorer la lisibilité */
     }
+      body.hidden {
+        visibility: hidden;
+    }
     .col-1-A {
       background-color: #ffffff;
       grid-column: span 2; /* Fusionne deux colonnes */
@@ -191,7 +194,7 @@
       
   </style>
 </head>
-<body>
+<body class="hidden">
   <div class="grid-container">
     <div class="grid-item col-1-A">ÉDIFICE MURRAY</div>
          <form>
@@ -220,6 +223,7 @@
         </select>
     </div>
 </form>
+      
     <div class="grid-item col-3-A"></div>
     <div class="grid-item col-3-A"></div>
     <div class="grid-item col-3-A">SALLE</div>
