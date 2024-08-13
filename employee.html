@@ -16,16 +16,26 @@
       body.hidden {
         visibility: hidden;
     }
-    .col-1-A {
+    .case1 {
       background-color: #ffffff;
       grid-column: span 2; /* Fusionne deux colonnes */
       font-family: Impact, Helvetica, sans-serif;
-      font-size: 110px;
+      font-size: 130px;
       display: flex;
       justify-content: center; /* Centre horizontalement */
       align-items: center; /* Centre verticalement */
+      grid-row: span 3;
     }
-    .col-3-A {
+    
+    .case3 {
+      display: flex;
+      font-family: Impact, Helvetica, sans-serif;
+      font-size: 20px;
+      align-items: center;
+      justify-content: right;
+      grid-column: span 2;
+    }
+    .case11 {
       font-family: Impact, Helvetica, sans-serif;
       text-align: center;
       font-size: 60px;
@@ -57,14 +67,14 @@
     }
 
     /* Conteneur pour le positionnement de l'icône */
-    .select-container {
+    .case7 {
       position: relative;
       display: flex;
       justify-content: center; /* Centre horizontalement */
       align-items: center; /* Centre verticalement */
       }
       
-    .col-1-2-A {
+    .case13 {
       font-family: Impact, Helvetica, sans-serif;
       text-align: center;
       grid-column: span 2;
@@ -76,99 +86,107 @@
     .button {
       padding: 20px 40px;
       font-family: Impact, Helvetica, sans-serif;
-      font-size: 30px;
       color: Black;
       border: none; /* pas de bordure */
       border-radius: 5px; /* coins arrondis */
       cursor: pointer; /* curseur pointeur */
-      transition: background-color 0.3s; /* transition pour le changement de couleur */
+      transition: background-color 0.3s;  
     }
     .button1 {
       width: 600px; /* Largeur du bouton */
       height: 80px; /* Hauteur du bouton */
-      background-color: #9ee577
+      background-color: #9ee577;
+      font-size: 30px;
     }
-    .button2 {
-      width: 350px; /* Largeur du bouton */
-      height: 80px; /* Hauteur du bouton */
+    .buttonLogOut {
+      width: 160px; /* Largeur du bouton */
+      height: 40px; /* Hauteur du bouton */
+      font-size: 20px;
+      display: flex;
+  	  justify-content: center; /* Centre horizontalement */
+  	  align-items: center; /* Centre verticalement */
     }
 
     /* Effet au survol */
     .button:hover {
       background-color: #0056b3; /* couleur de fond au survol */
     }
-    .col-3-2-A {
-      font-family: Impact, Helvetica, sans-serif;
-      text-align: center;
-      font-size: 30px;
-      display: flex;
-      justify-content: center; /* Centre horizontalement */
-      align-items: center; /* Centre verticalement */
-    }
-    .col-4-2-A {
-      font-family: Impact, Helvetica, sans-serif;
-      text-align: center;
-      font-size: 30px;
-      display: flex;
-      justify-content: center; /* Centre horizontalement */
-      align-items: center; /* Centre verticalement */
-    }
-    .col-1-3-A {
-      font-family: Impact, Helvetica, sans-serif;
-      text-align: left;
+    .case17 {
       font-size: 60px;
       display: flex;
-      justify-content: center; /* Centre horizontalement */
-      align-items: center; /* Centre verticalement */
-      grid-column: span 4;
     }
-    .col-1 {
+    .case21 {
+      border-left: 10px solid black;
+      border-top: 10px solid black;
       border-right: 10px solid black;
       display: flex;
+      grid-column: span 2;
+      font-family: Impact, Helvetica, sans-serif;
+      font-size: 30px;
+      align-items: center;
+      justify-content: center;
     }
-    .col-2 {
+    .case23 {
       font-family: Impact, Helvetica, sans-serif;
       text-align: center; 
       font-size: 30px;
-      border-top: 10px solid black;
       display: flex;
-        grid-column: span 2;
+      grid-column: span 2;
       justify-content: center; /* Centre horizontalement */
       align-items: center; /* Centre verticalement */
     }
-    .col-4 {
+    .case25 {
       border-left: 10px solid black;
-      display: flex;
-    }
-    .col-1-2 {
-      font-size: 180px;
+      border-bottom: 10px solid black;
       border-right: 10px solid black;
-    }
-    .col-2-2 {
       background-color: #f7e4d8; /* orange pâle */
       font-family: Impact, Helvetica, sans-serif;
       text-align: center;
       font-size: 180px;
       border-bottom: 10px solid black;
-        grid-column: span 2;
+      grid-column: span 2;
+      grid-row: span 2;
     }
-    .col-4-2 {
-      border-left: 10px solid black;
+    .case27 {
+      display: flex;
+      font-family: Impact, Helvetica, sans-serif;
+      font-size: 20px;
+      align-items: center;
+      justify-content: center;
+      text-decoration: underline;
     }
-    .col-1-3 {
+    .case28 {
+      display: flex;
+      font-family: Impact, Helvetica, sans-serif;
+      font-size: 20px;
+      align-items: center;
+      justify-content: center;
+      text-decoration: underline;
+    }
+    .case29 {
+      
       background-color: #ffffff;
-      grid-column: span 3; /* Fusionne deux colonnes */
       font-family: Impact, Helvetica, sans-serif;
       font-size: 40px;
       text-align: left;
     }
-    .col-2-3 {
-      background-color: #ffffff;
-      font-family: Impact, Helvetica, sans-serif;
-      font-size: 50px;
-      text-align: right;
+    .case31 {
+		display: flex;
+    	justify-content: center;
+    	align-items: center; /* Centre verticalement */
+    	height: 100%;
     }
-    .col-1-4 {
+        .case32 {
+		display: flex;
+    	justify-content: center;
+    	align-items: center; /* Centre verticalement */
+    	height: 100%;
+          font-family: Impact, Helvetica, sans-serif;
+      font-size: 80px;
+      flex-direction: column;
+
+    }
+    .case33 {
       background-color: #ffffff;
       font-family: Copperplate, Papyrus, Fantasy;
       font-size: 40px;
@@ -178,8 +196,18 @@
       justify-content: center; /* Centre horizontalement */
       align-items: center; /* Centre verticalement */
     }
-    .texte-rouge {
-      color: red;
+    .case36 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Impact, Helvetica, sans-serif;
+      font-size: 20px;
+      background-color: transparent; /* Réinitialiser l'arrière-plan du conteneur */
+    }
+
+    .highlight {
+      background-color: lightgray; /* Couleur du surligneur */
+      padding: 0 4px; /* Ajuster l'espacement autour du texte */
     }
     .button-container {
     display: flex;
@@ -191,14 +219,152 @@
     cursor: not-allowed;
     opacity: 0.6;
     }
-      
+    .gauge-container {
+            width: 350px;
+            height: 175px;
+            position: relative;
+            margin: 50px auto;
+            overflow: hidden;
+            
+        }
+        .gauge-background1 {
+            width: 85%;
+            height: 170%;
+            border-radius: 50%;
+            background: #b9291e;
+            position: absolute;
+            top: 100%;
+            left:6%;
+            transform: translateY(-50%);
+			clip-path: polygon(0% 50%, 50% 50%, 50% 0%, 0% 0%);
+            border: 6px solid black;
+        }
+      .gauge-background2 {
+            width: 85%;
+            height: 170%;
+            border-radius: 100%;
+            background: yellow;
+            position: absolute;
+            top: 100%;
+            left:6%;
+            transform: translateY(-50%);
+			clip-path: polygon(50% 50%, 50% 0%, 100% 0%);
+            border: 6px solid black;
+        }
+        .gauge-background3 {
+            width: 85%;
+            height: 170%;
+            border-radius: 100%;
+            background: green;
+            position: absolute;
+            top: 100%;
+            left:6%;
+            transform: translateY(-50%);
+			clip-path: polygon(50% 50%, 100% 0%, 100% 50%);
+            border: 6px solid black;
+        }
+        .gauge-needle {
+            width: 2%;
+            height: 90%;
+            background: red;
+            position: absolute;
+            bottom: 0%;
+            left: 48.5%;
+            transform-origin: bottom;
+            transform: rotate(-90deg);
+            transition: transform 0.5s ease-out;
+            border: 3px solid black;
+        }
+        .gauge-needle-global {
+            width: 6%;
+    		height: 95%; /* Réduire la hauteur pour qu'elle ne touche pas le bas */
+    		background: blue;
+    		position: absolute;
+    		bottom: 0%; /* Remonter l'aiguille pour éviter qu'elle touche le bas */
+    		left: 46%;
+    		transform-origin: bottom center; /* Laisser l'origine de la transformation en bas */
+    		transform: rotate(-90deg);
+    		transition: transform 0.5s ease-out;
+    		border: 3px solid black;
+        }
+        .gauge-center {
+            width: 20px;
+            height: 20px;
+            background: black;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 50%;
+            top: 96%;
+        }
+        .gauge-number {
+        font-family: Impact, Helvetica, sans-serif;
+        position: absolute;
+        color: black;
+        font-weight: bold;
+        
+    }
+
+    /* Positionnement des chiffres */
+    .number-0 {
+        top: 77%;
+        left: 12%;
+        transform: translateX(-50%);
+        font-size: 200%;
+    }
+
+    .number-2 {
+        top: 5%;
+        left: 50%;
+        transform: translate(-50%, 50%);
+        font-size: 200%;
+    }
+
+    .number-2125 {
+        top: 50%;
+        left: 75%;
+        transform: translate(-50%, -50%);
+        font-size: 150%;
+    }
+    .number-3 {
+        top: 77%;
+        left: 89%;
+        transform: translate(-50%, 0%);
+        font-size: 200%;
+    }
+    .pointrouge { 
+      font-family: Impact, Helvetica, sans-serif;
+      font-size: 60px;
+      color: red;
+    }
+    .pointbleu { 
+      font-family: Impact, Helvetica, sans-serif;
+      font-size: 60px;
+      color: blue;
+    }
+    .line1, .line2 {
+    display: flex;
+    align-items: center;
+	}
+    .personnel {
+  		color: red;
+    }
+
+    .equipe {
+      color: blue;
+    }
+
   </style>
 </head>
-<body class="hidden">
+<body>
   <div class="grid-container">
-    <div class="grid-item col-1-A">ÉDIFICE MURRAY</div>
+    <div class="grid-item case1">ÉDIFICE MURRAY</div>
+    <div class="grid-item case3">AdresseEmail &nbsp
+        <button class="button buttonLogOut" type="button" onclick="callNextUser()">Déconnexion</button></div>
+    
          <form>
-    <div class="select-container">
+    <div class="case7">
         <select id="roomNumber1">
             <option value="">-</option>
             <option value="A">A</option>
@@ -208,7 +374,7 @@
     </form>
     <form>
    
-    <div class="select-container">
+    <div class="case7">
         <select id="counterNumber1">
             <option value="">-</option>
             <option value="1">1</option>
@@ -224,35 +390,63 @@
     </div>
 </form>
       
-    <div class="grid-item col-3-A"></div>
-    <div class="grid-item col-3-A"></div>
-    <div class="grid-item col-3-A">SALLE</div>
-    <div class="grid-item col-3-A">TABLE</div>
-    <div class="grid-item col-1-3-A"></div>
-    <div class="grid-item col-1-3-A">Actions:</div>
-    <div class="button-container col-1-2-A">
+
+    <div class="grid-item case11">SALLE</div>
+    <div class="grid-item case11">TABLE</div>
+    <div class="button-container case13">
         <button class="button button1" type="button" onclick="callNextUser()">Numéro suivant</button>
     </div>
-    <div class="button-container col-3-2-A">
-        <button class="button button2" type="button" onclick="PreviousNumber()">Numéro précédent</button>
-    </div>
-    <div class="button-container col-4-2-A">
-        <button class="button button2" type="button" onclick="confirmReset()">Réinitialiser</button>
-    </div>
-<div class="grid-item col-1-3-A"></div>
-<div class="grid-item col-1-3-A"></div>
+    <div></div>
+    <div></div>
+	<div class="grid-item case17"></div>
+	<div></div>
+    <div></div>
+    <div></div>
+    
 
-<div class="grid-item col-1"></div>
-    <div class="grid-item col-2">NUMÉRO APPELÉ</div>
-    <div class="grid-item col-4"></div>
+<div class="grid-item case21">NUMÉRO APPELÉ</div>
+    <div class="grid-item case23">STATISTIQUES</div>
     
-    <div class="grid-item col-1-2"></div>
-    <div class="grid-item col-2-2"><span id="counterNumberEmployee">-</span></div>
-    <div class="grid-item col-4-2"></div>
+    <div class="grid-item case25"><span id="counterNumberEmployee">-</span></div>
     
-    <div class="grid-item col-1-3"></div>
-    <div class="grid-item col-2-3">ÉDIFICE MURRAY</div>
-    <div class="grid-item col-1-4">CIUSSSE-CHUS  |&nbsp      
+    <div class="grid-item case27">Moyenne de la dernière heure</div>
+    <div class="grid-item case28">Total quotidien</div>
+    
+<div class="gauge-container">
+	<div class="gauge-needle-global" id="needleGlobal"></div>
+
+    <div class="gauge-background"></div>
+    <div class="gauge-background1"></div>
+    <div class="gauge-background2"></div>
+    <div class="gauge-background3"></div>
+    <div class="gauge-number number-0"> &nbsp 0 &nbsp</div>
+    <div class="gauge-number number-2">&nbsp 2 &nbsp</div>
+    <div class="gauge-number number-2125">&nbsp 2,125 &nbsp</div>
+    <div class="gauge-number number-3">&nbsp 3 &nbsp</div>
+    <div class="gauge-needle" id="needle"></div>
+    <div class="gauge-center"></div>
+</div>
+    
+<div class="grid-item case32">
+    <div class="line1">
+        <span class="pointrouge">•</span> &nbsp 
+        <span id="counterTotalQuotidien">-</span>
+    </div>
+    <div class="line2">
+        <span class="pointbleu">•</span> &nbsp 
+        <span id="counterTotalGlobal">-</span>
+    </div>
+</div>
+
+	<div></div>
+    <div></div>
+    <div></div>
+<div class="grid-item case36">
+  <span class="highlight personnel">PERSONNEL</span> <span class="highlight">-</span><span class="highlight equipe">ÉQUIPE</span>
+</div>
+
+    
+    <div class="grid-item case33">CIUSSSE-CHUS  |&nbsp      
     <img src="https://upload.wikimedia.org/wikipedia/fr/7/7e/Qu%C3%A9bec.svg" alt="Gouvernement du Québec" style="width: 15%;"></div>
   </div>
    
@@ -265,6 +459,21 @@ function confirmReset() {
     resetCounter();
   }
 }
+    function setGaugeValuePersonel(value) {
+        const needle = document.getElementById('needle');
+        const rotation = (value / 100) * 180 - 90;  // Calcul de la rotation
+        needle.style.transform = `rotate(${rotation}deg)`;
+    }
+      function setGaugeValueGlobal(value1) {
+        const needleGlobal = document.getElementById('needleGlobal');
+        const rotation = (value1 / 100) * 180 - 90;  // Calcul de la rotation
+        needleGlobal.style.transform = `rotate(${rotation}deg)`;
+    }
+
+    // Exemple d'utilisation
+    setGaugeValuePersonel(70); 
+    setGaugeValueGlobal(80); 
+    
 </script>
 </body>
 </html>
