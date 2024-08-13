@@ -8,7 +8,7 @@ onAuthStateChanged(auth, (user) => {
         document.body.classList.remove('hidden');
     } else {
         // Utilisateur n'est pas connecté, rediriger vers la page de connexion ou afficher un message
-        alert('Veuillez vous connecter pour accéder à cette page.');
+        alert('Vous êtes déconnecté');
         // Optionnel: Redirection vers une page de connexion
         window.location.href = "login.html";
     }
