@@ -6,6 +6,10 @@ onAuthStateChanged(auth, (user) => {
     if (user) {
         // Utilisateur est connecté, afficher le contenu
         document.body.classList.remove('hidden');
+    const userEmail = user.email;
+
+      // Met à jour le texte dans l'élément HTML
+      document.getElementById('userEmail').textContent = userEmail;
     } else {
         // Utilisateur n'est pas connecté, rediriger vers la page de connexion ou afficher un message
         alert('Vous êtes déconnecté');
