@@ -40,8 +40,7 @@ async function callNextUser() {
       const time = now.toISOString().split('T')[1].split('.')[0]; // Heure au format HH:MM:SS
     
       // Récupérez l'adresse courriel de l'usager connecté
-      const user = auth.currentUser;
-      const userEmail = user ? user.email : 'Non connecté';
+      const userEmail = document.getElementById('userEmail').value;
 
         await addDoc(collection(db, 'userCalls'), {
           email: userEmail,
