@@ -34,6 +34,22 @@ async function callNextUser() {
             oldTimes: newOldTimes,
         }, { merge: true });
 
+              // Obtenez l'heure et la date actuelles
+      const now = new Date();
+      const date = now.toISOString().split('T')[0]; // Date au format YYYY-MM-DD
+      const time = now.toISOString().split('T')[1].split('.')[0]; // Heure au format HH:MM:SS
+    
+      // Récupérez l'adresse courriel de l'usager connecté
+      const user = auth.currentUser;
+      const userEmail = user ? user.email : 'Non connecté';
+
+        await addDoc(collection(db, 'userCalls'), {
+          email: userEmail,
+          date: date,
+          time: time,
+          timestamp: now
+        });
+            
         const formattedNumber = formatNumberEmployee(newNumber);
         document.getElementById('counterNumberEmployee').textContent = formattedNumber;
 
