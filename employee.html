@@ -279,18 +279,6 @@
             transition: transform 0.5s ease-out;
             border: 3px solid black;
         }
-        .gauge-needle-global {
-            width: 6%;
-    		height: 95%; /* Réduire la hauteur pour qu'elle ne touche pas le bas */
-    		background: blue;
-    		position: absolute;
-    		bottom: 0%; /* Remonter l'aiguille pour éviter qu'elle touche le bas */
-    		left: 46%;
-    		transform-origin: bottom center; /* Laisser l'origine de la transformation en bas */
-    		transform: rotate(-90deg);
-    		transition: transform 0.5s ease-out;
-    		border: 3px solid black;
-        }
         .gauge-center {
             width: 20px;
             height: 20px;
@@ -425,7 +413,6 @@
     <div class="grid-item case28">Total quotidien</div>
     
 <div class="gauge-container">
-	<div class="gauge-needle-global" id="needleGlobal"></div>
 
     <div class="gauge-background"></div>
     <div class="gauge-background1"></div>
@@ -453,9 +440,7 @@
 	<div></div>
     <div></div>
     <div></div>
-<div class="grid-item case36">
-  <span class="highlight personnel">PERSONNEL</span> <span class="highlight">-</span><span class="highlight equipe">ÉQUIPE</span>
-</div>
+
 
     
     <div class="grid-item case33">CIUSSSE-CHUS  |&nbsp      
@@ -471,20 +456,6 @@ function confirmReset() {
     resetCounter();
   }
 }
-    function setGaugeValuePersonel(value) {
-        const needle = document.getElementById('needle');
-        const rotation = (value / 100) * 180 - 90;  // Calcul de la rotation
-        needle.style.transform = `rotate(${rotation}deg)`;
-    }
-      function setGaugeValueGlobal(value1) {
-        const needleGlobal = document.getElementById('needleGlobal');
-        const rotation = (value1 / 100) * 180 - 90;  // Calcul de la rotation
-        needleGlobal.style.transform = `rotate(${rotation}deg)`;
-    }
-
-    // Exemple d'utilisation
-    setGaugeValuePersonel(70); 
-    setGaugeValueGlobal(80); 
     
 </script>
 </body>
