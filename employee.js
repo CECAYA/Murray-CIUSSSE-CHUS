@@ -33,21 +33,27 @@ async function callNextUser() {
             oldNumbers: newOldNumbers,
             oldTimes: newOldTimes,
         }, { merge: true });
-
-              // Obtenez l'heure et la date actuelles
-      const now = new Date();
-      const date = now.toISOString().split('T')[0]; // Date au format YYYY-MM-DD
-      const time = now.toISOString().split('T')[1].split('.')[0]; // Heure au format HH:MM:SS
     
-      // Récupérez l'adresse courriel de l'usager connecté
-      const userEmail = document.getElementById('userEmail').textContent;
+          // Récupérez l'adresse courriel de l'usager connecté
+            const userEmail = document.getElementById('userEmail').textContent;
 
-        await addDoc(collection(db, 'userCalls'), {
-          email: userEmail,
-          date: date,
-          time: time,
-          timestamp: now
-        });
+            const userDocRef = doc(db, 'userCalls', userEmail);
+            const userDocSnap = await getDoc(userDocRef);
+
+            let userData = userDocSnap.exists() ? userDocSnap.data() : { number: 0, oldTimes: [] };
+
+            let userOldTimes = userData.oldTimes;
+            let userOldNumber = userData.number + 1;
+
+            userOldTimes.unshift(Date.now());
+
+            if (userOldTimes.length > 5) userOldTimes = userOldTimes.slice(0, 5);
+
+            await setDoc(userDocRef, {
+                oldTimes: userOldTimes,
+                number: userOldNumber
+            }, { merge: true });
+
             
         const formattedNumber = formatNumberEmployee(newNumber);
         document.getElementById('counterNumberEmployee').textContent = formattedNumber;
