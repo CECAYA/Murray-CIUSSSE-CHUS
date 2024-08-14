@@ -80,7 +80,7 @@ await setDoc(userDocRef, {
             
         const formattedNumber = formatNumberEmployee(newNumber);
         document.getElementById('counterNumberEmployee').textContent = formattedNumber;
-        setGaugeValuePersonel(userMoyenne);
+        setGaugeValuePersonel((userMoyenne)/(60 * 1000));
         document.getElementById('counterTotalQuotidien').textContent = userOldNumber;
     }
 }
