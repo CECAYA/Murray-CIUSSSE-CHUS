@@ -150,14 +150,15 @@
       grid-column: span 2;
       grid-row: span 2;
     }
-    .case27 {
-      display: flex;
-      font-family: Impact, Helvetica, sans-serif;
-      font-size: 30px;
-      align-items: center;
-      justify-content: center;
-      text-decoration: underline;
-    }
+.case27 {
+  display: flex;
+  font-family: Impact, Helvetica, sans-serif;
+  font-size: 30px;
+  align-items: center;
+  justify-content: center;
+  text-decoration: underline;
+  text-align: center; /* Centrer le texte horizontalement */
+}
     .case28 {
       display: flex;
       font-family: Impact, Helvetica, sans-serif;
@@ -239,7 +240,7 @@
             top: 100%;
             left:6%;
             transform: translateY(-50%);
-			clip-path: polygon(0% 50%, 50% 50%, 50% 0%, 0% 0%);
+			clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 50%);
             border: 6px solid black;
         }
       .gauge-background2 {
@@ -251,7 +252,7 @@
             top: 100%;
             left:6%;
             transform: translateY(-50%);
-			clip-path: polygon(50% 50%, 50% 0%, 100% 0%);
+			clip-path: polygon(50% 50%, 33.75% 0%, 50% 0%);
             border: 6px solid black;
         }
         .gauge-background3 {
@@ -263,7 +264,7 @@
             top: 100%;
             left:6%;
             transform: translateY(-50%);
-			clip-path: polygon(50% 50%, 100% 0%, 100% 50%);
+			clip-path: polygon(50% 50%, 0% 50%, 0% 0%, 33.75% 0%);
             border: 6px solid black;
         }
         .gauge-needle {
@@ -310,29 +311,29 @@
     }
 
     /* Positionnement des chiffres */
-    .number-0 {
+    .number-5 {
         top: 77%;
         left: 12%;
         transform: translateX(-50%);
         font-size: 200%;
     }
 
-    .number-2 {
-        top: 5%;
-        left: 50%;
+    .number-7 {
+        top: 10%;
+        left: 38%;
         transform: translate(-50%, 50%);
         font-size: 200%;
     }
 
-    .number-2125 {
-        top: 50%;
-        left: 75%;
+    .number-75 {
+        top: 25%;
+        left: 50%;
         transform: translate(-50%, -50%);
         font-size: 150%;
     }
-    .number-3 {
+    .number-10 {
         top: 77%;
-        left: 89%;
+        left: 87%;
         transform: translate(-50%, 0%);
         font-size: 200%;
     }
@@ -420,7 +421,7 @@
     
     <div class="grid-item case25"><span id="counterNumberEmployee">-</span></div>
     
-    <div class="grid-item case27">Moyenne de la dernière heure</div>
+    <div class="grid-item case27">Durée moyenne d'un rendez-vous (mins)</div>
     <div class="grid-item case28">Total quotidien</div>
     
 <div class="gauge-container">
@@ -430,10 +431,10 @@
     <div class="gauge-background1"></div>
     <div class="gauge-background2"></div>
     <div class="gauge-background3"></div>
-    <div class="gauge-number number-0"> &nbsp 0 &nbsp</div>
-    <div class="gauge-number number-2">&nbsp 2 &nbsp</div>
-    <div class="gauge-number number-2125">&nbsp 2,125 &nbsp</div>
-    <div class="gauge-number number-3">&nbsp 3 &nbsp</div>
+    <div class="gauge-number number-5">5</div>
+    <div class="gauge-number number-7">7</div>
+    <div class="gauge-number number-75">7.5</div>
+    <div class="gauge-number number-10">10</div>
     <div class="gauge-needle" id="needle"></div>
     <div class="gauge-center"></div>
 </div>
