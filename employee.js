@@ -40,19 +40,42 @@ async function callNextUser() {
             const userDocRef = doc(db, 'userCalls', userEmail);
             const userDocSnap = await getDoc(userDocRef);
 
-            let userData = userDocSnap.exists() ? userDocSnap.data() : { number: 0, oldTimes: [] };
+let userData = userDocSnap.exists() ? userDocSnap.data() : { number: 0, lastTime: 0, totalTime: 0 };
 
-            let userOldTimes = userData.oldTimes;
-            let userOldNumber = userData.number + 1;
+let userlastTime = userData.lastTime;
+let userOldNumber = userData.number;
+let usertotalTime = userData.totalTime;
+let tempsNow = Date.now();
+let userMoyenne = -1;
 
-            userOldTimes.unshift(Date.now());
+// Vérifie si le temps écoulé est supérieur à 25 minutes (25 * 60 * 1000 millisecondes)
+if (tempsNow - userlastTime > 25 * 60 * 1000) {
+    // Vérifie si la date de lastTime est différente de la date actuelle
+    if (new Date(userlastTime).toDateString() !== new Date(tempsNow).toDateString()) {
+        userlastTime = tempsNow;
+        userOldNumber = 1;
+        userMoyenne = -1;
+        usertotalTime = 0;
+    } else {
+        usertotalTime = usertotalTime + (usertotalTime/userOldNumber);
+        userOldNumber = userOldNumber + 1;
+        userlastTime = tempsNow;
+        userMoyenne = usertotalTime / (userOldNumber-1);
+    }
+} else {
+    usertotalTime = usertotalTime + (tempsNow - userlastTime);
+    userOldNumber = userOldNumber + 1;
+    userlastTime = tempsNow;
+    userMoyenne = usertotalTime / (userOldNumber-1);
+}
 
-            if (userOldTimes.length > 5) userOldTimes = userOldTimes.slice(0, 5);
+// Met à jour le document dans Firestore
+await setDoc(userDocRef, {
+    lastTime: userlastTime,
+    number: userOldNumber,
+    totalTime: usertotalTime
+}, { merge: true });
 
-            await setDoc(userDocRef, {
-                oldTimes: userOldTimes,
-                number: userOldNumber
-            }, { merge: true });
 
             
         const formattedNumber = formatNumberEmployee(newNumber);
