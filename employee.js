@@ -158,6 +158,8 @@ async function displayCalls() {
     });
 }
 
+export { callNextUser, displayCalls };
+
 // Attacher les fonctions au contexte global pour qu'elles soient accessibles depuis le HTML
 window.callNextUser = callNextUser;
 window.resetCounter = resetCounter;
