@@ -1,4 +1,4 @@
-import { doc, setDoc, getDoc, updateDoc, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
+import { doc, setDoc, getDoc, updateDoc, collection, addDoc, query, getDocs } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
 import { db } from './config.js';
 
 // Fonction pour appeler le prochain usager
@@ -142,23 +142,20 @@ function setGaugeValuePersonel(value) {
 }
 
 
-async function displayCalls() {
-    try {
-        const userCallsRef = collection(db, 'userCalls');
-        const querySnapshot = await getDocs(userCallsRef);
+function displayCalls() {
+    const userCallsRef = collection(db, 'userCalls');
+    const q = query(userCallsRef);
 
-        const callsList = document.getElementById('callsList');
-        callsList.innerHTML = ''; // Effacer la liste actuelle
-
+    getDocs(q).then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             const data = doc.data();
             const listItem = document.createElement('li');
             listItem.textContent = `Numéro: ${data.number}, Durée totale: ${data.totalTime} mins`;
-            callsList.appendChild(listItem);
+            document.getElementById('callsList').appendChild(listItem);
         });
-    } catch (error) {
+    }).catch((error) => {
         console.error("Erreur lors de la récupération des appels: ", error);
-    }
+    });
 }
 
 // Attacher les fonctions au contexte global pour qu'elles soient accessibles depuis le HTML
