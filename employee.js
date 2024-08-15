@@ -141,8 +141,22 @@ function setGaugeValuePersonel(value) {
     needle.style.transform = `rotate(${rotation}deg)`;
 }
 
+function displayCalls() {
+    const userCallsRef = db.collection('userCalls');
+            userCallsRef.get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `Numéro: ${data.number}, Durée totale: ${data.totalTime} mins`;
+                    document.getElementById('callsList').appendChild(listItem);
+                });
+            }).catch((error) => {
+                console.error("Erreur lors de la récupération des appels: ", error);
+            });
+        }
 
 // Attacher les fonctions au contexte global pour qu'elles soient accessibles depuis le HTML
 window.callNextUser = callNextUser;
 window.resetCounter = resetCounter;
 window.PreviousNumber = PreviousNumber;
+window.displayCalls = displayCalls;
