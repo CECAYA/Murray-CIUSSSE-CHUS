@@ -120,10 +120,12 @@ function setGaugeValuePersonel(value) {
     const minValue = 5;
     const maxValue = 10;
     
-    // Si la valeur est égale à -1, on met l'aiguille à 270 degrés
+    // Si la valeur est égale à -1, on cache l'aiguille
     if (value === -1) {
-        needle.style.transform = `rotate(270deg)`;
+        needle.style.visibility = 'hidden';
         return;
+    } else {
+        needle.style.visibility = 'visible';
     }
 
     // Limite la valeur à la plage [5, 10]
