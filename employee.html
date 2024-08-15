@@ -346,10 +346,40 @@
     .equipe {
       color: blue;
     }
+    .nav-bar {
+  background-color: #333; /* Couleur de fond de la bande */
+  overflow: hidden;
+  padding: 10px;
+  display: flex;
+  justify-content: center; /* Centrer les liens horizontalement */
+}
+
+.nav-link {
+  font-family: Impact, Helvetica, sans-serif;
+  font-size: 20px;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none; /* Supprimer la sous-ligne */
+  margin: 0 10px; /* Espacement entre les liens */
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Effet de transition */
+}
+
+.nav-link:hover {
+  background-color: #575757; /* Couleur au survol */
+}
+
 
   </style>
 </head>
 <body>
+  <div class="nav-bar">
+    <a href="#onglet1" class="nav-link">Onglet 1</a>
+    <a href="#onglet2" class="nav-link">Onglet 2</a>
+  </div>
+
+<div id="onglet1" class="tab-content">
   <div class="grid-container">
     <div class="grid-item case1">ÉDIFICE MURRAY</div>
 
@@ -440,7 +470,15 @@
     
     <div class="grid-item case33">CIUSSSE-CHUS  |&nbsp      
     <img src="https://upload.wikimedia.org/wikipedia/fr/7/7e/Qu%C3%A9bec.svg" alt="Gouvernement du Québec" style="width: 15%;"></div>
+    </div>
   </div>
+   
+   <div id="onglet2" class="tab-content" style="display:none;">
+   <div class="grid-container">
+    <div class="grid-item case1">ÉDIFICE MURRAY</div>
+
+   
+   </div>
    
     <script type="module" src="config.js" defer></script>
     <script type="module" src="employee.js" defer></script>
@@ -449,6 +487,15 @@
 function confirmReset() {
   if (confirm("Êtes-vous sûr de vouloir réinitialiser le compteur ?")) {
     resetCounter();
+
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', function(event) {
+      document.querySelectorAll('.tab-content').forEach(tab => tab.style.display = 'none');
+      document.querySelector(this.getAttribute('href')).style.display = 'block';
+      event.preventDefault();
+    });
+  });
+
   }
 }
     
