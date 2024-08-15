@@ -119,7 +119,7 @@ function setGaugeValuePersonel(value) {
     const needle = document.getElementById('needle');
     const minValue = 5;
     const maxValue = 10;
-    const value1 = 0;
+    let value1 = 0;
 
     
     // Si la valeur est égale à -1, on cache l'aiguille
