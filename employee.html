@@ -349,9 +349,9 @@
     .nav-bar {
   background-color: #333; /* Couleur de fond de la bande */
   overflow: hidden;
-  padding: 10px;
+  padding: 1px;
   display: flex;
-  justify-content: center; /* Centrer les liens horizontalement */
+  justify-content: left; /* Centrer les liens horizontalement */
 }
 
 .nav-link {
@@ -369,14 +369,23 @@
 .nav-link:hover {
   background-color: #575757; /* Couleur au survol */
 }
-
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #f2f2f2;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
 
   </style>
 </head>
 <body>
   <div class="nav-bar">
-    <a href="#onglet1" class="nav-link">Onglet 1</a>
-    <a href="#onglet2" class="nav-link">Onglet 2</a>
+    <a href="#onglet1" class="nav-link">Appel des usagers</a>
+    <a href="#onglet2" class="nav-link">Statistiques</a>
   </div>
 
 <div id="onglet1" class="tab-content">
@@ -476,6 +485,8 @@
    <div id="onglet2" class="tab-content" style="display:none;">
    <div class="grid-container">
     <div class="grid-item case1">ÉDIFICE MURRAY</div>
+    
+    <ul id="callsList"></ul>
 
    
    </div>
@@ -484,10 +495,6 @@
     <script type="module" src="employee.js" defer></script>
     <script type="module" src="auth.js" defer></script>
 <script>
-function confirmReset() {
-  if (confirm("Êtes-vous sûr de vouloir réinitialiser le compteur ?")) {
-    resetCounter();
-
   document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', function(event) {
       document.querySelectorAll('.tab-content').forEach(tab => tab.style.display = 'none');
@@ -496,9 +503,12 @@ function confirmReset() {
     });
   });
 
+  function confirmReset() {
+    if (confirm("Êtes-vous sûr de vouloir réinitialiser le compteur ?")) {
+      resetCounter();
+    }
   }
-}
-    
+    window.onload = displayCalls;
 </script>
 </body>
 </html>
