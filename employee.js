@@ -80,7 +80,7 @@ await setDoc(userDocRef, {
             
         const formattedNumber = formatNumberEmployee(newNumber);
         document.getElementById('counterNumberEmployee').textContent = formattedNumber;
-        setGaugeValuePersonel((userMoyenne)/(60 * 1000));
+        setGaugeValuePersonel(userMoyenne);
         document.getElementById('counterTotalQuotidien').textContent = userOldNumber;
     }
 }
@@ -119,6 +119,8 @@ function setGaugeValuePersonel(value) {
     const needle = document.getElementById('needle');
     const minValue = 5;
     const maxValue = 10;
+    const value1 = 0;
+
     
     // Si la valeur est égale à -1, on cache l'aiguille
     if (value === -1) {
@@ -128,12 +130,14 @@ function setGaugeValuePersonel(value) {
         needle.style.visibility = 'visible';
     }
 
+    value1 = value/(60 * 1000);
+    
     // Limite la valeur à la plage [5, 10]
-    if (value < minValue) value = minValue;
-    if (value > maxValue) value = maxValue;
+    if (value1 < minValue) value1 = minValue;
+    if (value1 > maxValue) value1 = maxValue;
 
     // Calcul de la rotation pour la nouvelle plage de valeurs
-    const rotation = ((value - minValue) / (maxValue - minValue)) * 180 - 90;
+    const rotation = ((value1 - minValue) / (maxValue - minValue)) * 180 - 90;
     needle.style.transform = `rotate(${rotation}deg)`;
 }
 
