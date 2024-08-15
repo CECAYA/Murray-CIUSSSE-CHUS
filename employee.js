@@ -142,7 +142,7 @@ function setGaugeValuePersonel(value) {
 }
 
 
-function displayCalls() {
+async function displayCalls() {
     const userCallsRef = collection(db, 'userCalls');
     const q = query(userCallsRef);
 
