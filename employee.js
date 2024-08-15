@@ -141,19 +141,25 @@ function setGaugeValuePersonel(value) {
     needle.style.transform = `rotate(${rotation}deg)`;
 }
 
-function displayCalls() {
-    const userCallsRef = db.collection('userCalls');
-            userCallsRef.get().then((querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    const data = doc.data();
-                    const listItem = document.createElement('li');
-                    listItem.textContent = `Numéro: ${data.number}, Durée totale: ${data.totalTime} mins`;
-                    document.getElementById('callsList').appendChild(listItem);
-                });
-            }).catch((error) => {
-                console.error("Erreur lors de la récupération des appels: ", error);
-            });
-        }
+
+async function displayCalls() {
+    try {
+        const userCallsRef = collection(db, 'userCalls');
+        const querySnapshot = await getDocs(userCallsRef);
+
+        const callsList = document.getElementById('callsList');
+        callsList.innerHTML = ''; // Effacer la liste actuelle
+
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            const listItem = document.createElement('li');
+            listItem.textContent = `Numéro: ${data.number}, Durée totale: ${data.totalTime} mins`;
+            callsList.appendChild(listItem);
+        });
+    } catch (error) {
+        console.error("Erreur lors de la récupération des appels: ", error);
+    }
+}
 
 // Attacher les fonctions au contexte global pour qu'elles soient accessibles depuis le HTML
 window.callNextUser = callNextUser;
