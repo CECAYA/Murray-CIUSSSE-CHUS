@@ -159,7 +159,6 @@ async function displayCalls() {
 }
 
 async function getTechnicians() {
-  try {
     // Référence à la collection 'Techniciens'
     const techniciansRef = collection(db, 'Techniciens');
 
