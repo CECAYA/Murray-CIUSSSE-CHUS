@@ -711,8 +711,8 @@ h1 {
     }
   }
 	window.onload = function() {
-    displayCalls();
-    displayUsers2(getTechnicians);
+    updateTable(users);
+    displayUsers2(getTechnicians());
   };
   
      const users = [
@@ -782,9 +782,6 @@ h1 {
 
         // Attacher les événements
         document.getElementById('downloadBtn').addEventListener('click', downloadExcel);
-
-        // Appel de la fonction pour initialiser le tableau avec les données
-        updateTable(users);
         
           // Fonction pour afficher les utilisateurs
         function displayUsers2(users) {
