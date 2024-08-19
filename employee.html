@@ -711,7 +711,7 @@ h1 {
     }
   }
 	window.onload = function() {
-    displayUsers2(getTechnicians());
+    getTechnicians();
   };
 
         // Fonction pour mettre à jour le tableau et les totaux
@@ -776,15 +776,6 @@ h1 {
         // Attacher les événements
         document.getElementById('downloadBtn').addEventListener('click', downloadExcel);
         
-	function displayUsers2(users) {
-	    const userList = document.getElementById('userList2');
-	    userList.innerHTML = '';
-	    users.forEach(user => {
-	        const li = document.createElement('li');
-	        li.innerHTML = `${user.email} - ${user.isAdmin ? 'Admin' : 'Régulier'} <button onclick="deleteUser2('${user.email}')">Supprimer</button>`;
-	        userList.appendChild(li);
-	    });
-	}
 
         // Fonction pour créer un nouvel utilisateur
         function createUser2() {
