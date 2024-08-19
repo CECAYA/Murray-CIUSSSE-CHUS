@@ -218,7 +218,9 @@ async function createUser2() {
 }
 
 async function deleteUser2(email2) {
-const technicienDocRef = doc(firestore, 'Techniciens', email2);
+
+	try {
+	const technicienDocRef = doc(firestore, 'Techniciens', email2);
         const technicienDoc = await getDoc(technicienDocRef);
 
         if (technicienDoc.exists()) {
