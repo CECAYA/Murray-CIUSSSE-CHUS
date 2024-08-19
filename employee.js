@@ -195,7 +195,7 @@ async function getTechnicians() {
 
 
 async function createUser2() {
-    const email = document.getElementById('userEmail').value;
+    const email = document.getElementById('userEmail2').value;
     const password = document.getElementById('userPassword').value;
     const isAdmin = document.getElementById('userIsAdmin').checked;
 
