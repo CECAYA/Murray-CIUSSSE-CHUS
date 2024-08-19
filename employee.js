@@ -226,14 +226,8 @@ async function deleteUser2(email2) {
         if (technicienDoc.exists()) {
             const uid = technicienDoc.data().uid;
 
-            // Supprimer l'utilisateur de Firebase Authentication
-            const user = auth.currentUser;
-            if (user && user.uid === uid) {
-                await deleteUser(user);
+                await deleteUser(uid);
                 console.log(`L'utilisateur avec l'UID ${uid} a été supprimé de l'authentification.`);
-            } else {
-                console.error("Impossible de supprimer l'utilisateur: l'UID ne correspond pas.");
-            }
 
             // Supprimer le document du technicien de Firestore
             await deleteDoc(technicienDocRef);
