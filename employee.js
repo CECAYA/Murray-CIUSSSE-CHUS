@@ -188,7 +188,7 @@ async function getTechnicians() {
 	    userList.innerHTML = '';
 	    technicians.forEach(user => {
 	        const li = document.createElement('li');
-	        li.innerHTML = `${user.email} - ${user.isAdmin ? 'Admin' : 'Régulier'} <button onclick="deleteUser2('${user.uid}')">Supprimer</button>`;
+	        li.innerHTML = `${user.email} - ${user.isAdmin ? 'Admin' : 'Régulier'} <button onclick="deleteUser2('${user.email}')">Supprimer</button>`;
 	        userList.appendChild(li);
 	    });
 }
@@ -217,28 +217,30 @@ async function createUser2() {
     }
 }
 
-async function deleteUser2(userUID) {
-    try {
-        const userRef = doc(db, 'Techniciens', userUID);
-        const docSnap = await getDoc(userRef);
+async function deleteUser2(email2) {
+const technicienDocRef = doc(firestore, 'Techniciens', email2);
+        const technicienDoc = await getDoc(technicienDocRef);
 
-        if (docSnap.exists()) {
-            const user = docSnap.data();
+        if (technicienDoc.exists()) {
+            const uid = technicienDoc.data().uid;
 
-            // Suppression dans Firebase Authentication
-            const userAuth = await auth.getUser(user.uid);
-            await deleteUser(userAuth);
+            // Supprimer l'utilisateur de Firebase Authentication
+            const user = auth.currentUser;
+            if (user && user.uid === uid) {
+                await deleteUser(user);
+                console.log(`L'utilisateur avec l'UID ${uid} a été supprimé de l'authentification.`);
+            } else {
+                console.error("Impossible de supprimer l'utilisateur: l'UID ne correspond pas.");
+            }
 
-            // Suppression dans Firestore
-            await deleteDoc(userRef);
-
-            console.log('Utilisateur supprimé avec succès:', user.email);
-            getTechnicians();
+            // Supprimer le document du technicien de Firestore
+            await deleteDoc(technicienDocRef);
+            console.log(`Le document du technicien avec l'adresse e-mail ${email} a été supprimé de Firestore.`);
         } else {
-            console.log('Utilisateur non trouvé:', userUID);
+            console.log("Aucun technicien trouvé avec cet email.");
         }
     } catch (error) {
-        console.error('Erreur lors de la suppression de l\'utilisateur:', error);
+        console.error("Erreur lors de la suppression de l'utilisateur:", error);
     }
 }
 
