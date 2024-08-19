@@ -203,7 +203,7 @@ async function createUser2() {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
 
-        const userRef = doc(db, 'Techniciens', user.uid);
+        const userRef = doc(db, 'Techniciens', user.email);
         await setDoc(userRef, {
             uid: user.uid,
             email: user.email,
