@@ -184,11 +184,13 @@ async function getTechnicians() {
       });
     });
 
-    return technicians;
-  } catch (error) {
-    console.error('Erreur lors de la récupération des techniciens:', error);
-    return [];
-  }
+      	const userList = document.getElementById('userList2');
+	    userList.innerHTML = '';
+	    technicians.forEach(user => {
+	        const li = document.createElement('li');
+	        li.innerHTML = `${user.email} - ${user.isAdmin ? 'Admin' : 'Régulier'} <button onclick="deleteUser2('${user.email}')">Supprimer</button>`;
+	        userList.appendChild(li);
+	    });
 }
 
 export { callNextUser, displayCalls, getTechnicians };
