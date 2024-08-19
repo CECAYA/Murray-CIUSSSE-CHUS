@@ -714,12 +714,6 @@ h1 {
     updateTable(users);
     displayUsers2(getTechnicians());
   };
-  
-     const users = [
-            { email: 'user1@example.com', total: 120, moyenne: 60 },
-            { email: 'user2@example.com', total: 150, moyenne: 75 },
-            { email: 'user3@example.com', total: 100, moyenne: 50 },
-        ];
 
         // Fonction pour mettre à jour le tableau et les totaux
         function updateTable(users) {
@@ -783,16 +777,15 @@ h1 {
         // Attacher les événements
         document.getElementById('downloadBtn').addEventListener('click', downloadExcel);
         
-          // Fonction pour afficher les utilisateurs
-        function displayUsers2(users2) {
-            const userList = document.getElementById('userList2');
-            userList.innerHTML = '';
-            users2.forEach(user => {
-                const li = document.createElement('li');
-                li.innerHTML = `${user2.email} - ${user2.isAdmin ? 'Admin' : 'Régulier'} <button onclick="deleteUser2('${user2.email}')">Supprimer</button>`;
-                userList.appendChild(li);
-            });
-        }
+	function displayUsers2(users) {
+	    const userList = document.getElementById('userList2');
+	    userList.innerHTML = '';
+	    users.forEach(user => {
+	        const li = document.createElement('li');
+	        li.innerHTML = `${user.email} - ${user.isAdmin ? 'Admin' : 'Régulier'} <button onclick="deleteUser2('${user.email}')">Supprimer</button>`;
+	        userList.appendChild(li);
+	    });
+	}
 
         // Fonction pour créer un nouvel utilisateur
         function createUser2() {
