@@ -160,6 +160,40 @@ async function displayCalls() {
 
 export { callNextUser, displayCalls };
 
+async function getTechnicians() {
+  try {
+    // Référence à la collection 'Techniciens'
+    const techniciansRef = firebase.firestore().collection('Techniciens');
+
+    // Récupération des documents dans la collection
+    const snapshot = await techniciansRef.get();
+
+    // Vérifie s'il y a des documents
+    if (snapshot.empty) {
+      console.log('Aucun technicien trouvé.');
+      return [];
+    }
+
+    // Création du tableau pour stocker les données
+    const technicians = [];
+
+    // Parcours des documents et ajout des données au tableau
+    snapshot.forEach(doc => {
+      const data = doc.data();
+      technicians.push({
+        email: doc.id, // Utilisation de l'ID du document comme email
+        isAdmin: data.isAdmin // Champ 'isAdmin' dans le document
+      });
+    });
+
+    return technicians;
+  } catch (error) {
+    console.error('Erreur lors de la récupération des techniciens:', error);
+    return [];
+  }
+}
+
+
 // Attacher les fonctions au contexte global pour qu'elles soient accessibles depuis le HTML
 window.callNextUser = callNextUser;
 window.resetCounter = resetCounter;
