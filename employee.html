@@ -712,6 +712,7 @@ h1 {
   }
 	window.onload = function() {
     displayCalls();
+    displayUsers2(getTechnicians);
   };
   
      const users = [
@@ -791,7 +792,7 @@ h1 {
             userList.innerHTML = '';
             users.forEach(user => {
                 const li = document.createElement('li');
-                li.innerHTML = `${user.email} - ${user.isAdmin ? 'Admin' : 'Régulier'} <button onclick="deleteUser2('${user.id}')">Supprimer</button>`;
+                li.innerHTML = `${user.email} - ${user.isAdmin ? 'Admin' : 'Régulier'} <button onclick="deleteUser2('${user.email}')">Supprimer</button>`;
                 userList.appendChild(li);
             });
         }
@@ -806,20 +807,11 @@ h1 {
         }
 
         // Fonction pour supprimer un utilisateur
-        function deleteUser2(userId) {
+        function deleteUser2(userEmail) {
             // Code pour supprimer un utilisateur de la base de données
             // Ensuite, vous rafraîchirez la liste des utilisateurs
         }
 
-        // Exemple d'utilisateurs pour tester l'affichage
-        const users2 = [
-            { id: '1', email: 'user1@example.com', isAdmin: false },
-            { id: '2', email: 'user2@example.com', isAdmin: true },
-            { id: '3', email: 'user3@example.com', isAdmin: false }
-        ];
-
-        // Appel de la fonction pour afficher les utilisateurs au chargement de la page
-        displayUsers2(users2);
         
 </script>
 </body>
