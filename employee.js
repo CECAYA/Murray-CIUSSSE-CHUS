@@ -1,5 +1,6 @@
+import { getAuth, createUserWithEmailAndPassword, deleteUser } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
 import { doc, setDoc, getDoc, updateDoc, collection, addDoc, query, getDocs } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
-import { db } from './config.js';
+import { db, auth } from './config.js';
 
 // Fonction pour appeler le prochain usager
 async function callNextUser() {
@@ -192,7 +193,59 @@ async function getTechnicians() {
 	    });
 }
 
-export { callNextUser, displayCalls, getTechnicians };
+
+async function createUser2() {
+    const email = document.getElementById('userEmail').value;
+    const password = document.getElementById('userPassword').value;
+    const isAdmin = document.getElementById('userIsAdmin').checked;
+
+    try {
+        // Créer l'utilisateur dans Firebase Authentication
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        // Ajouter l'utilisateur dans Firestore
+        const userRef = doc(db, 'Techniciens', user.uid); // Utiliser l'UID comme identifiant
+        await setDoc(userRef, {
+            email: user.email,
+            isAdmin: isAdmin
+        });
+
+        console.log('Utilisateur ajouté avec succès:', user.email);
+        // Rafraîchir la liste des utilisateurs
+        getTechnicians();
+    } catch (error) {
+        console.error('Erreur lors de l\'ajout de l\'utilisateur:', error);
+    }
+}
+
+// Fonction pour supprimer un utilisateur
+async function deleteUser2(userEmail) {
+    try {
+        // Obtenir l'utilisateur via l'email
+        const user = await getUserByEmail(userEmail);
+
+        if (user) {
+            // Supprimer l'utilisateur de Firebase Authentication
+            await deleteUser(user);
+
+            // Supprimer l'utilisateur de Firestore
+            const userRef = doc(db, 'Techniciens', user.uid);
+            await deleteDoc(userRef);
+
+            console.log('Utilisateur supprimé avec succès:', userEmail);
+            // Rafraîchir la liste des utilisateurs
+            getTechnicians();
+        } else {
+            console.log('Utilisateur non trouvé:', userEmail);
+        }
+    } catch (error) {
+        console.error('Erreur lors de la suppression de l\'utilisateur:', error);
+    }
+}
+
+
+export { callNextUser, displayCalls, getTechnicians, createUser2, deleteUser2 };
 // Attacher les fonctions au contexte global pour qu'elles soient accessibles depuis le HTML
 window.callNextUser = callNextUser;
 window.resetCounter = resetCounter;
