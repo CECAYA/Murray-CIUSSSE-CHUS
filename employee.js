@@ -252,3 +252,5 @@ window.resetCounter = resetCounter;
 window.PreviousNumber = PreviousNumber;
 window.displayCalls = displayCalls;
 window.getTechnicians = getTechnicians;
+window.createUser2 = createUser2;
+window.deleteUser2 = deleteUser2;
