@@ -161,10 +161,10 @@ async function displayCalls() {
 async function getTechnicians() {
   try {
     // Référence à la collection 'Techniciens'
-    const techniciansRef = firebase.firestore().collection('Techniciens');
+    const techniciansRef = collection(db, 'Techniciens');
 
     // Récupération des documents dans la collection
-    const snapshot = await techniciansRef.get();
+    const snapshot = await getDocs(techniciansRef);
 
     // Vérifie s'il y a des documents
     if (snapshot.empty) {
