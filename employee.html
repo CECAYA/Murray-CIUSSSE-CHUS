@@ -784,12 +784,12 @@ h1 {
         document.getElementById('downloadBtn').addEventListener('click', downloadExcel);
         
           // Fonction pour afficher les utilisateurs
-        function displayUsers2(users) {
+        function displayUsers2(users2) {
             const userList = document.getElementById('userList2');
             userList.innerHTML = '';
-            users.forEach(user => {
+            users2.forEach(user => {
                 const li = document.createElement('li');
-                li.innerHTML = `${user.email} - ${user.isAdmin ? 'Admin' : 'Régulier'} <button onclick="deleteUser2('${user.email}')">Supprimer</button>`;
+                li.innerHTML = `${user2.email} - ${user2.isAdmin ? 'Admin' : 'Régulier'} <button onclick="deleteUser2('${user2.email}')">Supprimer</button>`;
                 userList.appendChild(li);
             });
         }
