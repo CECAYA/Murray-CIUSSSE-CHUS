@@ -2,10 +2,18 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Appel des Usagers</title>
   <style>
     body {
       margin: 60px;
+      font-family: Arial, sans-serif;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100vh;
     }
     .grid-container {
       display: grid;
@@ -379,13 +387,162 @@
             padding: 10px;
             border-radius: 5px;
         }
+h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
 
+        table {
+            width: 80%;
+            max-width: 1000px;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: normal;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .summary {
+            font-weight: bold;
+            color: #555;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .summary span {
+            color: #4CAF50;
+            font-size: 1.2em;
+        }
+
+        @media (max-width: 768px) {
+            table {
+                width: 100%;
+            }
+
+            th, td {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            .summary span {
+                font-size: 1em;
+            }
+        }
+
+        /* Nouveau style pour le sélecteur de date et le bouton */
+        .controls {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .controls input[type="date"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .controls button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .controls button:hover {
+            background-color: #45a049;
+        }
+        .user-container {
+            width: 100%;
+            margin: auto;
+            overflow: hidden;
+        }
+        h1 {
+            text-align: center;
+            padding: 20px;
+        }
+        .user-list-section, .user-form-section {
+            background: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .user-list-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        .user-list-section ul li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .user-list-section ul li:last-child {
+            border-bottom: none;
+        }
+        .user-list-section ul li button {
+            background: #e74c3c;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .user-form-section input[type="text"], .user-form-section input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+        .user-form-section label {
+            margin-right: 10px;
+        }
+        .user-form-section input[type="checkbox"] {
+            margin-right: 5px;
+        }
+        .user-form-section button {
+            background: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+        }
+        
   </style>
 </head>
 <body>
   <div class="nav-bar">
     <a href="#onglet1" class="nav-link">Appel des usagers</a>
     <a href="#onglet2" class="nav-link">Statistiques</a>
+      <a href="#onglet3" class="nav-link">Gestion</a>
   </div>
 
 <div id="onglet1" class="tab-content">
@@ -483,11 +640,56 @@
   </div>
    
    <div id="onglet2" class="tab-content" style="display:none;">
-   <div class="grid-container">
-    <div class="grid-item case1">ÉDIFICE MURRAY</div>
-    
-    <ul id="callsList"></ul>
+<h1>Totaux et Moyennes des Utilisateurs</h1>
 
+    <!-- Sélecteur de date et bouton de téléchargement -->
+    <div class="controls">
+        <input type="date" id="datePicker" />
+        <button id="downloadBtn">Télécharger les statistiques</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Total</th>
+                <th>Moyenne</th>
+            </tr>
+        </thead>
+        <tbody id="userTableBody">
+            <!-- Les données des utilisateurs seront insérées ici -->
+        </tbody>
+    </table>
+    <div>
+        <p class="summary">Somme des Totaux: <span id="totalSum">0</span></p>
+        <p class="summary">Moyenne Globale: <span id="globalAverage">0</span></p>
+    </div>
+
+</div>
+   <div id="onglet3" class="tab-content" style="display:none;">
+
+<div class="user-container">
+        <h1>Gestion des Utilisateurs</h1>
+        
+        <div class="user-list-section">
+            <h2>Liste des utilisateurs</h2>
+            <ul id="userList2">
+                <!-- Les utilisateurs seront affichés ici -->
+            </ul>
+        </div>
+
+        <div class="user-form-section">
+            <h2>Créer un nouvel utilisateur</h2>
+            <input type="text" id="userEmail" placeholder="Email" required>
+            <input type="password" id="userPassword" placeholder="Mot de passe" required>
+            <div>
+                <label>
+                    <input type="checkbox" id="userIsAdmin"> Admin
+                </label>
+            </div>
+            <button onclick="createUser2()">Créer un utilisateur</button>
+        </div>
+    </div>
    
    </div>
    
@@ -511,6 +713,114 @@
 	window.onload = function() {
     displayCalls();
   };
+  
+     const users = [
+            { email: 'user1@example.com', total: 120, moyenne: 60 },
+            { email: 'user2@example.com', total: 150, moyenne: 75 },
+            { email: 'user3@example.com', total: 100, moyenne: 50 },
+        ];
+
+        // Fonction pour mettre à jour le tableau et les totaux
+        function updateTable(users) {
+            const userTableBody = document.getElementById('userTableBody');
+            userTableBody.innerHTML = ''; // Vider le tableau avant de le remplir
+
+            let totalSum = 0;
+            let globalAverage = 0;
+
+            users.forEach(user => {
+                const row = document.createElement('tr');
+
+                const emailCell = document.createElement('td');
+                emailCell.textContent = user.email;
+                row.appendChild(emailCell);
+
+                const totalCell = document.createElement('td');
+                totalCell.textContent = user.total;
+                row.appendChild(totalCell);
+
+                const moyenneCell = document.createElement('td');
+                moyenneCell.textContent = user.moyenne;
+                row.appendChild(moyenneCell);
+
+                userTableBody.appendChild(row);
+
+                totalSum += user.total;
+                globalAverage += user.moyenne;
+            });
+
+            const totalSumElement = document.getElementById('totalSum');
+            const globalAverageElement = document.getElementById('globalAverage');
+
+            totalSumElement.textContent = totalSum;
+            globalAverageElement.textContent = (globalAverage / users.length).toFixed(2);
+        }
+
+        // Fonction pour télécharger les statistiques en format Excel
+        function downloadExcel() {
+            const table = document.querySelector('table');
+            const tableHtml = table.outerHTML.replace(/ /g, '%20');
+
+            const filename = 'statistiques_utilisateurs.xls';
+            const dataType = 'application/vnd.ms-excel';
+
+            const downloadLink = document.createElement('a');
+            document.body.appendChild(downloadLink);
+
+            if (navigator.msSaveOrOpenBlob) {
+                const blob = new Blob(['\ufeff', tableHtml], { type: dataType });
+                navigator.msSaveOrOpenBlob(blob, filename);
+            } else {
+                downloadLink.href = 'data:' + dataType + ', ' + tableHtml;
+                downloadLink.download = filename;
+                downloadLink.click();
+            }
+
+            document.body.removeChild(downloadLink);
+        }
+
+        // Attacher les événements
+        document.getElementById('downloadBtn').addEventListener('click', downloadExcel);
+
+        // Appel de la fonction pour initialiser le tableau avec les données
+        updateTable(users);
+        
+          // Fonction pour afficher les utilisateurs
+        function displayUsers2(users) {
+            const userList = document.getElementById('userList2');
+            userList.innerHTML = '';
+            users.forEach(user => {
+                const li = document.createElement('li');
+                li.innerHTML = `${user.email} - ${user.isAdmin ? 'Admin' : 'Régulier'} <button onclick="deleteUser2('${user.id}')">Supprimer</button>`;
+                userList.appendChild(li);
+            });
+        }
+
+        // Fonction pour créer un nouvel utilisateur
+        function createUser2() {
+            const email = document.getElementById('userEmail').value;
+            const password = document.getElementById('userPassword').value;
+            const isAdmin = document.getElementById('userIsAdmin').checked;
+            // Code pour créer un utilisateur dans la base de données
+            // Ensuite, vous rafraîchirez la liste des utilisateurs
+        }
+
+        // Fonction pour supprimer un utilisateur
+        function deleteUser2(userId) {
+            // Code pour supprimer un utilisateur de la base de données
+            // Ensuite, vous rafraîchirez la liste des utilisateurs
+        }
+
+        // Exemple d'utilisateurs pour tester l'affichage
+        const users2 = [
+            { id: '1', email: 'user1@example.com', isAdmin: false },
+            { id: '2', email: 'user2@example.com', isAdmin: true },
+            { id: '3', email: 'user3@example.com', isAdmin: false }
+        ];
+
+        // Appel de la fonction pour afficher les utilisateurs au chargement de la page
+        displayUsers2(users2);
+        
 </script>
 </body>
 </html>
