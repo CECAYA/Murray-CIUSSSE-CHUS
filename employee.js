@@ -158,8 +158,6 @@ async function displayCalls() {
     });
 }
 
-export { callNextUser, displayCalls };
-
 async function getTechnicians() {
   try {
     // Référence à la collection 'Techniciens'
@@ -193,9 +191,10 @@ async function getTechnicians() {
   }
 }
 
-
+export { callNextUser, displayCalls, getTechnicians };
 // Attacher les fonctions au contexte global pour qu'elles soient accessibles depuis le HTML
 window.callNextUser = callNextUser;
 window.resetCounter = resetCounter;
 window.PreviousNumber = PreviousNumber;
 window.displayCalls = displayCalls;
+window.getTechnicians = getTechnicians;
