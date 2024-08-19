@@ -188,7 +188,7 @@ async function getTechnicians() {
 	    userList.innerHTML = '';
 	    technicians.forEach(user => {
 	        const li = document.createElement('li');
-	        li.innerHTML = `${user.email} - ${user.isAdmin ? 'Admin' : 'Régulier'} <button onclick="deleteUser2('${user.email}')">Supprimer</button>`;
+	        li.innerHTML = `${user.email} - ${user.isAdmin ? 'Admin' : 'Régulier'} <button onclick="deleteUser2('${user.uid}')">Supprimer</button>`;
 	        userList.appendChild(li);
 	    });
 }
@@ -200,44 +200,42 @@ async function createUser2() {
     const isAdmin = document.getElementById('userIsAdmin').checked;
 
     try {
-        // Créer l'utilisateur dans Firebase Authentication
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
 
-        // Ajouter l'utilisateur dans Firestore
-        const userRef = doc(db, 'Techniciens', user.uid); // Utiliser l'UID comme identifiant
+        const userRef = doc(db, 'Techniciens', user.uid);
         await setDoc(userRef, {
+            uid: user.uid,
             email: user.email,
             isAdmin: isAdmin
         });
 
         console.log('Utilisateur ajouté avec succès:', user.email);
-        // Rafraîchir la liste des utilisateurs
         getTechnicians();
     } catch (error) {
         console.error('Erreur lors de l\'ajout de l\'utilisateur:', error);
     }
 }
 
-// Fonction pour supprimer un utilisateur
-async function deleteUser2(userEmail) {
+async function deleteUser2(userUID) {
     try {
-        // Obtenir l'utilisateur via l'email
-        const user = await getUserByEmail(userEmail);
+        const userRef = doc(db, 'Techniciens', userUID);
+        const docSnap = await getDoc(userRef);
 
-        if (user) {
-            // Supprimer l'utilisateur de Firebase Authentication
-            await deleteUser(user);
+        if (docSnap.exists()) {
+            const user = docSnap.data();
 
-            // Supprimer l'utilisateur de Firestore
-            const userRef = doc(db, 'Techniciens', user.uid);
+            // Suppression dans Firebase Authentication
+            const userAuth = await auth.getUser(user.uid);
+            await deleteUser(userAuth);
+
+            // Suppression dans Firestore
             await deleteDoc(userRef);
 
-            console.log('Utilisateur supprimé avec succès:', userEmail);
-            // Rafraîchir la liste des utilisateurs
+            console.log('Utilisateur supprimé avec succès:', user.email);
             getTechnicians();
         } else {
-            console.log('Utilisateur non trouvé:', userEmail);
+            console.log('Utilisateur non trouvé:', userUID);
         }
     } catch (error) {
         console.error('Erreur lors de la suppression de l\'utilisateur:', error);
