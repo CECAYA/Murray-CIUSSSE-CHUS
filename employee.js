@@ -188,7 +188,7 @@ async function getTechnicians() {
 	    userList.innerHTML = '';
 	    technicians.forEach(user => {
 	        const li = document.createElement('li');
-	        li.innerHTML = `${user.email} - ${user.isAdmin ? 'Admin' : 'Régulier'} <button onclick="deleteUser2('${user.email}')">Supprimer</button>`;
+	        li.innerHTML = `${user.email} - ${user.isAdmin ? 'Admin' : 'Régulier'} <button onclick="deleteUser2('${user.email}')">Désactiver</button>`;
 	        userList.appendChild(li);
 	    });
 }
@@ -205,8 +205,8 @@ async function createUser2() {
 
         const userRef = doc(db, 'Techniciens', user.email);
         await setDoc(userRef, {
-            uid: user.uid,
             email: user.email,
+	    Permission: false,
             isAdmin: isAdmin
         });
 
@@ -217,27 +217,20 @@ async function createUser2() {
     }
 }
 
-async function deleteUser2(email2) {
+async function deleteUser2(email) {
+  try {
+    // Référence au document de l'adresse courriel dans la collection Techniciens
+    const docRef = doc(db, "Techniciens", email);
 
-	try {
-	const technicienDocRef = doc(db, 'Techniciens', email2);
-        const technicienDoc = await getDoc(technicienDocRef);
-
-        if (technicienDoc.exists()) {
-            const uid = technicienDoc.data().uid;
-
-                await deleteUser(uid);
-                console.log(`L'utilisateur avec l'UID ${uid} a été supprimé de l'authentification.`);
-
-            // Supprimer le document du technicien de Firestore
-            await deleteDoc(technicienDocRef);
-            console.log(`Le document du technicien avec l'adresse e-mail ${email} a été supprimé de Firestore.`);
-        } else {
-            console.log("Aucun technicien trouvé avec cet email.");
-        }
-    } catch (error) {
-        console.error("Erreur lors de la suppression de l'utilisateur:", error);
-    }
+    // Mise à jour du champ Permission à false
+    await updateDoc(docRef, {
+      Permission: false
+    });
+    getTechnicians();
+    console.log("Le champ 'Permission' a été mis à jour avec succès.");
+  } catch (error) {
+    console.error("Erreur lors de la mise à jour du champ 'Permission':", error);
+  }
 }
 
 
