@@ -163,8 +163,11 @@ async function getTechnicians() {
     // Référence à la collection 'Techniciens'
     const techniciansRef = collection(db, 'Techniciens');
 
-    // Récupération des documents dans la collection
-    const snapshot = await getDocs(techniciansRef);
+    // Création de la requête avec une condition sur le champ 'Permission'
+    const q = query(techniciansRef, where('Permission', '==', true));
+
+    // Récupération des documents dans la collection avec la condition
+    const snapshot = await getDocs(q);
 
     // Vérifie s'il y a des documents
     if (snapshot.empty) {
@@ -184,14 +187,54 @@ async function getTechnicians() {
       });
     });
 
-      	const userList = document.getElementById('userList2');
-	    userList.innerHTML = '';
-	    technicians.forEach(user => {
-	        const li = document.createElement('li');
-	        li.innerHTML = `${user.email} - ${user.isAdmin ? 'Admin' : 'Régulier'} <button onclick="deleteUser2('${user.email}')">Désactiver</button>`;
-	        userList.appendChild(li);
-	    });
+    // Affichage des techniciens dans la liste
+    const userList = document.getElementById('userList2');
+    userList.innerHTML = '';
+    technicians.forEach(user => {
+        const li = document.createElement('li');
+        li.innerHTML = `${user.email} - ${user.isAdmin ? 'Admin' : 'Régulier'} <button onclick="deleteUser2('${user.email}')">Désactiver</button>`;
+        userList.appendChild(li);
+    });
 }
+
+async function getTechniciansFalse() {
+    // Référence à la collection 'Techniciens'
+    const techniciansRef = collection(db, 'Techniciens');
+
+    // Création de la requête avec une condition sur le champ 'Permission'
+    const q = query(techniciansRef, where('Permission', '==', false));
+
+    // Récupération des documents dans la collection avec la condition
+    const snapshot = await getDocs(q);
+
+    // Vérifie s'il y a des documents
+    if (snapshot.empty) {
+      console.log('Aucun technicien trouvé.');
+      return [];
+    }
+
+    // Création du tableau pour stocker les données
+    const technicians = [];
+
+    // Parcours des documents et ajout des données au tableau
+    snapshot.forEach(doc => {
+      const data = doc.data();
+      technicians.push({
+        email: doc.id, // Utilisation de l'ID du document comme email
+        isAdmin: data.isAdmin // Champ 'isAdmin' dans le document
+      });
+    });
+
+    // Affichage des techniciens dans la liste
+    const userList = document.getElementById('userList3');
+    userList.innerHTML = '';
+    technicians.forEach(user => {
+        const li = document.createElement('li');
+        li.innerHTML = `${user.email} - ${user.isAdmin ? 'Admin' : 'Régulier'} <button onclick="activation('${user.email}')">Activer</button>`;
+        userList.appendChild(li);
+    });
+}
+
 
 
 async function createUser2() {
@@ -212,6 +255,7 @@ async function createUser2() {
 
         console.log('Utilisateur ajouté avec succès:', user.email);
         getTechnicians();
+	getTechniciansFalse()
     } catch (error) {
         console.error('Erreur lors de l\'ajout de l\'utilisateur:', error);
     }
@@ -227,6 +271,24 @@ async function deleteUser2(email) {
       Permission: false
     });
     getTechnicians();
+	getTechniciansFalse()
+    console.log("Le champ 'Permission' a été mis à jour avec succès.");
+  } catch (error) {
+    console.error("Erreur lors de la mise à jour du champ 'Permission':", error);
+  }
+}
+
+async function activation(email) {
+  try {
+    // Référence au document de l'adresse courriel dans la collection Techniciens
+    const docRef = doc(db, "Techniciens", email);
+
+    // Mise à jour du champ Permission à false
+    await updateDoc(docRef, {
+      Permission: true
+    });
+    getTechnicians();
+	  getTechniciansFalse()
     console.log("Le champ 'Permission' a été mis à jour avec succès.");
   } catch (error) {
     console.error("Erreur lors de la mise à jour du champ 'Permission':", error);
@@ -234,7 +296,7 @@ async function deleteUser2(email) {
 }
 
 
-export { callNextUser, displayCalls, getTechnicians, createUser2, deleteUser2 };
+export { callNextUser, displayCalls, getTechnicians, createUser2, deleteUser2, getTechniciansFalse };
 // Attacher les fonctions au contexte global pour qu'elles soient accessibles depuis le HTML
 window.callNextUser = callNextUser;
 window.resetCounter = resetCounter;
@@ -243,3 +305,4 @@ window.displayCalls = displayCalls;
 window.getTechnicians = getTechnicians;
 window.createUser2 = createUser2;
 window.deleteUser2 = deleteUser2;
+window.getTechniciansFalse = getTechniciansFalse;
