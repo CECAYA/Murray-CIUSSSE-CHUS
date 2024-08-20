@@ -255,7 +255,7 @@ async function createUser2() {
 
         console.log('Utilisateur ajouté avec succès:', user.email);
         getTechnicians();
-	getTechniciansFalse()
+	getTechniciansFalse();
     } catch (error) {
         console.error('Erreur lors de l\'ajout de l\'utilisateur:', error);
     }
@@ -271,7 +271,7 @@ async function deleteUser2(email) {
       Permission: false
     });
     getTechnicians();
-	getTechniciansFalse()
+	getTechniciansFalse();
     console.log("Le champ 'Permission' a été mis à jour avec succès.");
   } catch (error) {
     console.error("Erreur lors de la mise à jour du champ 'Permission':", error);
@@ -288,7 +288,7 @@ async function activation(email) {
       Permission: true
     });
     getTechnicians();
-	  getTechniciansFalse()
+	  getTechniciansFalse();
     console.log("Le champ 'Permission' a été mis à jour avec succès.");
   } catch (error) {
     console.error("Erreur lors de la mise à jour du champ 'Permission':", error);
@@ -296,7 +296,7 @@ async function activation(email) {
 }
 
 
-export { callNextUser, displayCalls, getTechnicians, createUser2, deleteUser2, getTechniciansFalse };
+export { callNextUser, displayCalls, getTechnicians, createUser2, deleteUser2, getTechniciansFalse, activation };
 // Attacher les fonctions au contexte global pour qu'elles soient accessibles depuis le HTML
 window.callNextUser = callNextUser;
 window.resetCounter = resetCounter;
@@ -306,3 +306,4 @@ window.getTechnicians = getTechnicians;
 window.createUser2 = createUser2;
 window.deleteUser2 = deleteUser2;
 window.getTechniciansFalse = getTechniciansFalse;
+window.activation = activation;
