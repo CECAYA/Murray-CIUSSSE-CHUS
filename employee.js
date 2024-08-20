@@ -248,10 +248,10 @@ async function createUser2() {
     const password = document.getElementById('userPassword').value;
     const password2 = document.getElementById('userPassword2').value;
     const adminPassword = document.getElementById('adminPassword').value;
-    const isAdmin = document.getElementById('userIsAdmin').checked;
+    const isAdmin1 = document.getElementById('userIsAdmin').checked;
 
     const errorMessageElement = document.getElementById('errorMessage'); // Assurez-vous d'avoir un élément pour afficher les messages d'erreur
-
+	errorMessageElement.textContent = '';
     try {
         // Vérification du mot de passe de confirmation
         if (password !== password2) {
@@ -263,6 +263,11 @@ async function createUser2() {
         const userDoc = await getDoc(doc(db, 'Techniciens', user.email));
         if (!userDoc.exists() || userDoc.data().isAdmin !== true || adminPassword !== userPassword) {
             throw new Error('Mot de passe administrateur incorrect ou droits insuffisants.');
+	document.getElementById('userEmail2').value = '';
+        document.getElementById('userPassword').value = '';
+        document.getElementById('userPassword2').value = '';
+        document.getElementById('adminPassword').value = '';
+        document.getElementById('userIsAdmin').checked = false;
         }
 
         // Création de l'utilisateur
@@ -274,7 +279,7 @@ async function createUser2() {
         await setDoc(userRef, {
             email: newUser.email,
             Permission: false,
-            isAdmin: isAdmin
+            isAdmin: isAdmin1
         });
 
         console.log('Utilisateur ajouté avec succès:', newUser.email);
