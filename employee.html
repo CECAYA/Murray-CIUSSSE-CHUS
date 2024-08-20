@@ -517,7 +517,7 @@ h1 {
             cursor: pointer;
         }
         .user-form-section input[type="text"], .user-form-section input[type="password"] {
-            width: 100%;
+            width: 90%;
             padding: 10px;
             margin: 10px 0;
             border: 1px solid #ddd;
@@ -684,8 +684,11 @@ h1 {
 
         <div class="user-form-section">
             <div class="grid-item case28">CRÉATION</div>
-            <input type="text" id="userEmail2" placeholder="Email" required>
+            <input type="text" id="userEmail2" placeholder="Nom d'utilisateur (ex : PrénomNom) - Doit être unique" required>
             <input type="password" id="userPassword" placeholder="Mot de passe" required>
+          <input type="password" id="userPassword2" placeholder="Confirmer le mot de passe" required>
+          
+          <input type="password" id="adminPassword" placeholder="Mot de passe de l'administrateur connecté" required>
             <div>
                 <label>
                     <input type="checkbox" id="userIsAdmin"> Admin
@@ -786,6 +789,11 @@ h1 {
 
         // Attacher les événements
         document.getElementById('downloadBtn').addEventListener('click', downloadExcel);
+        
+                document.getElementById('userEmail2').addEventListener('input', function (e) {
+            // Filtrer les caractères non autorisés (espaces et caractères spéciaux)
+            this.value = this.value.replace(/[^a-zA-Z0-9]/g, '');
+        });
         
 </script>
 </body>
