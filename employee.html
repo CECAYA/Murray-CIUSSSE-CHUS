@@ -231,6 +231,8 @@
     cursor: not-allowed;
     opacity: 0.6;
     }
+    
+    
     .gauge-container {
             width: 350px;
             height: 175px;
@@ -478,6 +480,8 @@ h1 {
             width: 100%;
             margin: auto;
             overflow: hidden;
+            display: grid;
+      		grid-template-columns: repeat(2, 1fr); 
         }
         h1 {
             text-align: center;
@@ -640,8 +644,8 @@ h1 {
   </div>
    
    <div id="onglet2" class="tab-content" style="display:none;">
-<h1>Totaux et Moyennes des Utilisateurs</h1>
-
+	
+    <div class="grid-item case28">&nbsp</div>
     <!-- Sélecteur de date et bouton de téléchargement -->
     <div class="controls">
         <input type="date" id="datePicker" />
@@ -669,17 +673,17 @@ h1 {
    <div id="onglet3" class="tab-content" style="display:none;">
 
 <div class="user-container">
-        <h1>Gestion des Utilisateurs</h1>
-        
+		<div class="case23">&nbsp</div>
+        <div class="case23">GESTION DES PRÉLEVEURS</div>
         <div class="user-list-section">
-            <h2>Liste des utilisateurs</h2>
+            <div class="grid-item case28">Préleveurs actifs</div>
             <ul id="userList2">
                 <!-- Les utilisateurs seront affichés ici -->
             </ul>
         </div>
 
         <div class="user-form-section">
-            <h2>Créer un nouvel utilisateur</h2>
+            <div class="grid-item case28">CRÉATION</div>
             <input type="text" id="userEmail2" placeholder="Email" required>
             <input type="password" id="userPassword" placeholder="Mot de passe" required>
             <div>
@@ -688,6 +692,12 @@ h1 {
                 </label>
             </div>
             <button onclick="createUser2()">Créer un utilisateur</button>
+        </div>
+            <div class="user-list-section">
+            <div class="grid-item case28">Préleveurs inactifs</div>
+            <ul id="userList3">
+                <!-- Les utilisateurs seront affichés ici -->
+            </ul>
         </div>
     </div>
    
