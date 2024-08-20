@@ -169,8 +169,11 @@ async function getTechnicians() {
     // Récupération des documents dans la collection avec la condition
     const snapshot = await getDocs(q);
 
+    const userList = document.getElementById('userList2');
+	
     // Vérifie s'il y a des documents
     if (snapshot.empty) {
+	    userList.innerHTML = '';
       console.log('Aucun technicien trouvé.');
       return [];
     }
@@ -188,7 +191,7 @@ async function getTechnicians() {
     });
 
     // Affichage des techniciens dans la liste
-    const userList = document.getElementById('userList2');
+    
     userList.innerHTML = '';
     technicians.forEach(user => {
         const li = document.createElement('li');
@@ -207,8 +210,11 @@ async function getTechniciansFalse() {
     // Récupération des documents dans la collection avec la condition
     const snapshot = await getDocs(q);
 
+	const userList = document.getElementById('userList3');
+	
     // Vérifie s'il y a des documents
     if (snapshot.empty) {
+	    userList.innerHTML = '';
       console.log('Aucun technicien trouvé.');
       return [];
     }
@@ -226,7 +232,7 @@ async function getTechniciansFalse() {
     });
 
     // Affichage des techniciens dans la liste
-    const userList = document.getElementById('userList3');
+    
     userList.innerHTML = '';
     technicians.forEach(user => {
         const li = document.createElement('li');
