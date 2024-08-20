@@ -539,6 +539,11 @@ h1 {
             display: block;
             width: 100%;
         }
+                .error {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
         
   </style>
 </head>
@@ -689,11 +694,13 @@ h1 {
           <input type="password" id="userPassword2" placeholder="Confirmer le mot de passe" required>
           
           <input type="password" id="adminPassword" placeholder="Mot de passe de l'administrateur connecté" required>
+          
             <div>
                 <label>
                     <input type="checkbox" id="userIsAdmin"> Admin
                 </label>
             </div>
+            <div id="errorMessage" class="error"></div>
             <button onclick="createUser2()">Créer un utilisateur</button>
         </div>
             <div class="user-list-section">
