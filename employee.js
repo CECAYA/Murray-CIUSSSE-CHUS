@@ -244,49 +244,59 @@ async function getTechniciansFalse() {
 
 
 async function createUser2() {
-    const email = document.getElementById('userEmail2').value;
+    const email = document.getElementById('userEmail2').value + '@ssss.gouv.qc.ca';
     const password = document.getElementById('userPassword').value;
-    const confirmPassword = document.getElementById('userPassword2').value;
+    const password2 = document.getElementById('userPassword2').value;
     const adminPassword = document.getElementById('adminPassword').value;
     const isAdmin = document.getElementById('userIsAdmin').checked;
 
-    // Vérification que les deux mots de passe sont identiques
-    if (password !== confirmPassword) {
-        alert('Les mots de passe ne correspondent pas.');
-        return;
-    }
+    const errorMessageElement = document.getElementById('errorMessage'); // Assurez-vous d'avoir un élément pour afficher les messages d'erreur
 
     try {
-        // Authentification de l'admin pour valider l'identité du superviseur
-        const adminCredential = await signInWithEmailAndPassword(auth, auth.currentUser.email, adminPassword);
-        const adminUser = adminCredential.user;
-
-        // Vérification que l'utilisateur authentifié est un administrateur
-        const adminDocRef = doc(db, 'Techniciens', adminUser.email);
-        const adminDocSnap = await getDoc(adminDocRef);
-
-        if (adminDocSnap.exists() && adminDocSnap.data().isAdmin) {
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            const user = userCredential.user;
-
-            const userRef = doc(db, 'Techniciens', user.email);
-            await setDoc(userRef, {
-                email: user.email,
-                Permission: false,
-                isAdmin: isAdmin
-            });
-
-            console.log('Utilisateur ajouté avec succès:', user.email);
-            getTechnicians();
-            getTechniciansFalse();
-        } else {
-            alert('Vous devez être un administrateur pour créer un utilisateur.');
+        // Vérification du mot de passe de confirmation
+        if (password !== password2) {
+            throw new Error('Les mots de passe ne correspondent pas.');
         }
+
+        // Vérification du mot de passe admin
+        const user = auth.currentUser;
+        const userDoc = await getDoc(doc(db, 'Techniciens', user.email));
+        if (!userDoc.exists() || userDoc.data().isAdmin !== true || adminPassword !== userPassword) {
+            throw new Error('Mot de passe administrateur incorrect ou droits insuffisants.');
+        }
+
+        // Création de l'utilisateur
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const newUser = userCredential.user;
+
+        // Ajout des informations dans Firestore
+        const userRef = doc(db, 'Techniciens', newUser.email);
+        await setDoc(userRef, {
+            email: newUser.email,
+            Permission: false,
+            isAdmin: isAdmin
+        });
+
+        console.log('Utilisateur ajouté avec succès:', newUser.email);
+
+        // Effacer les champs de texte
+        document.getElementById('userEmail2').value = '';
+        document.getElementById('userPassword').value = '';
+        document.getElementById('userPassword2').value = '';
+        document.getElementById('adminPassword').value = '';
+        document.getElementById('userIsAdmin').checked = false;
+
+        // Réinitialiser le message d'erreur
+        errorMessageElement.textContent = '';
+
+        getTechnicians();
+        getTechniciansFalse();
     } catch (error) {
-        console.error('Erreur lors de l\'ajout de l\'utilisateur:', error);
-        alert('Échec de la création de l\'utilisateur. Vérifiez les informations fournies.');
+        console.error('Erreur lors de l\'ajout de l\'utilisateur:', error.message);
+        errorMessageElement.textContent = `Erreur : ${error.message}`;
     }
 }
+
 
 
 async function deleteUser2(email) {
