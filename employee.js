@@ -1,5 +1,6 @@
 import { getAuth, createUserWithEmailAndPassword, deleteUser } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
 import { doc, setDoc, getDoc, updateDoc, collection, addDoc, query, getDocs, where } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
+import { EmailAuthProvider, reauthenticateWithCredential } from 'firebase/auth';
 import { db, auth } from './config.js';
 
 // Fonction pour appeler le prochain usager
