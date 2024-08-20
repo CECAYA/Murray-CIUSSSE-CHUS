@@ -1,6 +1,6 @@
 import { auth } from './config.js';
-import { signOut } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+import { signOut } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
