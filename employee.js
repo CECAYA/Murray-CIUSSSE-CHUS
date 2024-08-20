@@ -251,23 +251,23 @@ async function createUser2() {
     const isAdmin1 = document.getElementById('userIsAdmin').checked;
 
     const errorMessageElement = document.getElementById('errorMessage'); // Assurez-vous d'avoir un élément pour afficher les messages d'erreur
-	errorMessageElement.textContent = '';
+    errorMessageElement.textContent = '';
+
     try {
         // Vérification du mot de passe de confirmation
         if (password !== password2) {
             throw new Error('Les mots de passe ne correspondent pas.');
         }
 
-        // Vérification du mot de passe admin
+        // Re-authentification de l'administrateur
         const user = auth.currentUser;
+        const credential = EmailAuthProvider.credential(user.email, adminPassword);
+        await reauthenticateWithCredential(user, credential);
+
+        // Vérification des droits admin
         const userDoc = await getDoc(doc(db, 'Techniciens', user.email));
-        if (!userDoc.exists() || userDoc.data().isAdmin !== true || adminPassword !== userPassword) {
-            throw new Error('Mot de passe administrateur incorrect ou droits insuffisants.');
-	document.getElementById('userEmail2').value = '';
-        document.getElementById('userPassword').value = '';
-        document.getElementById('userPassword2').value = '';
-        document.getElementById('adminPassword').value = '';
-        document.getElementById('userIsAdmin').checked = false;
+        if (!userDoc.exists() || userDoc.data().isAdmin !== true) {
+            throw new Error('Droits administratifs insuffisants.');
         }
 
         // Création de l'utilisateur
