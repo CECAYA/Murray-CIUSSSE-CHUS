@@ -599,7 +599,7 @@ h1 {
     <div class="grid-item case11">SALLE</div>
     <div class="grid-item case11">TABLE</div>
     <div class="button-container case13">
-        <button class="button button1" type="button" onclick="callNextUser(tempsPause)">Numéro suivant</button>
+        <button class="button button1" type="button">Numéro suivant</button>
     </div>
     <div></div>
     <div></div>
@@ -815,6 +815,7 @@ h1 {
         // Appeler fetchSettings lors du chargement de la page
         window.onload = async () => {
             await fetchSettings();
+	    document.querySelector('.button1').onclick = () => callNextUser(tempsPause);
         };
 	
 </script>
