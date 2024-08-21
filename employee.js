@@ -479,9 +479,9 @@ onSnapshot(doc(db, 'Activation', 'vigieActivation'), (doc) => {
     if (doc.exists) {
         const data = doc.data();
 	    if (data.active1 == true) {
-		    BouttonOn();
+		    bouttonOn();
 	    } else {
-		    BouttonOff();
+		    bouttonOff();
 	    }
     }
 });
