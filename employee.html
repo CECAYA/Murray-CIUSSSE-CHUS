@@ -800,8 +800,8 @@ h1 {
                 if (settingsSnapshot.exists()) {
                     const settingsData = settingsSnapshot.data();
                     tempsPause = settingsData.tempsPause || 25; // Utiliser la valeur de Firestore ou la valeur par défaut
-			const hautYellow = settingsData.hautYellow || 7.5;
-			const basYellow = settingsData.basYellow || 7;
+		const hautYellow = parseFloat((settingsData.hautYellow || 7.5).toFixed(1));
+		const basYellow = parseFloat((settingsData.basYellow || 7).toFixed(1));
 		    document.getElementById('lowYellow').textContent = basYellow; 
 		    document.getElementById('highYellow').textContent = hautYellow;
 		    document.getElementById('min1').textContent = hautYellow - 5*(hautYellow-basYellow);
