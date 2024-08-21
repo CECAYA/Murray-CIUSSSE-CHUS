@@ -8,8 +8,11 @@ onAuthStateChanged(auth, (user) => {
         document.body.classList.remove('hidden');
     const userEmail = user.email;
 
+    // Retirer "@gmail.com" de l'adresse e-mail
+        
+    let displayEmail = userEmail.split("@")[0];
       // Met à jour le texte dans l'élément HTML
-      document.getElementById('userEmail').textContent = userEmail;
+      document.getElementById('userEmail').textContent = displayEmail;
     } else {
         // Utilisateur n'est pas connecté, rediriger vers la page de connexion ou afficher un message
         alert('Vous êtes déconnecté');
