@@ -708,17 +708,17 @@ h1 {
             <div class="grid-item case28">Paramètres avancés</div>
             <p class="summary">Délais d'affichage de la vidéo salle d'attente (minutes):</p>
             <label>
-                    <input type="checkbox" id="temps5mins"> 5
-                    <input type="checkbox" id="temps10mins"> 10
-                    <input type="checkbox" id="temps15mins"> 15
-                    <input type="checkbox" id="tempsOff"> Off
+                    <input type="checkbox" id="temps5mins" name="tempsGroup"> 5
+                    <input type="checkbox" id="temps10mins" name="tempsGroup"> 10
+                    <input type="checkbox" id="temps15mins" name="tempsGroup"> 15
+                    <input type="checkbox" id="tempsOff" name="tempsGroup"> Off
                 </label>
              <p class="summary">Délais d'inactivité avant d'être considéré en pause (minutes):</p>
             <label>
-                    <input type="checkbox" id="pause15mins"> 15
-                    <input type="checkbox" id="pause20mins"> 20
-                    <input type="checkbox" id="pause25mins"> 25
-                    <input type="checkbox" id="pause30mins"> 30
+                    <input type="checkbox" id="pause15mins" name="pauseGroup"> 15
+                    <input type="checkbox" id="pause20mins" name="pauseGroup"> 20
+                    <input type="checkbox" id="pause25mins" name="pauseGroup"> 25
+                    <input type="checkbox" id="pause30mins" name="pauseGroup"> 30
                 </label>
              <p class="summary">Objectif des préleveurs - section en jaune de la jauge (mins) :</p>
              <input type="number" id="borneInferieure" placeholder="Borne inférieure" required>
@@ -813,6 +813,51 @@ h1 {
             userEmail2.addEventListener('input', function () {
                 this.value = this.value.replace(/[^a-zA-Z0-9]/g, '');
             });
+            
+                        // Gestion du premier groupe
+            const group1 = document.querySelectorAll('input[name="pauseGroup"]');
+            group1.forEach((checkbox) => {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        group1.forEach((cb) => {
+                            if (cb !== this) {
+                                cb.checked = false;
+                            }
+                        });
+                    }
+                });
+            });
+
+            // Gestion du deuxième groupe
+            const group2 = document.querySelectorAll('input[name="tempsGroup"]');
+            group2.forEach((checkbox) => {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        group2.forEach((cb) => {
+                            if (cb !== this) {
+                                cb.checked = false;
+                            }
+                        });
+                    }
+                });
+            });
+            
+            const borneInferieure = document.getElementById('borneInferieure');
+            const borneSuperieure = document.getElementById('borneSuperieure');
+
+            function validateBounds() {
+                const minValue = parseFloat(borneInferieure.value);
+                const maxValue = parseFloat(borneSuperieure.value);
+
+                if (!isNaN(minValue) && !isNaN(maxValue) && minValue > maxValue) {
+                    alert("La borne inférieure ne peut pas dépasser la borne supérieure !");
+                    borneInferieure.value = maxValue; // Réinitialiser la borne inférieure
+                }
+            }
+
+            borneInferieure.addEventListener('input', validateBounds);
+            borneSuperieure.addEventListener('input', validateBounds);
+
         });
         
 </script>
@@ -836,8 +881,8 @@ h1 {
 		const basYellow = parseFloat((settingsData.basYellow || 7).toFixed(1));
 		    document.getElementById('lowYellow').textContent = basYellow; 
 		    document.getElementById('highYellow').textContent = hautYellow;
-		    document.getElementById('min1').textContent = hautYellow - 5*(hautYellow-basYellow);
-		    document.getElementById('max1').textContent = hautYellow + 5*(hautYellow-basYellow);
+		    document.getElementById('min1').textContent = parseFloat((hautYellow - 5*(hautYellow-basYellow)|| 5).toFixed(1));
+		    document.getElementById('max1').textContent = parseFloat((hautYellow + 5*(hautYellow-basYellow)|| 10).toFixed(1));
                 } else {
                     console.error('Aucun document trouvé dans Firestore');
                 }
