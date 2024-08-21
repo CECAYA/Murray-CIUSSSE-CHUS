@@ -103,7 +103,12 @@
       cursor: pointer; /* curseur pointeur */
       transition: background-color 0.3s;  
     }
-    .button1 {
+    .button2 {
+      width: 600px; /* Largeur du bouton */
+      height: 80px; /* Hauteur du bouton */
+      font-size: 30px;
+    }
+    .button5 {
       width: 600px; /* Largeur du bouton */
       height: 80px; /* Hauteur du bouton */
       font-size: 30px;
@@ -249,16 +254,16 @@
     <div></div>
 
     <div class="button-container case13">
-        <button onclick="PreviousNumber()" class="button button1" type="button">Numéro précédent</button>
+        <button onclick="PreviousNumber()" class="button button2" type="button">Numéro précédent</button>
     </div>
         <div class="button-container case13">
-        <button onclick="nextNumber()" class="button button1" type="button">Numéro suivant</button>
+        <button onclick="nextNumber()" class="button button2" type="button">Numéro suivant</button>
     </div>
             <div class="button-container case13">
-        <button class="button button1" type="button">Désactiver</button>
+        <button onclick="Desactivation()" class="button button5" type="button">Désactiver</button>
     </div>
             <div class="button-container case13">
-        <button onclick="resetCounter()" class="button button1" type="button">Réinitialiser</button>
+        <button onclick="resetCounter()" class="button button2" type="button">Réinitialiser</button>
     </div>
     
     <div></div>
