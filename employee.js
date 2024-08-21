@@ -480,7 +480,7 @@ onSnapshot(doc(db, 'Activation', 'vigieActivation'), (doc) => {
         const data = doc.data();
 	    if (data.active1 == true) {
 		    BouttonOn();
-	    } else 
+	    } else {
 		    BouttonOff();
 	    }
     }
