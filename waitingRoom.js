@@ -32,33 +32,7 @@ function bouttonOn() {
     } 
 }
 
-    // Fonction pour démarrer le cycle de vidéo
-    async function startVideoCycle() {
-      try {
-        const docRef = doc(db, 'settings', 'settingsVideo');
-        const docSnap = await getDoc(docRef);
 
-        if (docSnap.exists()) {
-          const settings = docSnap.data();
-          const delay = settings.delays || 5; // Délai en minutes
-          const videoOn = settings.videoOn || false; // État de la vidéo
-
-          if (videoOn) {
-            const timeUntilNextInterval = getTimeUntilNextInterval(delay);
-            setTimeout(() => {
-              handleVideoCycle(); // Afficher la vidéo à l'heure correcte
-              setInterval(handleVideoCycle, delay * 60 * 1000); // Répéter toutes les X minutes
-            }, timeUntilNextInterval);
-          } else {
-            console.log('La lecture de la vidéo est désactivée.');
-          }
-        } else {
-          console.log('Aucun paramètre trouvé.');
-        }
-      } catch (error) {
-        console.error('Erreur lors de la lecture des paramètres :', error);
-      }
-    }
 
 
 onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
@@ -98,7 +72,5 @@ onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
             }
 });
 
-export { bouttonOff, bouttonOn, startVideoCycle };
 window.bouttonOff = bouttonOff;
 window.bouttonOn = bouttonOn;
-window.startVideoCycle = startVideoCycle;
