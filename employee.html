@@ -623,10 +623,10 @@ h1 {
     <div class="gauge-background1"></div>
     <div class="gauge-background2"></div>
     <div class="gauge-background3"></div>
-    <div class="gauge-number number-5">5</div>
-    <div class="gauge-number number-7">7</div>
-    <div class="gauge-number number-75">7.5</div>
-    <div class="gauge-number number-10">10</div>
+    <div class="gauge-number number-5"><span id="min1">-</span></div>
+    <div class="gauge-number number-7"><span id="lowYellow">-</span></div>
+    <div class="gauge-number number-75"><span id="highYellow">-</span></div>
+    <div class="gauge-number number-10"><span id="max1">-</span></div>
     <div class="gauge-needle" id="needle"></div>
     <div class="gauge-center"></div>
 </div>
@@ -727,10 +727,6 @@ h1 {
       resetCounter();
     }
   }
-	window.onload = function() {
-    
-    
-  }
 
         // Fonction pour mettre à jour le tableau et les totaux
         function updateTable(users) {
@@ -804,6 +800,12 @@ h1 {
                 if (settingsSnapshot.exists()) {
                     const settingsData = settingsSnapshot.data();
                     tempsPause = settingsData.tempsPause || 25; // Utiliser la valeur de Firestore ou la valeur par défaut
+			const hautYellow = settingsData.hautYellow || 7.5;
+			const basYellow = settingsData.basYellow || 7;
+		    document.getElementById('lowYellow').textContent = basYellow; 
+		    document.getElementById('highYellow').textContent = hautYellow;
+		    document.getElementById('min1').textContent = hautYellow - 5*(hautYellow-basYellow);
+		    document.getElementById('max1').textContent = hautYellow + 5*(hautYellow-basYellow);
                 } else {
                     console.error('Aucun document trouvé dans Firestore');
                 }
