@@ -464,6 +464,17 @@ async function changeSettings() {
     }
 }
 
+async function Desactivation() {
+    await setDoc(doc(db, 'Activation', 'vigieActivation'), {
+        active1: false
+    });
+}
+async function Activation1() {
+    await setDoc(doc(db, 'Activation', 'vigieActivation'), {
+        active1: true
+    });
+}
+
 onSnapshot(doc(db, 'Activation', 'vigieActivation'), (doc) => {
     if (doc.exists) {
         const data = doc.data();
@@ -491,3 +502,5 @@ window.fetchAndDisplayUserData = fetchAndDisplayUserData;
 window.afficherSettingsActifs = afficherSettingsActifs;
 window.changeSettings = changeSettings;
 window.nextNumber = nextNumber;
+window.Desactivation = Desactivation;
+window.Activation1 = Activation1;
