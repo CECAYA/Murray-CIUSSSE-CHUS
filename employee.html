@@ -726,7 +726,7 @@ h1 {
              <input type="number" id="borneInferieure" placeholder="Borne inférieure" required>
             <input type="number" id="borneSuperieure" placeholder="Borne supérieure" required>
             <div class="grid-item error"><span id="changesettingsmessage"></span></div>
-            <button onclick="changeSettings()">Appliquer les changements</button>
+            <button onclick="confirmchangeSettings()">Appliquer les changements</button>
             
             </div>
             
@@ -748,9 +748,9 @@ h1 {
     });
   });
 
-  function confirmReset() {
-    if (confirm("Êtes-vous sûr de vouloir réinitialiser le compteur ?")) {
-      resetCounter();
+  function confirmchangeSettings() {
+    if (confirm("Attention, si un changement est effectué parmi ces paramètres toutes les pages de cette plateforme (compteur salle d'attente, interface des préleveurs et interface vigie) doivent être actualisées afin que les changements prennent effet. Voulez-vous continuer ?")) {
+      changeSettings();
     }
   }
 
