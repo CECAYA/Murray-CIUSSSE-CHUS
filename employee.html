@@ -730,7 +730,7 @@ h1 {
 	window.onload = function() {
     
     
-  };
+  }
 
         // Fonction pour mettre à jour le tableau et les totaux
         function updateTable(users) {
@@ -768,36 +768,7 @@ h1 {
             globalAverageElement.textContent = (globalAverage / users.length).toFixed(2);
         }
 
-        // Fonction pour télécharger les statistiques en format Excel
-        function downloadExcel() {
-            const table = document.querySelector('table');
-            const tableHtml = table.outerHTML.replace(/ /g, '%20');
 
-            const filename = 'statistiques_utilisateurs.xls';
-            const dataType = 'application/vnd.ms-excel';
-
-            const downloadLink = document.createElement('a');
-            document.body.appendChild(downloadLink);
-
-            if (navigator.msSaveOrOpenBlob) {
-                const blob = new Blob(['\ufeff', tableHtml], { type: dataType });
-                navigator.msSaveOrOpenBlob(blob, filename);
-            } else {
-                downloadLink.href = 'data:' + dataType + ', ' + tableHtml;
-                downloadLink.download = filename;
-                downloadLink.click();
-            }
-
-            document.body.removeChild(downloadLink);
-        }
-
-        // Attacher les événements
-        document.getElementById('downloadBtn').addEventListener('click', downloadExcel);
-        
-                document.getElementById('userEmail2').addEventListener('input', function (e) {
-            // Filtrer les caractères non autorisés (espaces et caractères spéciaux)
-            this.value = this.value.replace(/[^a-zA-Z0-9]/g, '');
-        });
 
 	function handleTabClick(tabId) {
     console.log(`L'onglet ${tabId} a été cliqué.`);
@@ -814,7 +785,7 @@ h1 {
       getTechniciansFalse();
       console.log("Chargement de la page de gestion.");
     }
-  };
+  }
 	
 </script>
 </body>
