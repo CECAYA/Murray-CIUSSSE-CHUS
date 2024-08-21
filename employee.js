@@ -465,15 +465,21 @@ async function changeSettings() {
 }
 
 async function Desactivation() {
+	const nextButton = document.querySelector('.button5');
+	let ouiounon = false;
+	if (nextButton.classList.contains('button-disabled')) {
+		ouiounon = true;
+		nextButton.classList.remove('button-disabled');
+	} else {
+		ouiounon = false
+		nextButton.classList.add('button-disabled');
+	}
+
     await setDoc(doc(db, 'Activation', 'vigieActivation'), {
-        active1: false
+        active1: ouiounon
     });
 }
-async function Activation1() {
-    await setDoc(doc(db, 'Activation', 'vigieActivation'), {
-        active1: true
-    });
-}
+
 
 onSnapshot(doc(db, 'Activation', 'vigieActivation'), (doc) => {
     if (doc.exists) {
@@ -503,7 +509,7 @@ function bouttonOn() {
 }
 
 
-export { callNextUser, displayCalls, getTechnicians, createUser2, deleteUser2, getTechniciansFalse, activation, fetchAndDisplayUserData, afficherSettingsActifs, changeSettings, bouttonOn, bouttonOff };
+export { callNextUser, displayCalls, getTechnicians, createUser2, deleteUser2, getTechniciansFalse, activation, fetchAndDisplayUserData, afficherSettingsActifs, changeSettings, bouttonOn, bouttonOff, Desactivation };
 // Attacher les fonctions au contexte global pour qu'elles soient accessibles depuis le HTML
 window.callNextUser = callNextUser;
 window.resetCounter = resetCounter;
@@ -519,6 +525,5 @@ window.afficherSettingsActifs = afficherSettingsActifs;
 window.changeSettings = changeSettings;
 window.nextNumber = nextNumber;
 window.Desactivation = Desactivation;
-window.Activation1 = Activation1;
 window.bouttonOff = bouttonOff;
 window.bouttonOn = bouttonOn;
