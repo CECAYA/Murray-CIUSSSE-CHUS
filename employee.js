@@ -464,6 +464,19 @@ async function changeSettings() {
     }
 }
 
+onSnapshot(doc(db, 'Activation', 'vigieActivation'), (doc) => {
+    if (doc.exists) {
+        const data = doc.data();
+	    if (data.active1 == true) {
+		    
+	    } else 
+		    
+	    }
+    }
+
+});
+
+
 export { callNextUser, displayCalls, getTechnicians, createUser2, deleteUser2, getTechniciansFalse, activation, fetchAndDisplayUserData, afficherSettingsActifs, changeSettings };
 // Attacher les fonctions au contexte global pour qu'elles soient accessibles depuis le HTML
 window.callNextUser = callNextUser;
