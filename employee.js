@@ -352,10 +352,10 @@ async function activation(email) {
     let userCount = 0;
 
     userCallsSnapshot.forEach(doc => {
+	const data = doc.data();
       const dernierefois = data.lastTime || 0;
 	if (new Date(dernierefois).toDateString() == new Date(Date.now()).toDateString()) {
 	const email = doc.id;
-      const data = doc.data();
       const total = data.number || 0;
       let average = total !== 0 ? data.totalTime / total : 0;
 	average = average/(60*1000);
