@@ -382,9 +382,43 @@ async function activation(email) {
     document.getElementById("globalAverage").textContent = globalAverage.toFixed(2);
   }
 
+async function afficherSettingsActifs() {
+            try {
+                // Récupération des documents Firestore
+                const userSettingsDoc = await getDoc(doc(db, 'settings', 'userSettings'));
+                const settingsVideoDoc = await getDoc(doc(db, 'settings', 'settingsVideo'));
+
+                if (userSettingsDoc.exists()) {
+                    const userSettings = userSettingsDoc.data();
+                    // Appliquer les bornes inférieures et supérieures
+                    document.getElementById('borneInferieure').value = userSettings.basYellow;
+                    document.getElementById('borneSuperieure').value = userSettings.hautYellow;
+
+                    // Appliquer le temps de pause
+                    const pauseGroupValue = userSettings.tempsPause;
+                    document.querySelectorAll('input[name="pauseGroup"]').forEach(checkbox => {
+                        checkbox.checked = (checkbox.id === `pause${pauseGroupValue}mins`);
+                    });
+                }
+
+                if (settingsVideoDoc.exists()) {
+                    const settingsVideo = settingsVideoDoc.data();
+                    // Appliquer le délai de la vidéo
+                    const tempsGroupValue = settingsVideo.delays;
+                    document.querySelectorAll('input[name="tempsGroup"]').forEach(checkbox => {
+                        checkbox.checked = (checkbox.id === `temps${tempsGroupValue}mins`);
+                    });
+
+                    // Gestion de l'affichage de la vidéo (True/False)
+                    // Ici, vous pourriez par exemple gérer l'affichage d'une section vidéo en fonction de `settingsVideo.videoOn`
+                }
+            } catch (error) {
+                console.error("Erreur lors de la récupération des settings :", error);
+            }
+        }
 
 
-export { callNextUser, displayCalls, getTechnicians, createUser2, deleteUser2, getTechniciansFalse, activation, fetchAndDisplayUserData };
+export { callNextUser, displayCalls, getTechnicians, createUser2, deleteUser2, getTechniciansFalse, activation, fetchAndDisplayUserData, afficherSettingsActifs };
 // Attacher les fonctions au contexte global pour qu'elles soient accessibles depuis le HTML
 window.callNextUser = callNextUser;
 window.resetCounter = resetCounter;
@@ -396,3 +430,4 @@ window.deleteUser2 = deleteUser2;
 window.getTechniciansFalse = getTechniciansFalse;
 window.activation = activation;
 window.fetchAndDisplayUserData = fetchAndDisplayUserData;
+window.afficherSettingsActifs = afficherSettingsActifs;
