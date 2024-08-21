@@ -16,25 +16,6 @@ function speakNumber(number) {
     window.speechSynthesis.speak(speech);
 }
 
-function bouttonOff() {
-    const nextButton = document.querySelector('.button1');
-    if (nextButton) {
-        nextButton.disabled = true;
-        nextButton.classList.add('button-disabled');
-    }
-}
-
-function bouttonOn() {
-    const nextButton = document.querySelector('.button1');
-    if (nextButton) {
-        nextButton.disabled = false;
-        nextButton.classList.remove('button-disabled');
-    } 
-}
-
-
-
-
 onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
     if (doc.exists) {
         const data = doc.data();
@@ -71,6 +52,3 @@ onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
                 }
             }
 });
-
-window.bouttonOff = bouttonOff;
-window.bouttonOn = bouttonOn;
