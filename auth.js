@@ -7,7 +7,25 @@ onAuthStateChanged(auth, (user) => {
         // Utilisateur est connecté, afficher le contenu
         document.body.classList.remove('hidden');
     const userEmail = user.email;
+    const userDoc = doc(db, 'Techniciens', email);
+    const docSnap = await getDoc(userDoc);
+    if (docSnap.exists()) {
+                    const userData = docSnap.data();
+                    const isAdmin = userData.isAdmin;
 
+                    // Afficher/Masquer les onglets en fonction des droits
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        if (link.getAttribute('data-tab') === 'onglet2' || link.getAttribute('data-tab') === 'onglet3') {
+                            if (isAdmin) {
+                                link.classList.remove('hidden');
+                            } else {
+                                link.classList.add('hidden');
+                            }
+                        }
+                    });
+                } else {
+                    console.log("Aucun document trouvé pour l'utilisateur.");
+                }
     // Retirer "@gmail.com" de l'adresse e-mail
         
     let displayEmail = userEmail.split("@")[0];
