@@ -120,8 +120,8 @@ function formatNumberEmployee(num3) {
 
 function setGaugeValuePersonel(value) {
     const needle = document.getElementById('needle');
-    const minValue = 5;
-    const maxValue = 10;
+    const minValue = document.getElementById('highYellow').value - 5 * (document.getElementById('highYellow').value - document.getElementById('lowYellow').value) || 5;
+    const maxValue = document.getElementById('highYellow').value + 5 * (document.getElementById('highYellow').value - document.getElementById('lowYellow').value) || 10;
     let value1 = 0;
 
     
