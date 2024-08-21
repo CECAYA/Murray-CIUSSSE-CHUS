@@ -340,8 +340,44 @@ async function activation(email) {
   }
 }
 
+  async function fetchAndDisplayUserData() {
+    const userCallsCollection = collection(db, "userCalls");
+    const userCallsSnapshot = await getDocs(userCallsCollection);
+    const userTableBody = document.getElementById("userTableBody");
+    let totalSum = 0;
+    let globalAverageSum = 0;
+    let userCount = 0;
 
-export { callNextUser, displayCalls, getTechnicians, createUser2, deleteUser2, getTechniciansFalse, activation };
+    userCallsSnapshot.forEach(doc => {
+      const email = doc.id;
+      const data = doc.data();
+      const total = data.number || 0;
+      const average = total !== 0 ? data.totalTime / total : 0;
+
+      // Append data to the table
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${email}</td>
+        <td>${total}</td>
+        <td>${average.toFixed(2)}</td>
+      `;
+      userTableBody.appendChild(row);
+
+      // Update totals for summary
+      totalSum += total;
+      globalAverageSum += average;
+      userCount++;
+    });
+
+    // Calculate and display summary
+    const globalAverage = userCount !== 0 ? globalAverageSum / userCount : 0;
+    document.getElementById("totalSum").textContent = totalSum;
+    document.getElementById("globalAverage").textContent = globalAverage.toFixed(2);
+  }
+
+
+
+export { callNextUser, displayCalls, getTechnicians, createUser2, deleteUser2, getTechniciansFalse, activation, fetchAndDisplayUserData };
 // Attacher les fonctions au contexte global pour qu'elles soient accessibles depuis le HTML
 window.callNextUser = callNextUser;
 window.resetCounter = resetCounter;
@@ -352,3 +388,4 @@ window.createUser2 = createUser2;
 window.deleteUser2 = deleteUser2;
 window.getTechniciansFalse = getTechniciansFalse;
 window.activation = activation;
+window.fetchAndDisplayUserData = fetchAndDisplayUserData;
