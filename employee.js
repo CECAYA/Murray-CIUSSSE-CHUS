@@ -272,18 +272,19 @@ async function createUser2() {
             throw new Error('Droits administratifs insuffisants.');
         }
 
-        // Création de l'utilisateur
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        const newUser = userCredential.user;
+
 
         // Ajout des informations dans Firestore
-        const userRef = doc(db, 'Techniciens', newUser.email);
+        const userRef = doc(db, 'Techniciens', email);
         await setDoc(userRef, {
-            email: newUser.email,
+            email: email,
             Permission: false,
             isAdmin: isAdmin1
         });
 
+	            // Création de l'utilisateur
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+	    
         console.log('Utilisateur ajouté avec succès:', newUser.email);
 
         // Effacer les champs de texte
@@ -296,8 +297,8 @@ async function createUser2() {
         // Réinitialiser le message d'erreur
         errorMessageElement.textContent = '';
 
-        getTechnicians();
-        getTechniciansFalse();
+	    logout();
+
     } catch (error) {
         console.error('Erreur lors de l\'ajout de l\'utilisateur:', error.message);
         errorMessageElement.textContent = `Erreur : ${error.message}`;
