@@ -435,8 +435,8 @@ async function changeSettings() {
         await updateDoc(doc(db, 'settings', 'userSettings'), {
             tempsPause: pauseGroupChecked,
             delays: parseInt(tempsGroupChecked, 10),
-            basYellow: parseInt(borneInferieure, 10),
-            hautYellow: parseInt(borneSuperieure, 10)
+            basYellow: parseFloat(borneInferieure),
+            hautYellow: parseFloat(borneSuperieure)
         });
 
         console.log("Paramètres mis à jour avec succès !");
