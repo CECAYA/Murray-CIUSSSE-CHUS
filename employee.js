@@ -353,7 +353,7 @@ async function activation(email) {
       const data = doc.data();
       const total = data.number || 0;
       const average = total !== 0 ? data.totalTime / total : 0;
-
+	average = average/(60*1000);
       // Append data to the table
       const row = document.createElement("tr");
       row.innerHTML = `
