@@ -2,35 +2,36 @@ import { auth } from './config.js';
 import { signOut } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
     if (user) {
         // Utilisateur est connecté, afficher le contenu
         document.body.classList.remove('hidden');
-    const userEmail = user.email;
-    const userDoc = doc(db, 'Techniciens', email);
-    const docSnap = await getDoc(userDoc);
-    if (docSnap.exists()) {
-                    const userData = docSnap.data();
-                    const isAdmin = userData.isAdmin;
+        const userEmail = user.email;
+        const userDoc = doc(db, 'Techniciens', userEmail); // Utilisez userEmail ici
+        const docSnap = await getDoc(userDoc);
 
-                    // Afficher/Masquer les onglets en fonction des droits
-                    document.querySelectorAll('.nav-link').forEach(link => {
-                        if (link.getAttribute('data-tab') === 'onglet2' || link.getAttribute('data-tab') === 'onglet3') {
-                            if (isAdmin) {
-                                link.classList.remove('hidden');
-                            } else {
-                                link.classList.add('hidden');
-                            }
-                        }
-                    });
-                } else {
-                    console.log("Aucun document trouvé pour l'utilisateur.");
+        if (docSnap.exists()) {
+            const userData = docSnap.data();
+            const isAdmin = userData.isAdmin;
+
+            // Afficher/Masquer les onglets en fonction des droits
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.getAttribute('data-tab') === 'onglet2' || link.getAttribute('data-tab') === 'onglet3') {
+                    if (isAdmin) {
+                        link.classList.remove('hidden');
+                    } else {
+                        link.classList.add('hidden');
+                    }
                 }
-    // Retirer "@gmail.com" de l'adresse e-mail
-        
-    let displayEmail = userEmail.split("@")[0];
-      // Met à jour le texte dans l'élément HTML
-      document.getElementById('userEmail').textContent = displayEmail;
+            });
+        } else {
+            console.log("Aucun document trouvé pour l'utilisateur.");
+        }
+
+        // Retirer "@gmail.com" de l'adresse e-mail
+        let displayEmail = userEmail.split("@")[0];
+        // Met à jour le texte dans l'élément HTML
+        document.getElementById('userEmail').textContent = displayEmail;
     } else {
         // Utilisateur n'est pas connecté, rediriger vers la page de connexion ou afficher un message
         alert('Vous êtes déconnecté');
@@ -38,6 +39,7 @@ onAuthStateChanged(auth, (user) => {
         window.location.href = "login.html";
     }
 });
+
 
 async function logout() {
     try {
