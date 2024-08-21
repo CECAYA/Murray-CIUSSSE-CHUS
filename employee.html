@@ -807,59 +807,61 @@ h1 {
       console.log("Chargement de la page de gestion.");
     }
   }
-	document.addEventListener("DOMContentLoaded", function () {
-            const userEmail2 = document.getElementById('userEmail2');
+document.addEventListener("DOMContentLoaded", function () {
+    const userEmail2 = document.getElementById('userEmail2');
 
-            // Fonction pour filtrer les caractères spéciaux et les espaces
-            userEmail2.addEventListener('input', function () {
-                this.value = this.value.replace(/[^a-zA-Z0-9]/g, '');
-            });
-            
-                        // Gestion du premier groupe
-            const group1 = document.querySelectorAll('input[name="pauseGroup"]');
-            group1.forEach((checkbox) => {
-                checkbox.addEventListener('change', function() {
-                    if (this.checked) {
-                        group1.forEach((cb) => {
-                            if (cb !== this) {
-                                cb.checked = false;
-                            }
-                        });
-                    }
-                });
-            });
+    // Fonction pour filtrer les caractères spéciaux et les espaces
+    userEmail2.addEventListener('input', function () {
+        this.value = this.value.replace(/[^a-zA-Z0-9]/g, '');
+    });
+    
+    // Fonction pour gérer les cases d'un groupe et assurer qu'au moins une case est cochée
+    function manageCheckboxGroup(groupName) {
+        const group = document.querySelectorAll(`input[name="${groupName}"]`);
 
-            // Gestion du deuxième groupe
-            const group2 = document.querySelectorAll('input[name="tempsGroup"]');
-            group2.forEach((checkbox) => {
-                checkbox.addEventListener('change', function() {
-                    if (this.checked) {
-                        group2.forEach((cb) => {
-                            if (cb !== this) {
-                                cb.checked = false;
-                            }
-                        });
-                    }
-                });
-            });
-            
-            const borneInferieure = document.getElementById('borneInferieure');
-            const borneSuperieure = document.getElementById('borneSuperieure');
-
-            function validateBounds() {
-                const minValue = parseFloat(borneInferieure.value);
-                const maxValue = parseFloat(borneSuperieure.value);
-
-                if (!isNaN(minValue) && !isNaN(maxValue) && minValue > maxValue) {
-                    alert("La borne inférieure ne peut pas dépasser la borne supérieure !");
-                    borneInferieure.value = maxValue; // Réinitialiser la borne inférieure
+        group.forEach((checkbox) => {
+            checkbox.addEventListener('change', function() {
+                // Si la case est cochée
+                if (this.checked) {
+                    // Décocher les autres cases du groupe
+                    group.forEach((cb) => {
+                        if (cb !== this) {
+                            cb.checked = false;
+                        }
+                    });
                 }
-            }
 
-            borneInferieure.addEventListener('input', validateBounds);
-            borneSuperieure.addEventListener('input', validateBounds);
-
+                // Vérifier si au moins une case est cochée
+                const anyChecked = Array.from(group).some(cb => cb.checked);
+                if (!anyChecked) {
+                    // Recocher la case qui vient d'être décochée
+                    this.checked = true;
+                }
+            });
         });
+    }
+
+    // Appliquer la gestion des cases pour chaque groupe
+    manageCheckboxGroup('pauseGroup');
+    manageCheckboxGroup('tempsGroup');
+    
+    const borneInferieure = document.getElementById('borneInferieure');
+    const borneSuperieure = document.getElementById('borneSuperieure');
+
+    function validateBounds() {
+        const minValue = parseFloat(borneInferieure.value);
+        const maxValue = parseFloat(borneSuperieure.value);
+
+        if (!isNaN(minValue) && !isNaN(maxValue) && minValue > maxValue) {
+            alert("La borne inférieure ne peut pas dépasser la borne supérieure !");
+            borneInferieure.value = maxValue; // Réinitialiser la borne inférieure
+        }
+    }
+
+    borneInferieure.addEventListener('input', validateBounds);
+    borneSuperieure.addEventListener('input', validateBounds);
+});
+
         
 </script>
 <script type="module">
