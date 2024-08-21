@@ -98,7 +98,7 @@ onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
             }
 });
 
-
+export { bouttonOff, bouttonOn, startVideoCycle };
 window.bouttonOff = bouttonOff;
 window.bouttonOn = bouttonOn;
 window.startVideoCycle = startVideoCycle;
