@@ -356,6 +356,7 @@ async function activation(email) {
       const dernierefois = data.lastTime || 0;
 	if (new Date(dernierefois).toDateString() == new Date(Date.now()).toDateString()) {
 	const email = doc.id;
+	let displayEmail = email.split("@")[0];
       const total = data.number || 0;
       let average = total !== 0 ? data.totalTime / total : 0;
 	average = average/(60*1000);
@@ -363,7 +364,7 @@ async function activation(email) {
       // Append data to the table
       const row = document.createElement("tr");
       row.innerHTML = `
-        <td>${email}</td>
+        <td>${displayEmail}</td>
         <td>${total}</td>
         <td>${average.toFixed(2)}</td>
       `;
