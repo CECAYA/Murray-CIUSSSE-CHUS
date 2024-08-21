@@ -793,7 +793,7 @@ h1 {
 	import { db, auth } from './config.js'; // Assurez-vous que ce chemin est correct
 
 	        // Variable pour stocker le temps
-        let tempsPause = 25*60*1000; // Valeur par défaut
+        let tempsPause = 25; // Valeur par défaut
 
         // Fonction pour récupérer les paramètres de Firestore
         async function fetchSettings() {
@@ -803,7 +803,7 @@ h1 {
 
                 if (settingsSnapshot.exists()) {
                     const settingsData = settingsSnapshot.data();
-                    tempsPause = settingsData.tempsPause || 25*60*1000; // Utiliser la valeur de Firestore ou la valeur par défaut
+                    tempsPause = settingsData.tempsPause || 25; // Utiliser la valeur de Firestore ou la valeur par défaut
                 } else {
                     console.error('Aucun document trouvé dans Firestore');
                 }
