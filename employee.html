@@ -804,8 +804,8 @@ h1 {
 		const basYellow = parseFloat((settingsData.basYellow || 7).toFixed(1));
 		    document.getElementById('lowYellow').textContent = basYellow; 
 		    document.getElementById('highYellow').textContent = hautYellow;
-		    document.getElementById('min1').textContent = hautYellow - 5*(hautYellow-basYellow);
-		    document.getElementById('max1').textContent = hautYellow + 5*(hautYellow-basYellow);
+		    document.getElementById('min1').textContent = parseFloat((hautYellow - 5*(hautYellow-basYellow)|| 5).toFixed(1));
+		    document.getElementById('max1').textContent = parseFloat((hautYellow + 5*(hautYellow-basYellow)|| 10).toFixed(1));
                 } else {
                     console.error('Aucun document trouvé dans Firestore');
                 }
