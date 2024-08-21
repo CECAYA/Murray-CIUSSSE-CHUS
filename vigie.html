@@ -262,7 +262,7 @@
         <button onclick="Desactivation()" class="button button5" type="button">Désactiver</button>
     </div>
             <div class="button-container case13">
-        <button onclick="resetCounter()" class="button button2" type="button">Réinitialiser</button>
+        <button onclick="confirmReset()" class="button button2" type="button">Réinitialiser</button>
     </div>
     
     <div></div>
@@ -285,7 +285,11 @@
     <script type="module" src="employee.js" defer></script>
     <script type="module" src="auth.js" defer></script>
 <script>
-	
+function confirmReset() {
+    if (confirm("Êtes-vous sûr de vouloir réinitialiser le compteur ?")) {
+      resetCounter();
+    }
+  }
 </script>
 </body>
 </html>
