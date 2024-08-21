@@ -404,7 +404,6 @@ async function afficherSettingsActifs() {
             try {
                 // Récupération des documents Firestore
                 const userSettingsDoc = await getDoc(doc(db, 'settings', 'userSettings'));
-                const settingsVideoDoc = await getDoc(doc(db, 'settings', 'settingsVideo'));
 
                 if (userSettingsDoc.exists()) {
                     const userSettings = userSettingsDoc.data();
@@ -417,16 +416,6 @@ async function afficherSettingsActifs() {
                     document.querySelectorAll('input[name="pauseGroup"]').forEach(checkbox => {
                         checkbox.checked = (checkbox.id === `pause${pauseGroupValue}mins`);
                     });
-
-	            // Appliquer le temps de délai
-	            const tempsGroupValue = userSettings.delays;
-	            document.querySelectorAll('input[name="tempsGroup"]').forEach(checkbox => {
-	                if (tempsGroupValue === -1) {
-	                    checkbox.checked = (checkbox.id === 'tempsOff');
-	                } else {
-	                    checkbox.checked = (checkbox.id === `temps${tempsGroupValue}mins`);
-	                }
-	            });
                 }
 
             } catch (error) {
@@ -440,10 +429,6 @@ async function changeSettings() {
         const pauseGroupChecked = Array.from(document.querySelectorAll('input[name="pauseGroup"]'))
             .find(checkbox => checkbox.checked)?.id.replace('pause', '').replace('mins', '');
 
-        // Lire les valeurs des checkboxes pour les délais
-        const tempsGroupChecked = Array.from(document.querySelectorAll('input[name="tempsGroup"]'))
-            .find(checkbox => checkbox.checked)?.id.replace('temps', '').replace('mins', '') || -1;
-
         // Lire les bornes
         const borneInferieure = document.getElementById('borneInferieure').value;
         const borneSuperieure = document.getElementById('borneSuperieure').value;
@@ -451,7 +436,6 @@ async function changeSettings() {
         // Mettre à jour les paramètres dans Firestore
         await updateDoc(doc(db, 'settings', 'userSettings'), {
             tempsPause: pauseGroupChecked,
-            delays: parseInt(tempsGroupChecked, 10),
             basYellow: parseFloat(borneInferieure),
             hautYellow: parseFloat(borneSuperieure)
         });
