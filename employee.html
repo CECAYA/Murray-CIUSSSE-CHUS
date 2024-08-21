@@ -708,13 +708,6 @@ h1 {
         </div>
         <div class="user-form-section">
             <div class="grid-item case28">Paramètres avancés</div>
-            <p class="summary">Délais d'affichage de la vidéo salle d'attente (minutes):</p>
-            <label>
-                    <input type="checkbox" id="temps5mins" name="tempsGroup"> 5
-                    <input type="checkbox" id="temps10mins" name="tempsGroup"> 10
-                    <input type="checkbox" id="temps15mins" name="tempsGroup"> 15
-                    <input type="checkbox" id="tempsOff" name="tempsGroup"> Off
-                </label>
              <p class="summary">Délais d'inactivité avant d'être considéré en pause (minutes):</p>
             <label>
                     <input type="checkbox" id="pause15mins" name="pauseGroup"> 15
@@ -845,7 +838,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Appliquer la gestion des cases pour chaque groupe
     manageCheckboxGroup('pauseGroup');
-    manageCheckboxGroup('tempsGroup');
     
     const borneInferieure = document.getElementById('borneInferieure');
     const borneSuperieure = document.getElementById('borneSuperieure');
