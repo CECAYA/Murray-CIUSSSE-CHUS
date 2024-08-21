@@ -399,19 +399,18 @@ async function afficherSettingsActifs() {
                     document.querySelectorAll('input[name="pauseGroup"]').forEach(checkbox => {
                         checkbox.checked = (checkbox.id === `pause${pauseGroupValue}mins`);
                     });
+
+	            // Appliquer le temps de délai
+	            const tempsGroupValue = userSettings.delays;
+	            document.querySelectorAll('input[name="tempsGroup"]').forEach(checkbox => {
+	                if (tempsGroupValue === -1) {
+	                    checkbox.checked = (checkbox.id === 'tempsOff');
+	                } else {
+	                    checkbox.checked = (checkbox.id === `temps${tempsGroupValue}mins`);
+	                }
+	            });
                 }
 
-                if (settingsVideoDoc.exists()) {
-                    const settingsVideo = settingsVideoDoc.data();
-                    // Appliquer le délai de la vidéo
-                    const tempsGroupValue = settingsVideo.delays;
-                    document.querySelectorAll('input[name="tempsGroup"]').forEach(checkbox => {
-                        checkbox.checked = (checkbox.id === `temps${tempsGroupValue}mins`);
-                    });
-
-                    // Gestion de l'affichage de la vidéo (True/False)
-                    // Ici, vous pourriez par exemple gérer l'affichage d'une section vidéo en fonction de `settingsVideo.videoOn`
-                }
             } catch (error) {
                 console.error("Erreur lors de la récupération des settings :", error);
             }
