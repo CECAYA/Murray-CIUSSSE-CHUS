@@ -417,7 +417,7 @@ async function afficherSettingsActifs() {
         }
 async function changeSettings() {
     try {
-	    document.getElementById('changesettingsmessage').textvalue = "";
+	    document.getElementById('changesettingsmessage').textContent = "";
         // Lire les valeurs des checkboxes pour le temps de pause
         const pauseGroupChecked = Array.from(document.querySelectorAll('input[name="pauseGroup"]'))
             .find(checkbox => checkbox.checked)?.id.replace('pause', '').replace('mins', '');
@@ -439,10 +439,10 @@ async function changeSettings() {
         });
 
         console.log("Paramètres mis à jour avec succès !");
-	    document.getElementById('changesettingsmessage').textvalue = "Paramètres mis à jour avec succès !";
+	    document.getElementById('changesettingsmessage').textContent = "Paramètres mis à jour avec succès !";
     } catch (error) {
         console.error("Erreur lors de la mise à jour des paramètres :", error);
-	    document.getElementById('changesettingsmessage').textvalue = "Erreur lors de la mise à jour des paramètres :";
+	    document.getElementById('changesettingsmessage').textContent = "Erreur lors de la mise à jour des paramètres :";
     }
 }
 
