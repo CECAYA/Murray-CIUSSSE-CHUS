@@ -1,6 +1,7 @@
-import { auth } from './config.js';
 import { signOut } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+import { doc, setDoc, getDoc, updateDoc, collection, addDoc, query, getDocs, where } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
+import { db, auth } from './config.js'; // Assurez-vous que ce chemin est correct
 
 onAuthStateChanged(auth, async (user) => {
     if (user) {
