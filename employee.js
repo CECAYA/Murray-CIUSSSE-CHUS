@@ -5,7 +5,7 @@ import { db, auth } from './config.js'; // Assurez-vous que ce chemin est correc
 
 
 // Fonction pour appeler le prochain usager
-async function callNextUser() {
+async function callNextUser(tempsPause) {
     const counterNumber = document.getElementById('counterNumber1').value;
     const roomNumber = document.getElementById('roomNumber1').value;
 
@@ -52,7 +52,7 @@ let tempsNow = Date.now();
 let userMoyenne = -1;
 
 // Vérifie si le temps écoulé est supérieur à 25 minutes (25 * 60 * 1000 millisecondes)
-if (tempsNow - userlastTime > 25 * 60 * 1000) {
+if (tempsNow - userlastTime > tempsPause * 60 * 1000) {
     // Vérifie si la date de lastTime est différente de la date actuelle
     if (new Date(userlastTime).toDateString() !== new Date(tempsNow).toDateString()) {
         userlastTime = tempsNow;
