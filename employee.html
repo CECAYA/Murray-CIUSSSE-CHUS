@@ -311,16 +311,16 @@
     /* Positionnement des chiffres */
     .number-5 {
         top: 77%;
-        left: 12%;
+        left: 14%;
         transform: translateX(-50%);
-        font-size: 200%;
+        font-size: 150%;
     }
 
     .number-7 {
-        top: 10%;
+        top: 13%;
         left: 38%;
         transform: translate(-50%, 50%);
-        font-size: 200%;
+        font-size: 150%;
     }
 
     .number-75 {
@@ -331,9 +331,9 @@
     }
     .number-10 {
         top: 77%;
-        left: 87%;
+        left: 86%;
         transform: translate(-50%, 0%);
-        font-size: 200%;
+        font-size: 150%;
     }
     .pointrouge { 
       font-family: Impact, Helvetica, sans-serif;
@@ -704,6 +704,30 @@ h1 {
                 <!-- Les utilisateurs seront affichés ici -->
             </ul>
         </div>
+        <div class="user-form-section">
+            <div class="grid-item case28">Paramètres avancés</div>
+            <p class="summary">Délais d'affichage de la vidéo salle d'attente (minutes):</p>
+            <label>
+                    <input type="checkbox" id="temps5mins"> 5
+                    <input type="checkbox" id="temps10mins"> 10
+                    <input type="checkbox" id="temps15mins"> 15
+                    <input type="checkbox" id="tempsOff"> Off
+                </label>
+             <p class="summary">Délais d'inactivité avant d'être considéré en pause (minutes):</p>
+            <label>
+                    <input type="checkbox" id="pause15mins"> 15
+                    <input type="checkbox" id="pause20mins"> 20
+                    <input type="checkbox" id="pause25mins"> 25
+                    <input type="checkbox" id="pause30mins"> 30
+                </label>
+             <p class="summary">Objectif des préleveurs - section en jaune de la jauge (mins) :</p>
+             <input type="number" id="borneInferieure" placeholder="Borne inférieure" required>
+            <input type="number" id="borneSuperieure" placeholder="Borne supérieure" required>
+            <div class="grid-item error"></div>
+            <button onclick="changeSettings()">Appliquer les changements</button>
+            
+            </div>
+            
     </div>
    
    </div>
@@ -782,7 +806,15 @@ h1 {
       console.log("Chargement de la page de gestion.");
     }
   }
-	
+	document.addEventListener("DOMContentLoaded", function () {
+            const userEmail2 = document.getElementById('userEmail2');
+
+            // Fonction pour filtrer les caractères spéciaux et les espaces
+            userEmail2.addEventListener('input', function () {
+                this.value = this.value.replace(/[^a-zA-Z0-9]/g, '');
+            });
+        });
+        
 </script>
 <script type="module">
 	import { doc, setDoc, getDoc, updateDoc, collection, addDoc, query, getDocs, where } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
@@ -804,8 +836,8 @@ h1 {
 		const basYellow = parseFloat((settingsData.basYellow || 7).toFixed(1));
 		    document.getElementById('lowYellow').textContent = basYellow; 
 		    document.getElementById('highYellow').textContent = hautYellow;
-		    document.getElementById('min1').textContent = parseFloat((hautYellow - 5*(hautYellow-basYellow)|| 5).toFixed(1));
-		    document.getElementById('max1').textContent = parseFloat((hautYellow + 5*(hautYellow-basYellow)|| 10).toFixed(1));
+		    document.getElementById('min1').textContent = hautYellow - 5*(hautYellow-basYellow);
+		    document.getElementById('max1').textContent = hautYellow + 5*(hautYellow-basYellow);
                 } else {
                     console.error('Aucun document trouvé dans Firestore');
                 }
