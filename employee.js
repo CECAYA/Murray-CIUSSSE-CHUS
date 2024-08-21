@@ -104,6 +104,22 @@ async function PreviousNumber() {
     }
 }
 
+async function nextNumber() {
+    const docRef = doc(db, 'waitingRoom', 'current');
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+        let currentNumberA = docSnap.data().number;
+        currentNumberA = (currentNumberA + 1 + 100) % 100; // Assure que le numéro reste entre 0 et 99
+
+        await setDoc(docRef, {
+            number: currentNumberA,
+            counter: "?",
+            room: "?",
+        }, { merge: true });
+    }
+}
+
 async function resetCounter() {
     await setDoc(doc(db, 'waitingRoom', 'current'), {
         number: 0,
@@ -462,3 +478,4 @@ window.activation = activation;
 window.fetchAndDisplayUserData = fetchAndDisplayUserData;
 window.afficherSettingsActifs = afficherSettingsActifs;
 window.changeSettings = changeSettings;
+window.nextNumber = nextNumber;
