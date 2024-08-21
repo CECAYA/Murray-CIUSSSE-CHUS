@@ -226,15 +226,14 @@
     // Fonction pour démarrer le cycle de vidéo
     async function startVideoCycle() {
       try {
-        const docRef = doc(db, 'settings', 'settingsVideo');
+        const docRef = doc(db, 'settings', 'userSettings');
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
           const settings = docSnap.data();
           const delay = settings.delays || 5; // Délai en minutes
-          const videoOn = settings.videoOn || false; // État de la vidéo
 
-          if (videoOn) {
+          if (delay != -1) {
             const timeUntilNextInterval = getTimeUntilNextInterval(delay);
             setTimeout(() => {
               handleVideoCycle(); // Afficher la vidéo à l'heure correcte
