@@ -285,7 +285,7 @@ async function createUser2() {
 	            // Création de l'utilisateur
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 	    
-        console.log('Utilisateur ajouté avec succès:', newUser.email);
+        console.log('Utilisateur ajouté avec succès:', email);
 
         // Effacer les champs de texte
         document.getElementById('userEmail2').value = '';
