@@ -15,16 +15,13 @@ onAuthStateChanged(auth, async (user) => {
             const userData = docSnap.data();
             const isAdmin = userData.isAdmin;
 
-            // Afficher/Masquer les onglets en fonction des droits
-            document.querySelectorAll('.nav-link').forEach(link => {
-                if (link.getAttribute('data-tab') === 'onglet2' || link.getAttribute('data-tab') === 'onglet3') {
-                    if (isAdmin) {
-                        link.classList.remove('hidden');
-                    } else {
-                        link.classList.add('hidden');
-                    }
-                }
-            });
+            // Afficher/Masquer la barre de navigation en fonction des droits
+            const navBar = document.querySelector('.nav-bar'); // Assurez-vous que la classe correspond à votre barre de navigation
+            if (isAdmin) {
+                navBar.classList.remove('hidden');
+            } else {
+                navBar.classList.add('hidden');
+            }
         } else {
             console.log("Aucun document trouvé pour l'utilisateur.");
         }
