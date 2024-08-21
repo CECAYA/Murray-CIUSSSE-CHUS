@@ -717,7 +717,7 @@ h1 {
       document.querySelectorAll('.tab-content').forEach(tab => tab.style.display = 'none');
       document.querySelector(this.getAttribute('href')).style.display = 'block';
       event.preventDefault();
-      const tabId = link.getAttribute('data-tab');
+      const tabId = this.getAttribute('data-tab');
       handleTabClick(tabId);
     });
   });
