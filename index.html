@@ -164,50 +164,92 @@
   function formatNumber(number) {
     return number.toString().padStart(2, '0');
   }
-// Fonction pour afficher la vidéo
-   function showVideo() {
-    return new Promise((resolve) => {
+   // Fonction pour afficher la vidéo
+    function showVideo() {
+      return new Promise((resolve) => {
+        const videoContainer = document.getElementById('videoContainer');
+        const mainContent = document.querySelectorAll('body > :not(#videoContainer)');
+        
+        // Masquer le reste du contenu
+        mainContent.forEach(element => element.classList.add('hidden'));
+        
+        videoContainer.style.display = 'flex';
+        
+        // Lecture automatique de la vidéo
+        const videoElement = document.getElementById('videoElement');
+        videoElement.style.display = 'block';
+        videoElement.play();
+
+        videoElement.onended = () => {
+          hideVideo();
+          resolve(); // Résoudre la promesse lorsque la vidéo se termine
+        };
+      });
+    }
+
+    function hideVideo() {
       const videoContainer = document.getElementById('videoContainer');
       const mainContent = document.querySelectorAll('body > :not(#videoContainer)');
       
-      // Masquer le reste du contenu
-      mainContent.forEach(element => element.classList.add('hidden'));
+      // Afficher le reste du contenu
+      mainContent.forEach(element => element.classList.remove('hidden'));
       
-      videoContainer.style.display = 'flex';
+      videoContainer.style.display = 'none';
       
-      // Lecture automatique de la vidéo
+      // Réinitialiser la vidéo
       const videoElement = document.getElementById('videoElement');
-      videoElement.style.display = 'block';
-      videoElement.play();
+      videoElement.pause();
+      videoElement.currentTime = 0;
+    }
+
+    // Fonction pour calculer le temps restant jusqu'au prochain intervalle
+    function getTimeUntilNextInterval(interval) {
+      const now = new Date();
+      const minutes = now.getMinutes();
+      const seconds = now.getSeconds();
+      const milliseconds = now.getMilliseconds();
   
-      videoElement.onended = () => {
-        hideVideo();
-        resolve(); // Résoudre la promesse lorsque la vidéo se termine
-      };
-    });
-  }
-function hideVideo() {
-    const videoContainer = document.getElementById('videoContainer');
-    const mainContent = document.querySelectorAll('body > :not(#videoContainer)');
-    
-    // Afficher le reste du contenu
-    mainContent.forEach(element => element.classList.remove('hidden'));
-    
-    videoContainer.style.display = 'none';
-    
-    // Réinitialiser la vidéo
-    const videoElement = document.getElementById('videoElement');
-    videoElement.pause();
-    videoElement.currentTime = 0;
-}
+      // Calculer le nombre de minutes restantes jusqu'au prochain multiple de l'intervalle
+      const minutesToNextInterval = interval - (minutes % interval);
+      const nextInterval = new Date(now.getTime() + minutesToNextInterval * 60000 - (seconds * 1000) - milliseconds);
+  
+      return nextInterval - now;
+    }
 
-async function handleVideoCycle() {
-    await showVideo(); // Attendre que la vidéo se termine
-}
+    async function handleVideoCycle() {
+      await showVideo(); // Attendre que la vidéo se termine
+    }
 
-// Répéter l'affichage de la vidéo toutes les 10 minutes (20000 ms)
-setInterval(handleVideoCycle, 400000);
+    // Fonction pour démarrer le cycle de vidéo
+    async function startVideoCycle() {
+      try {
+        const docRef = doc(db, 'settings', 'settingsVideo');
+        const docSnap = await getDoc(docRef);
 
+        if (docSnap.exists()) {
+          const settings = docSnap.data();
+          const delay = settings.delays || 5; // Délai en minutes
+          const videoOn = settings.videoOn || false; // État de la vidéo
+
+          if (videoOn) {
+            const timeUntilNextInterval = getTimeUntilNextInterval(delay);
+            setTimeout(() => {
+              handleVideoCycle(); // Afficher la vidéo à l'heure correcte
+              setInterval(handleVideoCycle, delay * 60 * 1000); // Répéter toutes les X minutes
+            }, timeUntilNextInterval);
+          } else {
+            console.log('La lecture de la vidéo est désactivée.');
+          }
+        } else {
+          console.log('Aucun paramètre trouvé.');
+        }
+      } catch (error) {
+        console.error('Erreur lors de la lecture des paramètres :', error);
+      }
+    }
+
+    // Démarrer le cycle de vidéo lors du chargement de la page
+    window.onload = startVideoCycle;
 </script>
 </body>
 </html>
