@@ -344,6 +344,9 @@ async function activation(email) {
     const userCallsCollection = collection(db, "userCalls");
     const userCallsSnapshot = await getDocs(userCallsCollection);
     const userTableBody = document.getElementById("userTableBody");
+
+	  userTableBody.innerHTML = "";
+	  
     let totalSum = 0;
     let globalAverageSum = 0;
     let userCount = 0;
@@ -352,9 +355,13 @@ async function activation(email) {
       const email = doc.id;
       const data = doc.data();
       const total = data.number || 0;
+	const dernierefois = data.lastTime;
       let average = total !== 0 ? data.totalTime / total : 0;
 	average = average/(60*1000);
+	const total = data.lastTime || 0;
       // Append data to the table
+
+      if (new Date(dernierefois).toDateString() == new Date(Date.now()).toDateString()) {
       const row = document.createElement("tr");
       row.innerHTML = `
         <td>${email}</td>
@@ -367,6 +374,7 @@ async function activation(email) {
       totalSum += total;
       globalAverageSum += average;
       userCount++;
+	    };
     });
 
     // Calculate and display summary
