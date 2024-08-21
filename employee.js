@@ -486,8 +486,24 @@ onSnapshot(doc(db, 'Activation', 'vigieActivation'), (doc) => {
     }
 });
 
+function bouttonOff() {
+    const nextButton = document.querySelector('.button1');
+    if (nextButton) {
+        nextButton.disabled = true;
+        nextButton.classList.add('button-disabled');
+    }
+}
 
-export { callNextUser, displayCalls, getTechnicians, createUser2, deleteUser2, getTechniciansFalse, activation, fetchAndDisplayUserData, afficherSettingsActifs, changeSettings };
+function bouttonOn() {
+    const nextButton = document.querySelector('.button1');
+    if (nextButton) {
+        nextButton.disabled = false;
+        nextButton.classList.remove('button-disabled');
+    } 
+}
+
+
+export { callNextUser, displayCalls, getTechnicians, createUser2, deleteUser2, getTechniciansFalse, activation, fetchAndDisplayUserData, afficherSettingsActifs, changeSettings, bouttonOn, bouttonOff };
 // Attacher les fonctions au contexte global pour qu'elles soient accessibles depuis le HTML
 window.callNextUser = callNextUser;
 window.resetCounter = resetCounter;
@@ -504,3 +520,5 @@ window.changeSettings = changeSettings;
 window.nextNumber = nextNumber;
 window.Desactivation = Desactivation;
 window.Activation1 = Activation1;
+window.bouttonOff = bouttonOff;
+window.bouttonOn = bouttonOn;
