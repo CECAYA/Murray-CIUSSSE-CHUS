@@ -61,7 +61,7 @@
     <div class="container">
         <h1>Appel des usagers Murray</h1>
         <form id="loginForm">
-            <input type="email" id="email" placeholder="Email" required>
+            <input type="email" id="email" placeholder="Nom d'utilisateur" required>
             <input type="password" id="password" placeholder="Mot de passe" required>
             <button type="button" onclick="login()">Connexion</button>
             <div id="error-message" class="error"></div>
@@ -73,7 +73,7 @@
         import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
 
         async function login() {
-            const email = document.getElementById('email').value;
+            const email = document.getElementById('email').value + "@ssss.gouv.qc.ca";
             const password = document.getElementById('password').value;
             const errorMessage = document.getElementById('error-message');
             
