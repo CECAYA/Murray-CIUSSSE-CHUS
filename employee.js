@@ -415,9 +415,35 @@ async function afficherSettingsActifs() {
                 console.error("Erreur lors de la récupération des settings :", error);
             }
         }
+async function changeSettings() {
+    try {
+        // Lire les valeurs des checkboxes pour le temps de pause
+        const pauseGroupChecked = Array.from(document.querySelectorAll('input[name="pauseGroup"]'))
+            .find(checkbox => checkbox.checked)?.id.replace('pause', '').replace('mins', '');
 
+        // Lire les valeurs des checkboxes pour les délais
+        const tempsGroupChecked = Array.from(document.querySelectorAll('input[name="tempsGroup"]'))
+            .find(checkbox => checkbox.checked)?.id.replace('temps', '').replace('mins', '') || -1;
 
-export { callNextUser, displayCalls, getTechnicians, createUser2, deleteUser2, getTechniciansFalse, activation, fetchAndDisplayUserData, afficherSettingsActifs };
+        // Lire les bornes
+        const borneInferieure = document.getElementById('borneInferieure').value;
+        const borneSuperieure = document.getElementById('borneSuperieure').value;
+
+        // Mettre à jour les paramètres dans Firestore
+        await updateDoc(doc(db, 'settings', 'userSettings'), {
+            tempsPause: pauseGroupChecked,
+            delays: parseInt(tempsGroupChecked, 10),
+            basYellow: parseInt(borneInferieure, 10),
+            hautYellow: parseInt(borneSuperieure, 10)
+        });
+
+        console.log("Paramètres mis à jour avec succès !");
+    } catch (error) {
+        console.error("Erreur lors de la mise à jour des paramètres :", error);
+    }
+}
+
+export { callNextUser, displayCalls, getTechnicians, createUser2, deleteUser2, getTechniciansFalse, activation, fetchAndDisplayUserData, afficherSettingsActifs, changeSettings };
 // Attacher les fonctions au contexte global pour qu'elles soient accessibles depuis le HTML
 window.callNextUser = callNextUser;
 window.resetCounter = resetCounter;
@@ -430,3 +456,4 @@ window.getTechniciansFalse = getTechniciansFalse;
 window.activation = activation;
 window.fetchAndDisplayUserData = fetchAndDisplayUserData;
 window.afficherSettingsActifs = afficherSettingsActifs;
+window.changeSettings = changeSettings;
