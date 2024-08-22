@@ -44,6 +44,7 @@ onSnapshot(doc(db, 'waitingRoom', 'current'), (doc) => {
                 if (data.room != "?") {
                     const notification123 = document.getElementById('notification123');
                     if (notification123) {
+                        notification123.volume = 0.5;
                         notification123.play();
                         setTimeout(() => {
                             speakNumber(data.number);
