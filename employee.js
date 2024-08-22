@@ -213,7 +213,7 @@ async function getTechnicians() {
     userList.innerHTML = '';
     technicians.forEach(user => {
         const li = document.createElement('li');
-        li.innerHTML = `${user.email} - ${user.isAdmin ? 'Admin' : 'Régulier'} <button onclick="deleteUser2('${user.email}')">Désactiver</button>`;
+        li.innerHTML = `${user.email} - ${user.isAdmin ? 'Admin' : ' '} <button onclick="deleteUser2('${user.email}')">Désactiver</button>`;
         userList.appendChild(li);
     });
 }
@@ -254,7 +254,7 @@ async function getTechniciansFalse() {
     userList.innerHTML = '';
     technicians.forEach(user => {
         const li = document.createElement('li');
-        li.innerHTML = `${user.email} - ${user.isAdmin ? 'Admin' : 'Régulier'} <button onclick="activation('${user.email}')">Activer</button>`;
+        li.innerHTML = `${user.email} - ${user.isAdmin ? 'Admin' : ' '} <button onclick="activation('${user.email}')">Activer</button>`;
         userList.appendChild(li);
     });
 }
